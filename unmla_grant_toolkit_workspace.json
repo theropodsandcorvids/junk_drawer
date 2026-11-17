@@ -1,0 +1,404 @@
+{
+    "project_metadata": {
+        "title": "Gateway STEM Success and Institutional Capacity Building",
+        "institution": "University of New Mexico-Los Alamos (UNM-LA)",
+        "governance_status": "Designated Hispanic-Serving Institution (HSI) / Branch Campus of UNM (R1 Flagship)",
+        "reporting_line": "Office of Academic Affairs / Dean of Instruction",
+        "unified_financial_totals": {
+            "3_year_cumulative_direct_costs": "$546,527.28",
+            "3_year_cumulative_fa_indirect_costs_8_percent_capped": "$40,661.28",
+            "combined_project_grand_total": "$590,098.56"
+        },
+        "institutional_baselines": {
+            "part_time_student_enrollment_density": "71.1%",
+            "hispanic_or_latino_student_demographic": "45.8%",
+            "white_non_hispanic_demographic": "41.0%",
+            "american_indian_alaska_native_demographic": "3.7%",
+            "female_balance": "53.0%",
+            "male_balance": "47.0%"
+        }
+    },
+    "grant_lifecycle_phases": {
+        "phase_1_pre_award_and_proposal_development": {
+            "assets": [
+                {
+                    "asset_id": 1,
+                    "title": "UNM-LA Standard Formatting Baseline Matrix",
+                    "specifications": "Arial or Times New Roman, 11-12pt font, 1-inch margins, single-spaced line heights, searchable PDF formats."
+                },
+                {
+                    "asset_id": 2,
+                    "title": "NSF (PAPPG) Grant Proposal Compliance Checklist",
+                    "components": [
+                        "Research.gov alignment",
+                        "15-page limit checks",
+                        "Intellectual Merit & Broader Impacts separate headers",
+                        "Current & Pending support profiles",
+                        "Data Management Plan hooks"
+                    ]
+                },
+                {
+                    "asset_id": 3,
+                    "title": "NIH (PHS 398) Budget Justification Template",
+                    "components": [
+                        "Effort translation into Calendar Months",
+                        "PHS 398 modular structural layouts",
+                        "Modular cap compliance filters"
+                    ]
+                },
+                {
+                    "asset_id": 4,
+                    "title": "NSF-Compliant Biographical Sketch Template Outline",
+                    "components": [
+                        "SciENcv integration",
+                        "Professional preparation logs",
+                        "Appointments list",
+                        "5 related products",
+                        "5 alternate products",
+                        "Synergistic activities summary"
+                    ]
+                },
+                {
+                    "asset_id": 5,
+                    "title": "Federal Grant Data Management Plan",
+                    "components": [
+                        "Dublin Core metadata schemes",
+                        "Machine-readable layouts (CSV/searchable PDF)",
+                        "FERPA-compliant statistical data masking controls",
+                        "UNM Digital Repository long-term open access archiving"
+                    ]
+                },
+                {
+                    "asset_id": 6,
+                    "title": "Facilities, Equipment, and Other Resources Narrative",
+                    "components": [
+                        "Qualitative profiling of Chemistry Wet Labs",
+                        "Academic Support Center (ASC) retention hubs",
+                        "Banner ERP fiscal framework tracking",
+                        "Exclusion of financial metrics to eliminate voluntary cost-sharing risk"
+                    ]
+                },
+                {
+                    "asset_id": 7,
+                    "title": "Institutional Letter of Commitment",
+                    "signatory": "Dean of Instruction",
+                    "commitments": [
+                        "Direct GSO reporting verification",
+                        "ePAR local authorization setups",
+                        "ECRT tracking integration",
+                        "Banner index isolation permissions"
+                    ]
+                },
+                {
+                    "asset_id": 8,
+                    "title": "Streamlyne Document Status Cheat Sheet",
+                    "status_codes": {
+                        "In Progress": "Editable by local team/GSO",
+                        "En Route": "Locked, running automated routing signatures",
+                        "Approval Granted": "Final branch/main validation completed",
+                        "Returned": "Rejected with log notes for modification"
+                    }
+                },
+                {
+                    "asset_id": 9,
+                    "title": "Grant Writing Tips Reference Sheet",
+                    "directives": [
+                        "Lead with HSI demographic hook",
+                        "Bind outcomes to verifiable SIS data lines",
+                        "Frame relationship to flagship R1 OSP",
+                        "Avoid quantitative dollar values in resource profiles"
+                    ]
+                }
+            ]
+        },
+        "phase_2_post_award_setup_and_launch": {
+            "assets": [
+                {
+                    "asset_id": 10,
+                    "title": "Post-Award Handover Guide",
+                    "target_audience": "Business Operations Director",
+                    "components": [
+                        "Restricted index code initialization rules",
+                        "Fringe benefits configuration parameters",
+                        "ePAR alignment parameters under Uniform Guidance"
+                    ]
+                },
+                {
+                    "asset_id": 11,
+                    "title": "Banner ERP Account Code Crosswalk Chart",
+                    "mapping": {
+                        "201A": "Regular Professional Salaries (GSO & Coordinator lines)",
+                        "202A": "Student Hourly Payroll (Undergraduate Peer Tutors)",
+                        "207A": "Professional Fringe Benefits (32.0%)",
+                        "207B": "Student Employee Fringe Benefits (2.0%)",
+                        "31A0": "Domestic Travel (Field Conferences / Dissemination)",
+                        "40A0": "Participant Support Costs (Student Cohort Stipends Sandbox)",
+                        "3110": "Educational & Lab Supplies (Glassware, Reagents)",
+                        "31B0": "Software Licensing & Data Subscriptions"
+                    }
+                },
+                {
+                    "asset_id": 12,
+                    "title": "Year 1 Procurement Schedule Matrix",
+                    "total_allocation": "$8,450.00",
+                    "quarters": {
+                        "Q1": "Pre-Semester Setup: Glassware kits ($1,400), Chemical stocks ($1,250), PPE ($300), ASC Manuals ($1,800), Grid Boards ($750)",
+                        "Q2": "Mid-Semester Maintenance: Benchtop pH meters ($850), Survey Scale Prints ($500)",
+                        "Q3": "Spring Refresh/Fall Setup: Consumables reorders & cohort logbooks ($1,200)"
+                    }
+                },
+                {
+                    "asset_id": 13,
+                    "title": "Faculty Onboarding Slideshow Script",
+                    "slides": [
+                        "Project Welcome & Overview",
+                        "Driving Student Success Metrics",
+                        "Streamlyne Routing Hierarchy",
+                        "Year 1 Procurement Setup",
+                        "Uniform Guidance 2 CFR 200 Controls",
+                        "ECRT & FERPA Compliance Safeguards"
+                    ]
+                },
+                {
+                    "asset_id": 14,
+                    "title": "Student Cohort Orientation Email Template",
+                    "components": [
+                        "Stipend payout notification ($500 flat tranche)",
+                        "ASC priority resource allocation description",
+                        "Mandatory intake documentation checklists",
+                        "Orientation scheduling modules"
+                    ]
+                },
+                {
+                    "asset_id": 15,
+                    "title": "GSO First-Semester Monthly Task Calendar",
+                    "timeline": "Chronological month-by-month week-level operational tracking matrix for Year 1 Spring Term setup."
+                },
+                {
+                    "asset_id": 16,
+                    "title": "Search Committee Interview Matrix & Questions",
+                    "target_position": "0.5 FTE STEM Program Coordinator",
+                    "scoring_rubric": "1-5 scale evaluation matrix across data platform proficiency, intervention execution, and compliance tracking."
+                }
+            ]
+        },
+        "phase_3_active_monitoring_and_iterative_reporting": {
+            "assets": [
+                {
+                    "asset_id": 17,
+                    "title": "3-Year Cumulative Direct Cost Trajectory Graph & Matrix",
+                    "specifications": "High-precision textual line graph mapping multi-year quarterly burn rates against a +/- 5.0% compliance variance trigger threshold.",
+                    "cumulative_milestones": {
+                        "Year_1_End": "$169,422.40",
+                        "Year_2_End": "$338,804.80",
+                        "Year_3_End": "$546,527.28"
+                    }
+                },
+                {
+                    "asset_id": 18,
+                    "title": "Student Stipend Disbursement Tracking Matrix",
+                    "target_account": "Banner Code 40A0",
+                    "components": [
+                        "Master Summary Ledger template",
+                        "Student Disbursements Detail schema",
+                        "System sandbox tracking keys",
+                        "FERPA warning metrics"
+                    ]
+                },
+                {
+                    "asset_id": 19,
+                    "title": "Risk Mitigation Guide",
+                    "early_warning_triggers": {
+                        "Week_4_Early_Alert": "Engagement or quiz scores trend low in target bottleneck classes.",
+                        "Week_8_Midterm_Check": "Aggregate midterm success falls beneath a 60% pass threshold.",
+                        "Year_1_APR_Review": "Compounded success indicators drop behind the 62% intermediate baseline."
+                    },
+                    "remedial_actions": [
+                        "Intrusive advising modules",
+                        "Mandatory ASC tutoring blocks",
+                        "Weekend Chemistry Lab practical bootcamps",
+                        "Streamlyne budget adjustments"
+                    ]
+                },
+                {
+                    "asset_id": 20,
+                    "title": "FERPA Data-Masking Protocol Worksheet",
+                    "methodology": "Applied structural data protection manual teaching primary cell suppression for n < 5, complementary secondary cell suppression, and top/bottom coding for 100% or 0% extremes."
+                },
+                {
+                    "asset_id": 21,
+                    "title": "Monthly Reporting Reminder Faculty Email",
+                    "components": [
+                        "Data entry request directives",
+                        "Gateway progression milestone updates",
+                        "2 CFR 200 / ECRT compliance context prompts",
+                        "FERPA local raw tracking security assurance"
+                    ]
+                },
+                {
+                    "asset_id": 22,
+                    "title": "Monthly GSO Accomplishments Memo Template",
+                    "target_recipient": "Dean of Instruction",
+                    "sections": [
+                        "Executive Summary & Fiscal Balance Status",
+                        "Milestone & System Completions Ledger",
+                        "Regulatory Compliance Certification",
+                        "Upcoming 30-Day Operational Directives"
+                    ]
+                },
+                {
+                    "asset_id": 23,
+                    "title": "Sponsor Budget Modification Request Form",
+                    "compliance_threshold": "Triggers upon modifications exceeding 25% annual category balance shifts under 2 CFR 200.308.",
+                    "components": [
+                        "Direct Cost Realignment ledger sheet",
+                        "Source/Destination Narrative Justification layout",
+                        "Institutional Multi-Unit Sign-Off signature array"
+                    ]
+                },
+                {
+                    "asset_id": 24,
+                    "title": "Year 1 Monthly Timeline & KPI Targets Dashboard",
+                    "format": "Text-based infographic summarizing the active year's operational layout against institutional baseline targets."
+                }
+            ]
+        },
+        "phase_4_post_award_audits_and_executive_reporting": {
+            "assets": [
+                {
+                    "asset_id": 25,
+                    "title": "Monthly Voucher Audit Workflow Sheet",
+                    "target_audience": "Business Operations Office Accounting Personnel",
+                    "steps": [
+                        "Pre-audit ledger data extraction (FGROBND)",
+                        "Transactional voucher auditing (Allowability/Micro-purchase determinations)",
+                        "Ring-fenced category validation (40A0 isolation & 8.0% F&A sweeps)",
+                        "Monthly compliance log sign-off ledger"
+                    ]
+                },
+                {
+                    "asset_id": 26,
+                    "title": "Internal Audit Notification Memo Template",
+                    "target_recipient": "Project Principal Investigator (PI)",
+                    "components": [
+                        "Scope of internal desk audit",
+                        "Required Binder access documentation directives",
+                        "Post-review resolution tracking pathways"
+                    ]
+                },
+                {
+                    "asset_id": 27,
+                    "title": "3-Year Post-Award Audit Risk Matrix",
+                    "risk_domains": [
+                        {
+                            "domain": "Effort Certification Delinquency",
+                            "level": "CRITICAL",
+                            "mitigation": "Bi-annual ECRT enforcement gates."
+                        },
+                        {
+                            "domain": "Participant Support PSC Leakage",
+                            "level": "CRITICAL",
+                            "mitigation": "Banner index sandbox locks."
+                        },
+                        {
+                            "domain": "Institutional Supplanting",
+                            "level": "HIGH",
+                            "mitigation": "Annual programmatic review cycles by the Dean."
+                        },
+                        {
+                            "domain": "FERPA Identity Disclosures",
+                            "level": "HIGH",
+                            "mitigation": "Double-blind cell-suppression matrix audits."
+                        }
+                    ]
+                },
+                {
+                    "asset_id": 28,
+                    "title": "Executive Briefing Memorandum Template",
+                    "sender": "Dean of Instruction",
+                    "recipient": "UNM Main Campus Provost",
+                    "metrics": [
+                        "Gateway STEM shifts (54% to 62%)",
+                        "ASC expansion impacts",
+                        "F&A indirect capture rates",
+                        "Frictionless transfer tracking data profiles"
+                    ]
+                },
+                {
+                    "asset_id": 29,
+                    "title": "Board of Regents Executive Presentation Script",
+                    "timeline": "5-Minute High-Impact Executive Presentation Layout",
+                    "slides": [
+                        "Title & Strategic HSI Alignment",
+                        "Shifting Student Success Indicators",
+                        "Capital Lab Modernization & Intervention Loops",
+                        "Ironclad 2 CFR 200 Fiscal Internal Controls",
+                        "Multi-Year Velocity Summary"
+                    ]
+                }
+            ]
+        },
+        "phase_5_grant_closeout_and_archiving": {
+            "assets": [
+                {
+                    "asset_id": 30,
+                    "title": "Federal Grant Performance Progress Report (PPR) Template",
+                    "components": [
+                        "Annual Accomplishments matrix",
+                        "Quantitative performance metric data sheets",
+                        "Financial liquidations reconciliation",
+                        "Out-year escalation forecasting parameters"
+                    ]
+                },
+                {
+                    "asset_id": 31,
+                    "title": "End-of-Grant Closeout Checklist Matrix",
+                    "timeline": "Months 34-36 statutory closeout track",
+                    "components": [
+                        "Banner ledger freezing & liquidation",
+                        "Final early ECRT effort certification tracking",
+                        "SF-425 Federal Financial Report compilation pipelines"
+                    ]
+                },
+                {
+                    "asset_id": 32,
+                    "title": "Pre-Audit Documentation Binder Index",
+                    "sections": [
+                        "Pre-Award & Authorizing Frameworks (Tabs 1.1 - 1.4)",
+                        "Post-Award Fiscal & Transactional Ledgers (Tabs 2.1 - 2.4)",
+                        "Ring-Fenced Category & Regulatory Compliance (Tabs 3.1 - 3.3)",
+                        "Performance Progress Reports & Closeout (Tabs 4.1 - 4.2)"
+                    ]
+                },
+                {
+                    "asset_id": 33,
+                    "title": "GSO Onboarding Transition Memo",
+                    "sender": "Office of Academic Affairs / Dean of Instruction",
+                    "recipient": "Incoming GSO Successor",
+                    "components": [
+                        "Strategic branch posture briefing",
+                        "3-year multi-year ledger baseline charts",
+                        "High-priority first-30-days actionable objectives",
+                        "Portfolio delivery receipts sign-off"
+                    ]
+                }
+            ]
+        },
+        "aggregation_portals": {
+            "assets": [
+                {
+                    "asset_id": 34,
+                    "title": "Grant Toolkit Webpage Portal",
+                    "file_name": "grant_toolkit_portal.html",
+                    "description": "Unified digital responsive HTML5 asset combining all generated charts, script files, and sheets."
+                },
+                {
+                    "asset_id": 35,
+                    "title": "Printable Master Proposal Guide",
+                    "file_name": "unmla_master_proposal_guide.pdf",
+                    "description": "Comprehensive printable PDF booklet containing the complete synchronized grant package."
+                }
+            ]
+        }
+    }
+}

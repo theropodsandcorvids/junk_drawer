@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Grant Proposal Compliance Check Matrix</title>
+    <style>
+        :root {
+            --navy-primary: #1F497D;
+            --navy-dark: #122C4A;
+            --green-input: #E2EFDA;
+            --green-text: #276A3C;
+            --alert-coral: #FCE4D6;
+            --alert-text: #C00000;
+            --gray-light: #F2F2F2;
+            --gray-border: #D3D3D3;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F9FAFB;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--navy-primary);
+            border-bottom: 3px solid var(--navy-primary);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dashboard Metrics grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background-color: var(--gray-light);
+            border-left: 5px solid var(--navy-primary);
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .metric-card.alert-card {
+            border-left-color: var(--alert-text);
+            background-color: #FFF3F2;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #666666;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--navy-dark);
+        }
+
+        /* Dynamic tools block */
+        .tools-section {
+            background-color: #F4F7FA;
+            border: 1px solid var(--gray-border);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-block {
+            background-color: var(--white);
+            border: 1px solid var(--gray-border);
+            border-radius: 4px;
+            padding: 15px;
+        }
+
+        .tool-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--navy-primary);
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--gray-border);
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .form-group input, .form-group select {
+            width: 55%;
+            padding: 6px;
+            border: 1px solid var(--gray-border);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .form-group input:focus {
+            background-color: var(--green-input);
+            outline: none;
+        }
+
+        /* Matrix Table styling */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        th {
+            background-color: var(--navy-primary);
+            color: var(--white);
+            padding: 12px 10px;
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid var(--navy-dark);
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid var(--gray-border);
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        .section-header-row {
+            background-color: #E9EEF4 !important;
+            font-weight: bold;
+            color: var(--navy-dark);
+            font-size: 14px;
+        }
+
+        .section-header-row td {
+            padding: 8px 10px;
+            border-bottom: 2px solid var(--navy-primary);
+        }
+
+        /* Dynamic Status Dropdowns style rules */
+        select.status-dropdown {
+            width: 100%;
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+            border: 1px solid var(--gray-border);
+            cursor: pointer;
+        }
+
+        .status-compliant {
+            background-color: var(--green-input) !important;
+            color: var(--green-text) !important;
+        }
+
+        .status-action {
+            background-color: var(--alert-coral) !important;
+            color: var(--alert-text) !important;
+        }
+
+        .status-pending {
+            background-color: #FFF2CC !important;
+            color: #B25E00 !important;
+        }
+
+        .status-na {
+            background-color: var(--gray-light) !important;
+            color: #555555 !important;
+        }
+
+        .notes-area {
+            width: 95%;
+            height: 45px;
+            border: 1px solid var(--gray-border);
+            border-radius: 4px;
+            padding: 5px;
+            font-family: inherit;
+            font-size: 12px;
+            resize: vertical;
+        }
+
+        .notes-area:focus {
+            background-color: var(--green-input);
+            outline: none;
+        }
+
+        /* Action elements buttons */
+        .action-bar {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--navy-primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--navy-dark);
+        }
+
+        .btn-secondary {
+            background-color: #5A6268;
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: #4E555D;
+        }
+
+        .feedback-msg {
+            margin-left: 15px;
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--green-text);
+            display: none;
+            align-self: center;
+        }
+
+        .file-size-badge {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Institutional Grant Proposal Compliance Check Matrix</h1>
+    
+    <!-- Dashboard Summary Framework Metrics -->
+    <div class="dashboard-grid">
+        <div class="metric-card">
+            <div class="metric-label">Total Matrix Elements</div>
+            <div id="metric-total" class="metric-value">14</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Fully Compliant</div>
+            <div id="metric-compliant" class="metric-value" style="color: var(--green-text);">0</div>
+        </div>
+        <div class="metric-card alert-card">
+            <div class="metric-label">Action Required</div>
+            <div id="metric-action" class="metric-value" style="color: var(--alert-text);">0</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Routing Status Tracking</div>
+            <div id="metric-routing" class="metric-value">Pending Clock</div>
+        </div>
+    </div>
+
+    <!-- Live Engineering Support Modules (Tools Section) -->
+    <div class="tools-section">
+        
+        <!-- Tool 1: Document Upload Portal & File Size Estimator -->
+        <div class="tool-block">
+            <div class="tool-title">🗂️ Portal File Size Validation Estimator</div>
+            <div class="form-group">
+                <label for="portal-select">Target Submission Portal:</label>
+                <select id="portal-select" onchange="validateFileSize()">
+                    <option value="research-gov">Research.gov (NSF) - Max 10MB per file</option>
+                    <option value="grants-gov">Grants.gov (DOE/NIH) - Max 200MB global bundle</option>
+                    <option value="era-commons">eRA Commons (NIH Assays) - Max 10MB per file</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file-upload-mock">Simulate Component Upload:</label>
+                <input type="file" id="file-upload-mock" onchange="processMockUpload()">
+            </div>
+            <div id="file-size-feedback" style="font-size: 12px; margin-top: 10px; font-weight: bold;">
+                No file staged. Select a file to evaluate boundary thresholds.
+            </div>
+        </div>
+
+        <!-- Tool 2: Institutional Routing Timeline Monitor -->
+        <div class="tool-block">
+            <div class="tool-title">⏳ Institutional Routing Timeline Clock</div>
+            <div class="form-group">
+                <label for="sponsor-deadline">Target Sponsor Deadline:</label>
+                <input type="date" id="sponsor-deadline" value="2026-12-15" onchange="calculateRoutingWindows()">
+            </div>
+            <div id="routing-timeline-output" style="font-size: 12px; line-height: 1.4; color: #444;">
+                Calculating administrative milestone gating parameters...
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Master Compliance Checking Grid Matrix -->
+    <div class="table-responsive">
+        <table id="compliance-matrix-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%;">Sponsor Tracking</th>
+                    <th style="width: 25%;">Compliance Control Element</th>
+                    <th style="width: 32%;">Strict Structural Specification Guidelines</th>
+                    <th style="width: 15%;">Compliance Call</th>
+                    <th style="width: 20%;">Internal Desk Audit / Review Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <!-- SECTION A: CORE FEDERAL STRUCTURES -->
+                <tr class="section-header-row">
+                    <td colspan="5">SECTION A: GENERAL AGENCY STRUCTURES &amp; FORMATTING CONTROLS</td>
+                </tr>
+                <tr data-category="federal">
+                    <td><b>UNIVERSAL</b></td>
+                    <td>2 CFR 200 Uniform Guidance Limits</td>
+                    <td>Verify F&amp;A indirect cost loops are completely blocked from running sweeps against restricted elements including Participant Support Costs (40A0).</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="federal">
+                    <td><b>NSF</b></td>
+                    <td>NSF PAPPG Two-Month Salary Cap</td>
+                    <td>Senior personnel requested compensation balances cannot cross a cumulative limit of 2.0 calendar months from all NSF awards combined per fiscal cycle.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="federal">
+                    <td><b>NIH</b></td>
+                    <td>NIH Person-Month Translation Track</td>
+                    <td>Effort reporting matrices must display commitment integers strictly as Calendar, Academic, or Summer Months. Standard % layouts are non-compliant.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="federal">
+                    <td><b>NIH</b></td>
+                    <td>Executive Level II Salary Cap Limit</td>
+                    <td>Verify no single individual's requested direct funding allocation utilizes an institutional base rate scaling above the active statutory cap ($228,000).</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="federal">
+                    <td><b>DOE</b></td>
+                    <td>DOE ERP Grid Alignment Check</td>
+                    <td>Cross-tab check to ensure all narrative descriptions, calculations, and supplies match cell-for-cell with the loaded DOE Excel Workbook lines.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+
+                <!-- SECTION B: COMPLIANCE RISKS & REGULATORY SAFEGARDS -->
+                <tr class="section-header-row">
+                    <td colspan="5">SECTION B: INSTITUTIONAL RISK MINIMIZATION &amp; FERPA SAFEGARDS</td>
+                </tr>
+                <tr data-category="risk">
+                    <td><b>UNIVERSAL</b></td>
+                    <td>2 CFR 200.306 Cost-Sharing Ban</td>
+                    <td>Confirm Facilities and Resources text lists assets using pure qualitative descriptions. Quantitative cash valuations must be completely dropped.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="risk">
+                    <td><b>UNIVERSAL</b></td>
+                    <td>FERPA Primary Cell Masking (n &lt; 5)</td>
+                    <td>Check that any internal reporting loop or performance progress sheet masks out integers when a specific student sample set drops below 5.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="risk">
+                    <td><b>UNIVERSAL</b></td>
+                    <td>FERPA Extreme Performance Coding</td>
+                    <td>Verify that any metric hitting absolute bounds (100% or 0% pass limits) is automatically recoded to safe ranges (&gt;95% or &lt;5%) before publication.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+
+                <!-- NEW SECTION C: HUMAN & ANIMAL SUBJECT REGULATORY TRACKS -->
+                <tr class="section-header-row">
+                    <td colspan="5">SECTION C: SPECIALIZED INSTITUTIONAL BIOETHICS &amp; CLEARANCE CODES</td>
+                </tr>
+                <tr data-category="bioethics">
+                    <td><b>NIH / NSF</b></td>
+                    <td>Human Subjects Protection (IRB Clear)</td>
+                    <td>Verify presence of institutional DHHS-approved Assurance Number, active training certifications for all key personnel, and data-security lockers.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="bioethics">
+                    <td><b>NIH</b></td>
+                    <td>Vertebrate Animals Protocol (IACUC)</td>
+                    <td>Justify sample tracking sizing rules, detail five specific care criteria steps, and verify active IACUC clearance code validation limits.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="bioethics">
+                    <td><b>NIH</b></td>
+                    <td>Inclusion of Women, Minorities, &amp; Children</td>
+                    <td>Verify explicit target enrollment tables are generated and matched with clinical trial tracking infrastructure when applicable.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+
+                <!-- SECTION D: RECOGNIZED ROUTING SCHEDULER CONTROLS -->
+                <tr class="section-header-row">
+                    <td colspan="5">SECTION D: INSTITUTIONAL INTERNAL GATING &amp; ROUTING SCHEDULER</td>
+                </tr>
+                <tr data-category="routing">
+                    <td><b>INTERNAL</b></td>
+                    <td>GSO 5-Day Business Clearance Rule</td>
+                    <td>Ensure complete financial workbook arrays and standard budget justifications are locked inside Streamlyne for final pre-audit checks.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="routing">
+                    <td><b>INTERNAL</b></td>
+                    <td>OSP 2-Day Electronic Submission Gate</td>
+                    <td>All components (Biosketches, Narrative Blueprints, Letters) must match 'Approval Granted' status for automated submission pipelines.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+                <tr data-category="routing">
+                    <td><b>INTERNAL</b></td>
+                    <td>Multi-Unit Academic Authorization Signatures</td>
+                    <td>Electronic routing check verifying authorized sign-off lines from the Dean of Instruction and Academic Affairs are active.</td>
+                    <td>
+                        <select class="status-dropdown status-pending" onchange="updateRowStyles(this)">
+                            <option value="Pending" class="status-pending" selected>🟡 Pending Review</option>
+                            <option value="Compliant" class="status-compliant">🟢 Fully Compliant</option>
+                            <option value="Action" class="status-action">🔴 Action Required</option>
+                            <option value="NA" class="status-na">⚪ Not Applicable</option>
+                        </select>
+                    </td>
+                    <td><textarea class="notes-area" placeholder="Add auditing review logs..."></textarea></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Actions Control Panel Footer Bar -->
+    <div class="action-bar">
+        <button class="btn btn-primary" onclick="compileAndCopyReport()">Compile &amp; Copy Audit Summary</button>
+        <button class="btn btn-secondary" onclick="resetMatrixFields()">Reset All Controls</button>
+        <div id="action-feedback-toast" class="feedback-msg">📋 Report compiled and copied to clipboard successfully!</div>
+    </div>
+</div>
+
+<script>
+    // System Lifecycle Initializer 
+    window.addEventListener('DOMContentLoaded', () => {
+        calculateRoutingWindows();
+        recalculateDashboardMetrics();
+    });
+
+    // Color CSS Class Switcher Engine
+    function updateRowStyles(dropdownElement) {
+        // Strip previous style tracks
+        dropdownElement.classList.remove('status-pending', 'status-compliant', 'status-action', 'status-na');
+        
+        const selection = dropdownElement.value;
+        if(selection === 'Compliant') dropdownElement.classList.add('status-compliant');
+        else if(selection === 'Action') dropdownElement.classList.add('status-action');
+        else if(selection === 'Pending') dropdownElement.classList.add('status-pending');
+        else if(selection === 'NA') dropdownElement.classList.add('status-na');
+
+        recalculateDashboardMetrics();
+    }
+
+    // Recalculate Dashboard Summary Panel Counters
+    function recalculateDashboardMetrics() {
+        const dropdowns = document.querySelectorAll('.status-dropdown');
+        let compliantCount = 0;
+        let actionCount = 0;
+
+        dropdowns.forEach(dropdown => {
+            if(dropdown.value === 'Compliant') compliantCount++;
+            if(dropdown.value === 'Action') actionCount++;
+        });
+
+        document.getElementById('metric-compliant').innerText = compliantCount;
+        document.getElementById('metric-action').innerText = actionCount;
+        document.getElementById('metric-total').innerText = dropdowns.length;
+    }
+
+    // Portal File Size Validator Engine
+    function processMockUpload() {
+        const fileSelector = document.getElementById('file-upload-mock');
+        if (!fileSelector.files || fileSelector.files.length === 0) return;
+
+        const stagedFile = fileSelector.files[0];
+        // Translate file size byte configurations to standard MB values
+        const fileSizeMB = (stagedFile.size / (1024 * 1024)).toFixed(2);
+        
+        validateFileSize(fileSizeMB, stagedFile.name);
+    }
+
+    function validateFileSize(forcedSize = null, fileName = "staged_document.pdf") {
+        const selectedPortal = document.getElementById('portal-select').value;
+        const feedbackBlock = document.getElementById('file-size-feedback');
+        
+        // Default to a compliant mock file size if none uploaded manually
+        let activeSize = forcedSize ? parseFloat(forcedSize) : 2.45; 
+        let thresholdLimit = (selectedPortal === 'grants-gov') ? 200.0 : 10.0;
+        
+        let targetLabel = (selectedPortal === 'research-gov') ? "Research.gov Limit (10MB)" : 
+                          (selectedPortal === 'era-commons') ? "eRA Commons Limit (10MB)" : "Grants.gov Global Limit (200MB)";
+
+        let isBreached = activeSize > thresholdLimit;
+        
+        if (isBreached) {
+            feedbackBlock.innerHTML = `⚠️ <span style="color: var(--alert-text);">PORTAL BREACH DETECTED: "${fileName}" is ${activeSize}MB. crosses ${targetLabel}. Re-compress immediately!</span>`;
+            feedbackBlock.className = "";
+        } else {
+            feedbackBlock.innerHTML = `✅ <span style="color: var(--green-text);">Portal Compliant: "${fileName}" is ${activeSize}MB. Safely within ${targetLabel}.</span>`;
+        }
+    }
+
+    // Institutional Routing Timeline Calculator Engine
+    function calculateRoutingWindows() {
+        const deadlineSelector = document.getElementById('sponsor-deadline');
+        const outputBlock = document.getElementById('routing-timeline-output');
+        const globalDashboardBadge = document.getElementById('metric-routing');
+        
+        if (!deadlineSelector.value) return;
+
+        const sponsorDeadlineDate = new Date(deadlineSelector.value);
+        // Current baseline set to November 2026 based on workspace runtime anchors
+        const mockCurrentDate = new Date('2026-11-05'); 
+
+        // Calculation rules: Translate business date frameworks to daily integers
+        const absoluteTimeDiff = sponsorDeadlineDate - mockCurrentDate;
+        const totalDaysRemaining = Math.ceil(absoluteTimeDiff / (1024 * 60 * 60 * 24));
+
+        // Subtraction targets for business alignment routing checkpoints
+        const gsoDueDays = totalDaysRemaining - 5;
+        const ospDueDays = totalDaysRemaining - 2;
+
+        let trackingHtml = "";
+        
+        if(totalDaysRemaining <= 0) {
+            trackingHtml = `<span style="color: var(--alert-text); font-weight: bold;">🛑 SPONSOR DEADLINE BREACHED or IS TODAY. Emergency administrative bypass required.</span>`;
+            globalDashboardBadge.innerText = "OVERDUE";
+            globalDashboardBadge.style.color = "var(--alert-text)";
+        } else {
+            trackingHtml = `
+                • <b>Sponsor Lock Calendar:</b> ${totalDaysRemaining} days until submission window closes.<br>
+                • <b>GSO Internal Pre-Audit Gate (-5 Business Days):</b> Needs locking in <b>${gsoDueDays} days</b>.<br>
+                • <b>OSP Electronic Submission Gate (-2 Business Days):</b> Closes in <b>${ospDueDays} days</b>.
+            `;
+            
+            if(gsoDueDays < 0) {
+                trackingHtml += `<br><span style="color: var(--alert-text); font-weight: bold;">⚠️ ROUTING ALERT: GSO internal pre-audit deadline has been passed! Item is OVERDUE.</span>`;
+                globalDashboardBadge.innerText = "⚠️ GSO OVERDUE";
+                globalDashboardBadge.style.color = "var(--alert-text)";
+            } else if (gsoDueDays <= 3) {
+                globalDashboardBadge.innerText = "⚡ CRITICAL WINDOW";
+                globalDashboardBadge.style.color = "#B25E00";
+            } else {
+                globalDashboardBadge.innerText = "🟢 Active Tracker";
+                globalDashboardBadge.style.color = "var(--green-text)";
+            }
+        }
+        
+        outputBlock.innerHTML = trackingHtml;
+    }
+
+    // Data Aggregator & Text Packager Compiler Exporter
+    function compileAndCopyReport() {
+        const rows = document.querySelectorAll('#compliance-matrix-table tbody tr');
+        let generatedReportText = "=================================================================\n";
+        generatedReportText += "INSTITUTIONAL GRANT COMPLIANCE MASTER AUDIT REPORT\n";
+        generatedReportText += `Generated Runtime Anchor: 2026-11-05 | Current Baseline Status\n`;
+        generatedReportText += "=================================================================\n\n";
+
+        let visualCurrentSection = "";
+
+        rows.forEach(row => {
+            if(row.classList.contains('section-header-row')) {
+                visualCurrentSection = row.innerText.trim();
+                generatedReportText += `\n[${visualCurrentSection}]\n-------------------------------------------------\n`;
+                return;
+            }
+
+            const columns = row.querySelectorAll('td');
+            if(columns.length < 5) return;
+
+            const agency = columns[0].innerText.trim();
+            const elementControl = columns[1].innerText.trim();
+            const complianceDropdownValue = columns[3].querySelector('select').value;
+            const reviewerNotesValue = columns[4].querySelector('textarea').value.trim() || "No auditor review logs provided.";
+
+            generatedReportText += `• Agency/Scope: ${agency}\n`;
+            generatedReportText += `  Control Item: ${elementControl}\n`;
+            generatedReportText += `  Auditing Status Call: [${complianceDropdownValue.toUpperCase()}]\n`;
+            generatedReportText += `  Reviewer Logs: ${reviewerNotesValue}\n\n`;
+        });
+
+        // Copy plain text data array to memory clipboard lines
+        const temporaryHiddenTextArea = document.createElement('textarea');
+        temporaryHiddenTextArea.value = generatedReportText;
+        document.body.appendChild(temporaryHiddenTextArea);
+        temporaryHiddenTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(temporaryHiddenTextArea);
+
+        // Flash action verification feedback banner
+        const toastElement = document.getElementById('action-feedback-toast');
+        toastElement.style.display = "block";
+        setTimeout(() => {
+            toastElement.style.display = "none";
+        }, 3500);
+    }
+
+    // Reset Form Fields 
+    function resetMatrixFields() {
+        if(!confirm("Are you sure you want to clear all active dropdown indicators and text area notes logs?")) return;
+        
+        const dropdowns = document.querySelectorAll('.status-dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.value = "Pending";
+            updateRowStyles(dropdown);
+        });
+
+        const notesFields = document.querySelectorAll('.notes-area');
+        notesFields.forEach(field => field.value = "");
+
+        document.getElementById('file-upload-mock').value = "";
+        validateFileSize();
+        calculateRoutingWindows();
+        recalculateDashboardMetrics();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNM-LA Gateway STEM Success Portal</title>
+    <style>
+        :root {
+            --unm-cherry: #ba0c2f;
+            --unm-silver: #63666a;
+            --dark-slate: #1e293b;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-slate);
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--unm-cherry);
+            color: white;
+            padding: 2rem 5%;
+            border-bottom: 4px solid var(--unm-silver);
+        }
+        header h1 { margin: 0; font-size: 2.2rem; }
+        header p { margin: 0.5rem 0 0 0; font-size: 1.1rem; opacity: 0.9; }
+        
+        nav {
+            background-color: var(--dark-slate);
+            padding: 0.5rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        nav a:hover { color: #cbd5e1; }
+
+        .container { padding: 2rem 5%; max-width: 1200px; margin: 0 auto; }
+        
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-left: 5px solid var(--unm-cherry);
+        }
+        h2 { color: var(--unm-cherry); margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        h3 { color: var(--dark-slate); margin-top: 1.5rem; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th { background-color: #f1f5f9; color: var(--dark-slate); }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .pre-block {
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 1.5rem;
+            border-radius: 6px;
+            font-family: monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .script-line { color: #f8fafc; font-style: italic; margin-bottom: 0.5rem; display: block;}
+        .visual-cue { color: #a8a29e; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>UNM-Los Alamos Gateway STEM Success Portal</h1>
+    <p>Comprehensive Institutional Master Repository & GSO Operational Toolkit</p>
+</header>
+
+<nav>
+    <a href="#overview">Overview & Budget</a>
+    <a href="#compliance">Compliance Checklists</a>
+    <a href="#facilities">Facilities & Data</a>
+    <a href="#burn-rate">Burn-Rate Trajectory</a>
+    <a href="#closeout">Closeout & Transition</a>
+</nav>
+
+<div class="container">
+
+    <section id="overview">
+        <h2>1. Project Profile & Financial Architecture</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Institutional Baseline</h3>
+                <ul>
+                    <li><strong>Institution:</strong> University of New Mexico-Los Alamos (UNM-LA)</li>
+                    <li><strong>Status:</strong> Designated Hispanic-Serving Institution (HSI) / Branch Campus</li>
+                    <li><strong>Enrollment:</strong> 71.1% Part-Time | 28.9% Full-Time</li>
+                    <li><strong>Demographics:</strong> 45.8% Hispanic or Latino | 41.0% White | 3.7% Native American</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>3-Year Financial Model</h3>
+                <ul>
+                    <li><strong>Cumulative Direct Costs:</strong> $546,527.28</li>
+                    <li><strong>F&A Indirect Costs (8.0% Capped):</strong> $40,661.28</li>
+                    <li><strong>Combined Project Grand Total:</strong> $590,098.56</li>
+                    <li><strong>Fringe Parameters:</strong> 32.0% Professional | 2.0% Student</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Multi-Year Direct & Indirect Budget Ledger Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Budget Category</th>
+                    <th>Year 1 Direct</th>
+                    <th>Year 2 Direct</th>
+                    <th>Year 3 Direct</th>
+                    <th>3-Year Cumulative Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>A. Senior Personnel (GSO)</strong></td>
+                    <td>$68,000.00</td>
+                    <td>$70,040.00</td>
+                    <td>$72,141.20</td>
+                    <td>$210,181.20</td>
+                </tr>
+                <tr>
+                    <td><strong>B. Other Personnel (Coord/Tutors)</strong></td>
+                    <td>$36,000.00</td>
+                    <td>$36,720.00</td>
+                    <td>$37,461.60</td>
+                    <td>$110,181.60</td>
+                </tr>
+                <tr>
+                    <td><strong>C. Fringe Benefits</strong></td>
+                    <td>$29,680.00</td>
+                    <td>$30,563.20</td>
+                    <td>$31,472.90</td>
+                    <td>$91,716.10</td>
+                </tr>
+                <tr>
+                    <td><strong>D. Travel (Domestic Field)</strong></td>
+                    <td>$4,500.00</td>
+                    <td>$4,635.00</td>
+                    <td>$4,774.05</td>
+                    <td>$13,909.05</td>
+                </tr>
+                <tr>
+                    <td><strong>F. Participant Support (Stipends)</strong></td>
+                    <td>$15,000.00</td>
+                    <td>$15,000.00</td>
+                    <td>$15,000.00</td>
+                    <td>$45,000.00</td>
+                </tr>
+                <tr>
+                    <td><strong>G. Other Direct Costs (Supplies/Data)</strong></td>
+                    <td>$12,742.40</td>
+                    <td>$12,424.20</td>
+                    <td>$13,611.45</td>
+                    <td>$38,778.05</td>
+                </tr>
+                <tr style="background:#f1f5f9; font-weight:bold;">
+                    <td>ANNUAL DIRECT TOTAL</td>
+                    <td>$169,422.40</td>
+                    <td>$169,382.40</td>
+                    <td>$169,461.20</td>
+                    <td>$546,527.28</td>
+                </tr>
+                <tr style="background:#e2e8f0; font-weight:bold;">
+                    <td>CAPPED F&A INDIRECT (8.0%)</td>
+                    <td>$13,553.79</td>
+                    <td>$13,550.59</td>
+                    <td>$13,556.90</td>
+                    <td>$40,661.28</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="compliance">
+        <h2>2. Compliance Matrix & Streamlyne Routing</h2>
+        <h3>Streamlyne Sequence Tracking Map</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Routing Stage</th>
+                    <th>Reviewing Footprint / Authority</th>
+                    <th>Core Compliance Action Item Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Stage 1</strong></td>
+                    <td>UNM-LA Local GSO Validation</td>
+                    <td>Verify standard proposal layout parameters and FERPA data-masking fields.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stage 2</strong></td>
+                    <td>UNM-LA Director of Business Operations</td>
+                    <td>Confirm Banner ERP index binding, cost allowability, and exact fringe fringe benefits.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stage 3</strong></td>
+                    <td>UNM-LA Dean of Instruction Sign-Off</td>
+                    <td>Administrative authorization and formal executive commitment validation.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stage 4</strong></td>
+                    <td>UNM Main Campus OSP Review Queue</td>
+                    <td>Final centralized validation and transmission to external sponsor portals.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Banner ERP Account Code Crosswalk</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>UNM Banner Account Code</th>
+                    <th>Account Description</th>
+                    <th>Year 1 Budget Line Assignment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>201A</strong></td>
+                    <td>Regular Faculty / Professional Staff (Full/Part Time Salary)</td>
+                    <td>$92,000.00 (GSO Base + STEM Coordinator Base)</td>
+                </tr>
+                <tr>
+                    <td><strong>202A</strong></td>
+                    <td>Student Hourly Payroll (ASC Peer Tutors)</td>
+                    <td>$12,000.00</td>
+                </tr>
+                <tr>
+                    <td><strong>207A / 207B</strong></td>
+                    <td>Professional Staff Fringe (32.0%) / Student Fringe (2.0%)</td>
+                    <td>$29,440.00 (Professional) / $240.00 (Student)</td>
+                </tr>
+                <tr>
+                    <td><strong>31A0</strong></td>
+                    <td>Domestic Travel (Conferences, Meetings, Per Diem)</td>
+                    <td>$4,500.00</td>
+                </tr>
+                <tr>
+                    <td><strong>40A0</strong></td>
+                    <td>Student Stipends (Ring-Fenced Participant Support Sandbox)</td>
+                    <td>$15,000.00</td>
+                </tr>
+                <tr>
+                    <td><strong>3110 / 31B0</strong></td>
+                    <td>Educational Supplies / Software Licensing & Data Metrics</td>
+                    <td>$8,450.00 (Consumables) / $4,292.40 (Clearinghouse Subscriptions)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="facilities">
+        <h2>3. Institutional Infrastructure & FERPA Safeguards</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Chemistry Wet Labs</h3>
+                <p>Fully equipped infrastructure configured for gateway course enhancements and safety controls. Features certified chemical fume hoods, analytical instrumentation, and personal protective equipment lines to lift success metrics from 54% to the 70% target.</p>
+            </div>
+            <div class="card">
+                <h3>Academic Support Center (ASC)</h3>
+                <p>The centralized anchor for cohort tutoring and intrusive advising. Specially configured to support high-density part-time student tracks and gather survey indicators to reach an 85% Self-Efficacy milestone.</p>
+            </div>
+        </div>
+
+        <h3>FERPA Applied Cell-Suppression Protocol Training Key</h3>
+        <p>Prior to compiling annual progress submissions, data rows featuring counts smaller than five (n < 5) must be systematically masked to protect student privacy lines.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Demographic Cohort</th>
+                    <th>Total Enrolled Count</th>
+                    <th>Achieved Gateway Success Count</th>
+                    <th>Success Rate Metric (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Full-Time Cohorts</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td><strong>&ge; 95%</strong> <em>(Top-Coded Extreme Limit)</em></td>
+                </tr>
+                <tr>
+                    <td>Part-Time Cohorts</td>
+                    <td>15</td>
+                    <td>10</td>
+                    <td>66.7%</td>
+                </tr>
+                <tr>
+                    <td>White (Non-Hispanic)</td>
+                    <td><strong>DS</strong> <em>(Secondary Complementary Suppression)</em></td>
+                    <td><strong>DS</strong></td>
+                    <td>87.5%</td>
+                </tr>
+                <tr>
+                    <td>American Indian / Alaska Native</td>
+                    <td><strong>DS</strong> <em>(Primary Suppression for n &lt; 5)</em></td>
+                    <td><strong>DS</strong></td>
+                    <td>66.7%</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="burn-rate">
+        <h2>4. Line Graph Text Block: Cumulative Quarterly Direct Trajectory</h2>
+        <div class="pre-block">$546k ─────────────────────────────────────────────────────────────────────────────── 📈 $546,52728
+$500k ─────────────────────────────────────────────────────────────────────── █ Q12
+$450k ─────────────────────────────────────────────────────────────── █ Q11
+$400k ─────────────────────────────────────────────────────── █ Q10
+$350k ─────────────────────────────────────────────── █ Q09
+$300k ─────────────────────────────────────── █ Q08
+$250k ─────────────────────────────── █ Q07
+$200k ─────────────────────── █ Q06
+$150k ─────────────── █ Q05
+$100k ─────── █ Q04
+$50k  ─ █ Q01
+$0    ──┴─────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────
+       Q01     Q02     Q03     Q04     Q05     Q06     Q07     Q08     Q09     Q10     Q11     Q12
+       [────────── Year 1 ──────────] [────────── Year 2 ──────────] [────────── Year 3 ──────────]</div>
+    </section>
+
+    <section id="closeout">
+        <h2>5. Faculty Onboarding Script & Closeout Framework</h2>
+        <h3>Onboarding Presentation Transcript Excerpt</h3>
+        <div class="pre-block"><span class="visual-cue">[Slide: Risk Mitigation & Financial Controls under 2 CFR 200]</span>
+<span class="script-line">GSO Presenter: "Because these are federal funds, we operate under strict OMB Uniform Guidance rules. Every expenditure must be allowable, reasonable, and allocable. Notice the wall around our Participant Support Costs. We have $15,000 allocated annually for student cohort stipends. By federal law, these funds are structurally isolated. We cannot reallocate money out of student stipends to balance operational deficits without formal approval from the federal program officer. What is built for the students stays with the students."</span></div>
+
+        <h3>Statutory Statutory End-of-Grant Milestones (Months 34-36)</h3>
+        <ul>
+            <li><strong>Month 34 (Reconciliation):</strong> Freeze new requisition parameters under operating codes; resolve final outstanding travel encumbrances.</li>
+            <li><strong>Month 35 (Certifications & Masking):</strong> Log final electronic effort verifications into ECRT; execute cell-suppression matrix pipelines; secure DOIs via Digital Repository@UNM.</li>
+            <li><strong>Month 36 (Legal Closeout):</strong> Submit the final Federal Financial Report (SF-425) via the centralized portal; execute a total index lockdown; trigger the mandatory 3-year record retention audit clock.</li>
+        </ul>
+    </section>
+
+</div>
+
+</body>
+</html>

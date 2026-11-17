@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Post-Award Handover Guide Template</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --alert-bg: #FCE4D6;
+            --alert-text: #C00000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: #F9FAFB;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .meta-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-box label {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--navy);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .input-box input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            background-color: var(--soft-green);
+        }
+
+        .progress-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #FFFFFF;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .progress-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--navy);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #E0E0E0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--dark-green);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        .section-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-body {
+            padding: 20px;
+        }
+
+        .instruction-text {
+            font-size: 13px;
+            color: #555555;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-style: italic;
+            border-left: 3px solid var(--navy);
+            padding-left: 10px;
+        }
+
+        .checklist-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            padding: 12px;
+            border-bottom: 1px solid var(--light-gray);
+            align-items: start;
+            transition: background 0.2s;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .checklist-item.checked, tr.checked {
+            background-color: rgba(226, 239, 218, 0.4);
+        }
+
+        .item-details h4 {
+            margin: 0 0 5px 0;
+            color: var(--navy);
+            font-size: 14px;
+        }
+
+        .item-details p {
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        /* Account Table Framework */
+        .account-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .account-table th, .account-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: left;
+        }
+
+        .account-table th {
+            background-color: var(--light-gray);
+            color: var(--navy);
+            font-weight: bold;
+        }
+
+        .account-table input {
+            width: 92%;
+            padding: 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--soft-green);
+        }
+
+        /* Sign-off Framework */
+        .signoff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .signature-block {
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+        }
+
+        .signature-block h5 {
+            margin: 0 0 15px 0;
+            color: var(--navy);
+            font-size: 14px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333333;
+            margin-top: 35px;
+            margin-bottom: 5px;
+        }
+
+        .action-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #153358;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Universal Post-Award Handover Guide &amp; Compliance Matrix</h1>
+        <p class="subtitle">Federal Uniform Guidance (2 CFR 200) Compliance Framework Template</p>
+    </header>
+
+    <!-- Meta Tracking Dashboard -->
+    <div class="dashboard-grid">
+        <div class="meta-input-group">
+            <div class="input-box">
+                <label>Project Title / Identifier</label>
+                <input type="text" id="meta-title" placeholder="e.g., Gateway STEM Success">
+            </div>
+            <div class="input-box">
+                <label>Lead Institution / Branch</label>
+                <input type="text" id="meta-inst" placeholder="e.g., UNM-Los Alamos">
+            </div>
+            <div class="input-box">
+                <label>Target Funding Sponsor</label>
+                <input type="text" id="meta-sponsor" placeholder="e.g., National Science Foundation">
+            </div>
+            <div class="input-box">
+                <label>Assigned Index Sandbox Code</label>
+                <input type="text" id="meta-index" placeholder="e.g., Banner Restricted Index">
+            </div>
+        </div>
+        <div class="progress-box">
+            <div class="progress-title">Onboarding Execution Score</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="progress-text" id="progress-text">0% Completed</div>
+        </div>
+    </div>
+
+    <!-- Section 1: Restricted Index Setup -->
+    <div class="section-card">
+        <div class="section-header">1. Restricted Index Initialization Parameters</div>
+        <div class="section-body">
+            <p class="instruction-text">Isolate grant funds inside an exclusive sandbox ledger to satisfy statutory ring-fencing rules under Uniform Guidance.</p>
+            
+            <div class="checklist-item">
+                <input type="checkbox" class="compliance-chk" onchange="updateProgress(this)">
+                <div class="item-details">
+                    <h4>Isolate the Restricted Ledger Code</h4>
+                    <p>Establish a dedicated project account string to block general operational co-mingling.</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item">
+                <input type="checkbox" class="compliance-chk" onchange="updateProgress(this)">
+                <div class="item-details">
+                    <h4>Activate Automatic Sweep Locks</h4>
+                    <p>Configure account parameters to reject fiscal year-end automated balance clawbacks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Budget Category Crosswalk -->
+    <div class="section-card">
+        <div class="section-header">2. Budget Category Crosswalk Configuration</div>
+        <div class="section-body">
+            <p class="instruction-text">Map approved sponsor allocations to distinct transaction codes. Click checkboxes once codes are locked into the ledger.</p>
+            
+            <table class="account-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%;">Lock</th>
+                        <th style="width: 15%;">ERP Code</th>
+                        <th style="width: 35%;">Budget Allocation Category Name</th>
+                        <th style="width: 42%;">Strict Spending Guidelines / Rate Limits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="compliance-chk" onchange="updateProgress(this)"></td>
+                        <td><input type="text" placeholder="e.g., 201A"></td>
+                        <td><input type="text" placeholder="e.g., Regular Professional Salaries"></td>
+                        <td><input type="text" placeholder="e.g., Capped at faculty prorated effort"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="compliance-chk" onchange="updateProgress(this)"></td>
+                        <td><input type="text" placeholder="e.g., 202A"></td>
+                        <td><input type="text" placeholder="e.g., Student Hourly Payroll"></td>
+                        <td><input type="text" placeholder="e.g., Hourly student wages baseline"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="compliance-chk" onchange="updateProgress(this)"></td>
+                        <td><input type="text" placeholder="e.g., 40A0"></td>
+                        <td><input type="text" placeholder="e.g., Participant Support Costs"></td>
+                        <td><input type="text" placeholder="e.g., Exempt from F&amp;A Indirect Sweeps"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="compliance-chk" onchange="updateProgress(this)"></td>
+                        <td><input type="text" placeholder="e.g., 3110"></td>
+                        <td><input type="text" placeholder="e.g., Educational Supplies"></td>
+                        <td><input type="text" placeholder="e.g., Exclude unallowable catering items"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Section 3: Personnel & Effort Certification -->
+    <div class="section-card">
+        <div class="section-header">3. Personnel Action Forms &amp; Effort Tracking Blocks</div>
+        <div class="section-body">
+            <p class="instruction-text">Payroll is heavily scrutinized. Ensure appointment allocations exactly match personnel narratives.</p>
+            
+            <div class="checklist-item">
+                <input type="checkbox" class="compliance-chk" onchange="updateProgress(this)">
+                <div class="item-details">
+                    <h4>Execute Electronic Personnel Action Forms (ePAR)</h4>
+                    <p>Route payroll authorizations mapping personnel pro-rated salary to the isolated index line.</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item">
+                <input type="checkbox" class="compliance-chk" onchange="updateProgress(this)">
+                <div class="item-details">
+                    <h4>Activate Effort Certification Tracking (ECRT) Gates</h4>
+                    <p>Sync index lines to the institutional effort tracker to enforce mandatory bi-annual labor sign-offs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Handover Sign-off -->
+    <div class="section-card">
+        <div class="section-header">4. Institutional Handover Authorization Sign-Off Block</div>
+        <div class="section-body">
+            <p class="instruction-text" style="border-left-color: var(--alert-text); color: var(--alert-text);">
+                <strong>MANDATORY COMPLIANCE CONTROL:</strong> This formal authorization block must be maintained as a binding system element. Your signature confirms that all accounts, code blocks, and regulatory sandbox parameters have been programmatically established in the financial ledger.
+            </p>
+            
+            <div class="signoff-grid">
+                <div class="signature-block">
+                    <h5>Post-Award / Business Operations Director</h5>
+                    <p style="font-size: 12px; color: #555;">I certify that the restricted index, ERP category codes, and system spending rules have been successfully verified and built into the financial platform.</p>
+                    <div class="signature-line"></div>
+                    <span style="font-size: 11px; color: #666;">Authorized Operational Signature &amp; Date Signed</span>
+                </div>
+                <div class="signature-block">
+                    <h5>Grants Support Officer / Principal Investigator</h5>
+                    <p style="font-size: 12px; color: #555;">I verify that the established institutional sandbox accounts precisely replicate the pre-award terms, allocations, and compliance parameters approved by the sponsor.</p>
+                    <div class="signature-line"></div>
+                    <span style="font-size: 11px; color: #666;">Authorized Verification Signature &amp; Date Signed</span>
+                </div>
+            </div>
+            
+            <div class="checklist-item" style="margin-top: 20px; border: 1px dashed var(--border-color); background-color: var(--light-gray);">
+                <input type="checkbox" class="compliance-chk" id="signoff-lock" onchange="updateProgress(this)">
+                <div class="item-details" style="padding-top: 2px;">
+                    <h4>Confirm Physical or Electronic Sign-off Document Retention</h4>
+                    <p style="margin-bottom: 0;">Check this box to confirm physical or electronic sign-off documents are completed and uploaded to the master project archive folder.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-container">
+        <button class="btn" onclick="compileAndCopyReport()">Compile &amp; Copy Handover Audit Text</button>
+    </div>
+</div>
+
+<script>
+function updateProgress(checkbox) {
+    const parentItem = checkbox.closest('.checklist-item') || checkbox.closest('tr');
+    if (parentItem) {
+        if (checkbox.checked) {
+            parentItem.classList.add('checked');
+        } else {
+            parentItem.classList.remove('checked');
+        }
+    }
+
+    const totalItems = document.querySelectorAll('.compliance-chk').length;
+    const checkedItems = document.querySelectorAll('.compliance-chk:checked').length;
+    const score = Math.round((checkedItems / totalItems) * 100);
+
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    progressBar.style.width = score + '%';
+    progressText.innerText = score + '% Completed';
+
+    if (score === 100) {
+        progressText.innerText = '100% Audit Ready ✔';
+        progressText.style.color = 'var(--dark-green)';
+    } else {
+        progressText.style.color = 'var(--dark-green)';
+    }
+}
+
+function compileAndCopyReport() {
+    const title = document.getElementById('meta-title').value || '[UNSPECIFIED PROJECT TITLE]';
+    const institution = document.getElementById('meta-inst').value || '[UNSPECIFIED INSTITUTION]';
+    const sponsor = document.getElementById('meta-sponsor').value || '[UNSPECIFIED SPONSOR]';
+    const index = document.getElementById('meta-index').value || '[UNSPECIFIED RESTRICTED INDEX]';
+    const score = document.getElementById('progress-text').innerText;
+
+    let outputText = "================================================================================\n";
+    outputText += "POST-AWARD HANDOVER COMPLIANCE REPORT & LEDGER AUDIT RECONCILIATION\n";
+    outputText += "================================================================================\n";
+    outputText += `PROJECT TITLE: ${title}\n`;
+    outputText += `LEAD INSTITUTION: ${institution}\n`;
+    outputText += `FUNDING AGENCY SPONSOR: ${sponsor}\n`;
+    outputText += `ASSIGNED RESTRICTED ERP INDEX: ${index}\n`;
+    outputText += `ONBOARDING SCORE: ${score}\n`;
+    outputText += "--------------------------------------------------------------------------------\n\n";
+
+    outputText += "SECTION 1: SYSTEM INITIALIZATION STATUS\n";
+    const checkboxes = document.querySelectorAll('.compliance-chk');
+    outputText += `- Checkbox Tasks Completed: ${document.querySelectorAll('.compliance-chk:checked').length} of ${checkboxes.length} total gates.\n\n`;
+
+    outputText += "SECTION 2: MANDATORY REGULATORY SIGN-OFF TRACKING\n";
+    const signoffBox = document.getElementById('signoff-lock');
+    if(signoffBox.checked) {
+        outputText += "[STATUS: ACTIVE/COMPLIANT] Handover Authorization Sign-off documents successfully verified, signed, and uploaded to the centralized project control binder.\n";
+    } else {
+        outputText += "[STATUS: PENDING] WARNING: Physical/Electronic validation signatures are missing or have not been logged into the compliance repository.\n";
+    }
+    outputText += "\n================================================================================\n";
+    outputText += "Report generated successfully. Ready for insertion into project master files.";
+
+    navigator.clipboard.writeText(outputText).then(() => {
+        alert('Success! The compiled handover report text has been copied to your clipboard.');
+    }).catch(err => {
+        alert('Clipboard copy failed. Please review system console configurations.');
+    });
+}
+</script>
+</body>
+</html>

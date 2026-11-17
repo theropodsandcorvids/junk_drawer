@@ -1,0 +1,604 @@
+"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Grant Portfolio Control Portal</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --dark-navy: #153358;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --bg-color: #F9FAFB;
+            --log-color: #0066CC;
+            --guide-color: #7030A0;
+            --template-color: #375623;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            color: var(--navy);
+            margin: 0 0 5px 0;
+            font-size: 26px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Functional Category Legend */
+        .legend-container {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-bottom: 35px;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .legend-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .legend-tag {
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot.static { background-color: var(--guide-color); }
+        .dot.template { background-color: var(--template-color); }
+        .dot.log { background-color: var(--log-color); }
+
+        /* Navigation Matrix / Grid */
+        .phase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .phase-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .phase-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 14px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .phase-subtitle {
+            font-size: 12px;
+            background-color: rgba(255,255,255,0.2);
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .phase-body {
+            padding: 20px;
+            background-color: #FFFFFF;
+        }
+
+        .asset-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 15px;
+        }
+
+        .asset-link-card {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #FFF;
+            position: relative;
+        }
+
+        .asset-link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+            border-color: var(--navy);
+        }
+
+        .asset-id-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .asset-number {
+            font-size: 10px;
+            font-weight: bold;
+            background-color: var(--light-gray);
+            color: #555555;
+            padding: 2px 5px;
+            border-radius: 3px;
+            min-width: 50px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .asset-title-text {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--navy);
+            line-height: 1.3;
+        }
+
+        .category-indicator {
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 6px;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .category-indicator.static { color: var(--guide-color); }
+        .category-indicator.template { color: var(--template-color); }
+        .category-indicator.log { color: var(--log-color); }
+
+        /* Master packages block */
+        .portal-footer-section {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .portal-footer-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--navy);
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .asset-list-grid {
+                grid-template-columns: 1fr;
+            }
+            .legend-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-title">
+            <h1>Grant Portfolio Lifecycle Control Portal</h1>
+            <p>Unified Operational Management Hub — 40-Asset Compliance Engine</p>
+        </div>
+    </header>
+
+    <!-- Functional Category Crosswalk Legend -->
+    <div class="legend-container">
+        <span class="legend-title">Functional Category Taxonomy:</span>
+        <span class="legend-tag"><span class="dot static"></span> Static Guidelines (Regulations &amp; Rules)</span>
+        <span class="legend-tag"><span class="dot template"></span> High-Value Blank Fillable Templates</span>
+        <span class="legend-tag"><span class="dot log"></span> Project-Specific Logs &amp; Baselines</span>
+    </div>
+
+    <!-- Navigation Phase Matrix -->
+    <div class="phase-grid">
+        
+        <!-- PHASE 1 -->
+        <div class="phase-card" id="phase-1">
+            <div class="phase-header">
+                <span>Phase 1: Pre-Award &amp; Proposal Development</span>
+                <span class="phase-subtitle">11 Assets Active</span>
+            </div>
+            <div class="phase-body">
+                <div class="asset-list-grid">
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 01</span>
+                            <span class="asset-title-text">Standard Formatting Baseline Matrix</span>
+                        </div>
+                        <div class="category-indicator static"><span class="dot static"></span> Static Guideline</div>
+                    </a>
+                    <a href="grant_proposal_compliance_matrix.html" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 02</span>
+                            <span class="asset-title-text">NSF Grant Proposal Compliance Checklist</span>
+                        </div>
+                        <div class="category-indicator static"><span class="dot static"></span> Static Guideline</div>
+                    </a>
+                    <a href="grant_budget_justification_worksheet.xlsx" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 03</span>
+                            <span class="asset-title-text">NIH Budget Justification Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 04</span>
+                            <span class="asset-title-text">NSF Biographical Sketch Template Outline</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 05</span>
+                            <span class="asset-title-text">Federal Grant Data Management Plan</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 06</span>
+                            <span class="asset-title-text">Facilities, Equipment, &amp; Other Resources Narrative</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 07</span>
+                            <span class="asset-title-text">Institutional Letter of Commitment Framework</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 36</span>
+                            <span class="asset-title-text">Conflict of Interest (COI) Disclosure Matrix</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 37</span>
+                            <span class="asset-title-text">Human Subjects Protection / IRB Framework</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 38</span>
+                            <span class="asset-title-text">Subaward Budget &amp; SOW Package Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 40</span>
+                            <span class="asset-title-text">Current &amp; Pending Support Profile Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div class="phase-card" id="phase-2">
+            <div class="phase-header">
+                <span>Phase 2: Post-Award Setup &amp; Launch</span>
+                <span class="phase-subtitle">6 Assets Active</span>
+            </div>
+            <div class="phase-body">
+                <div class="asset-list-grid">
+                    <a href="post_award_handover_guide.html" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 10</span>
+                            <span class="asset-title-text">Post-Award Handover Guide &amp; Checklist</span>
+                        </div>
+                        <div class="category-indicator static"><span class="dot static"></span> Static Guideline</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 11</span>
+                            <span class="asset-title-text">Banner ERP Account Code Crosswalk Chart</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 12</span>
+                            <span class="asset-title-text">Year 1 Procurement Schedule Matrix</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 13</span>
+                            <span class="asset-title-text">Faculty Onboarding Slideshow Script</span>
+                        </div>
+                        <div class="category-indicator static"><span class="dot static"></span> Static Guideline</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 14</span>
+                            <span class="asset-title-text">Student Cohort Orientation Email Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 15</span>
+                            <span class="asset-title-text">GSO First-Semester Monthly Task Calendar</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 16</span>
+                                                        <span class="asset-title-text">Search Committee Interview Scoring Matrix</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3 -->
+        <div class="phase-card" id="phase-3">
+            <div class="phase-header">
+                <span>Phase 3: Active Monitoring &amp; Iterative Reporting</span>
+                <span class="phase-subtitle">9 Assets Active</span>
+            </div>
+            <div class="phase-body">
+                <div class="asset-list-grid">
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 17</span>
+                            <span class="asset-title-text">3-Year Cumulative Direct Cost Trajectory Graph</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 18</span>
+                            <span class="asset-title-text">Student Stipend Disbursement Tracking Ledger</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 19</span>
+                            <span class="asset-title-text">Risk Mitigation Guide &amp; Tripwires</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 20</span>
+                            <span class="asset-title-text">FERPA Data-Masking Worksheet Rules</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 21</span>
+                            <span class="asset-title-text">Monthly Reporting Reminder Faculty Email</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="gso_monthly_accomplishments_memo.html" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 22</span>
+                            <span class="asset-title-text">Monthly GSO Accomplishments Memo Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 23</span>
+                            <span class="asset-title-text">Sponsor Budget Modification Request Form</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="year1_kpi_dashboard.html" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 24</span>
+                            <span class="asset-title-text">Year 1 Monthly Timeline &amp; KPI Targets Dashboard</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 39</span>
+                            <span class="asset-title-text">Multi-Year Operational Risk Register</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 4 -->
+        <div class="phase-card" id="phase-4">
+            <div class="phase-header">
+                <span>Phase 4: Post-Award Audits &amp; Executive Reporting</span>
+                <span class="phase-subtitle">5 Assets Active</span>
+            </div>
+            <div class="phase-body">
+                <div class="asset-list-grid">
+                    <a href="grant_voucher_audit_workflow.xlsx" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 25</span>
+                            <span class="asset-title-text">Monthly Voucher Audit Workflow Sheet</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 26</span>
+                            <span class="asset-title-text">Internal Audit Notification Memo Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 27</span>
+                            <span class="asset-title-text">3-Year Post-Award Audit Risk Matrix</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 28</span>
+                            <span class="asset-title-text">Executive Briefing Memorandum Template</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 29</span>
+                            <span class="asset-title-text">Board of Regents Executive Presentation Script</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 5 -->
+        <div class="phase-card" id="phase-5">
+            <div class="phase-header">
+                <span>Phase 5: Grant Closeout &amp; Archiving</span>
+                <span class="phase-subtitle">4 Assets Active</span>
+            </div>
+            <div class="phase-body">
+                <div class="asset-list-grid">
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 30</span>
+                            <span class="asset-title-text">Federal Grant Performance Progress Report (PPR)</span>
+                        </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 31</span>
+                            <span class="asset-title-text">End-of-Grant Closeout Checklist Matrix</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 32</span>
+                            <span class="asset-title-text">Pre-Audit Documentation Binder Index</span>
+                        </div>
+                        <div class="category-indicator template"><span class="dot template"></span> Fillable Template</div>
+                    </a>
+                    <a href="#" class="asset-link-card">
+                        <div class="asset-id-title">
+                            <span class="asset-number">Asset 33</span>
+                            <span class="asset-title-text">GSO Onboarding Transition Handover Memo</span>
+                                                </div>
+                        <div class="category-indicator log"><span class="dot log"></span> Project-Specific Log</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Master Packages Footer Section -->
+    <div class="portal-footer-section">
+        <h3 class="portal-footer-title">🗂️ Aggregation Portals (Cross-Phase Master Packages)</h3>
+        <div class="asset-list-grid">
+            <div class="asset-link-card" style="background-color: #FFF; border-left: 4px solid var(--log-color);">
+                <div class="asset-id-title">
+                    <span class="asset-number" style="background-color: var(--soft-green); color: var(--dark-green);">Asset 34</span>
+                    <span class="asset-title-text">Grant Toolkit Webpage Portal [index.html]</span>
+                </div>
+                <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">This landing page. Integrates and connects all active digital assets and compliance sub-sheets inside your workspace portfolio.</p>
+            </div>
+            <div class="asset-link-card" style="background-color: #FFF; border-left: 4px solid var(--log-color);">
+                <div class="asset-id-title">
+                    <span class="asset-number" style="background-color: var(--soft-green); color: var(--dark-green);">Asset 35</span>
+                    <span class="asset-title-text">Printable Master Proposal Guide Booklet</span>
+                </div>
+                <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">Comprehensive synchronized physical binder layout consolidating the complete pre-award narrative package from start to finish.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

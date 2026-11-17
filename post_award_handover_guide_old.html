@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset 10: Post-Award Handover Guide & Checklist</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .header-block {
+            border-bottom: 3px solid #1F497D;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            color: #1F497D;
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            font-size: 13px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #1F497D;
+        }
+        .meta-item strong {
+            color: #1F497D;
+        }
+        .progress-section {
+            background: #E2EFDA;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #375623;
+        }
+        .progress-bar-container {
+            background: #fff;
+            border-radius: 10px;
+            height: 20px;
+            width: 100%;
+            margin-top: 8px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+        .progress-bar {
+            background: #375623;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .section-title {
+            color: #1F497D;
+            border-bottom: 1px solid #D3D3D3;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            margin: 8px 0;
+            background: #fdfdfd;
+            border: 1px solid #eef2f5;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .checklist-item:hover {
+            background: #f4f7f9;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 4px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        .checklist-text {
+            flex: 1;
+        }
+        .checklist-text strong {
+            color: #2c3e50;
+        }
+        .code-pill {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #b22222;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .grid-card {
+            border: 1px solid #D3D3D3;
+            border-radius: 5px;
+            padding: 15px;
+            background: #fff;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .grid-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border-color: #1F497D;
+        }
+        .grid-card strong {
+            color: #1F497D;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .rule-box {
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+            border-left: 3px solid #b22222;
+            display: none;
+        }
+        .grid-card.active .rule-box {
+            display: block;
+        }
+        .btn-container {
+            margin-top: 4px;
+            text-align: right;
+        }
+        button {
+            background-color: #1F497D;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #16355c;
+        }
+        #output-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f2f2f2;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            display: none;
+            font-size: 12px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-block">
+        <h1>Post-Award Handover Guide & Checklist (Asset 10)</h1>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Project:</strong> Gateway STEM Success</div>
+            <div class="meta-item"><strong>Institution:</strong> UNM-Los Alamos</div>
+            <div class="meta-item"><strong>Audience:</strong> Business Operations Director</div>
+            <div class="meta-item"><strong>Regulation:</strong> Uniform Guidance 2 CFR 200</div>
+        </div>
+    </div>
+
+    <div class="progress-section">
+        <strong>Initialization Progress Engine:</strong> <span id="progress-text">0% Completed</span>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </div>
+
+    <h2 class="section-title">1. Restricted Index Initialization Tracker</h2>
+    <div class="checklist-item">
+        <input type="checkbox" class="progress-check" data-weight="1" id="c1">
+        <div class="checklist-text">
+            <strong>Isolate Index Sandbox:</strong> Initialize an exclusive, restricted Banner index code specifically for the Gateway STEM Success project to prevent blending with general branch operational accounts.
+        </div>
+    </div>
+    <div class="checklist-item">
+        <input type="checkbox" class="progress-check" data-weight="1" id="c2">
+        <div class="checklist-text">
+            <strong>Establish Cash Lock:</strong> Configure index system privileges to block automatic year-end cash sweeps, institutional reallocations, or unapproved cross-collateralization.
+        </div>
+    </div>
+
+    <h2 class="section-title">2. ERP Account Code Registry (Click cards for strict spending rules)</h2>
+    <div class="grid-container">
+        <div class="grid-card" onclick="this.classList.toggle('active')">
+            <strong>Code 201A: Professional Salaries</strong>
+            <span>PI, Co-PI, and 0.5 FTE Coordinator lines only.</span>
+            <div class="rule-box">Rule: Must align directly with approved calendar months. Subject to ECRT bi-annual locks.</div>
+        </div>
+        <div class="grid-card" onclick="this.classList.toggle('active')">
+            <strong>Code 202A: Student Hourly Payroll</strong>
+            <span>Undergraduate Peer Tutors & GRA hourly shifts.</span>
+            <div class="rule-box">Rule: Tracks exact hours worked at standard base rates. Supplement, never supplant.</div>
+        </div>
+        <div class="grid-card" onclick="this.classList.toggle('active')">
+            <strong>Code 40A0: Participant Support</strong>
+            <span>Ring-Fenced Student Cohort Stipend Tranches.</span>
+            <div class="rule-box">Rule: 100% exempt from F&A indirect cost sweeps. Reallocations OUT require prior sponsor approval under 2 CFR 200.308.</div>
+        </div>
+        <div class="grid-card" onclick="this.classList.toggle('active')">
+            <strong>Code 207A/B: Fringe Benefit Anchors</strong>
+            <span>Fringe rates locked to institutional mandates.</span>
+            <div class="rule-box">Rule: Full-Time Faculty fixed at 44.23%, Staff lines at 25.97%, and Student Employees at 1.00%.</div>
+        </div>
+    </div>
+
+    <h2 class="section-title">3. Compliance & Procurement Gates</h2>
+    <div class="checklist-item">
+        <input type="checkbox" class="progress-check" data-weight="1" id="c3">
+        <div class="checklist-text">
+            <strong>Configure Zero-Indirect Sweep Filter:</strong> Ensure Account Code <span class="code-pill">40A0</span> is programmatically stripped from the MTDC base calculation to keep the 8.0% capped F&A from running overhead sweeps on student stipends.
+        </div>
+    </div>
+    <div class="checklist-item">
+        <input type="checkbox" class="progress-check" data-weight="1" id="c4">
+        <div class="checklist-text">
+            <strong>Initialize ePAR Actions & ECRT Hooks:</strong> Link all budgeted personnel lines directly to the Effort Certification and Reporting Technology system to enforce bi-annual certification gates.
+        </div>
+    </div>
+    <div class="checklist-item">
+        <input type="checkbox" class="progress-check" data-weight="1" id="c5">
+        <div class="checklist-text">
+            <strong>Activate 2 CFR 200.438 Entertainment Ban:</strong> Program the accounts payable filter to automatically flag and reject any vouchers under supply code <span class="code-pill">3110</span> containing office coffee, student social catering, or unallowable entertainment lines.
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <button onclick="compileSummary()">Compile & Copy Handover Guide</button>
+    </div>
+
+    <textarea id="output-summary" rows="12" readonly></textarea>
+</div>
+
+<script>
+    const checkboxes = document.querySelectorAll('.progress-check');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    function updateProgress() {
+        let checkedCount = 0;
+        checkboxes.forEach(cb => {
+            if (cb.checked) checkedCount++;
+        });
+        const pct = Math.round((checkedCount / checkboxes.length) * 100);
+        progressBar.style.width = pct + '%';
+        progressText.innerText = pct + '% Completed';
+    }
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', updateProgress);
+    });
+
+    function compileSummary() {
+        let md = "# ASSET 10: POST-AWARD HANDOVER COMPLIANCE REFRESH\n";
+        md += "Generated Operational Track Log for Business Operations Director\n\n";
+        
+        checkboxes.forEach(cb => {
+            const labelText = cb.nextElementSibling.innerText.replace(/\s+/g, ' ');
+            md += `[${cb.checked ? 'X' : ' '}] ${labelText}\n`;
+        });
+        
+        const out = document.getElementById('output-summary');
+        out.value = md;
+        out.style.display = 'block';
+        
+        navigator.clipboard.writeText(md);
+        alert("Compliance summary compiled and copied to clipboard successfully!");
+    }
+</script>
+
+</body>
+</html>

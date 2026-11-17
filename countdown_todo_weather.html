@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --danger-color: #ef4444;
+            --danger-hover: #dc2626;
+            --border-color: #e2e8f0;
+            --subtask-bg: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Responsive Dashboard Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        /* Desktop Layout Rule: Split view */
+        @media (min-width: 850px) {
+            .container {
+                grid-template-columns: 550px 1fr;
+            }
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            height: fit-content;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="date"], input[type="text"] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: white;
+            color: var(--text-color);
+        }
+
+        input:focus {
+            border-color: var(--accent-color);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Countdown Display Styles */
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #718096;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        /* Weather Grid Styles */
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .weather-item {
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weather-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .weather-lbl {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        .text-high { color: #ea580c; }
+        .text-low { color: #2563eb; }
+
+        /* To-Do Element Styles */
+        .todo-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .todo-wrapper {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            padding: 0.75rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .todo-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .todo-text {
+            flex: 1;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .action-btns button {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-delete { background-color: var(--danger-color); }
+        .btn-delete:hover { background-color: var(--danger-hover); }
+
+        /* Subtask System Layout */
+        .subtask-section {
+            margin-top: 0.75rem;
+            padding-left: 1rem;
+            border-left: 2px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .subtask-input-group {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtask-input-group input {
+            padding: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .subtask-input-group button {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .subtask-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .subtask-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--subtask-bg);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .subtask-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .subtask-item.completed .subtask-text {
+            text-decoration: line-through;
+            color: #a0aec0;
+        }
+
+        .btn-sub-delete {
+            background-color: transparent;
+            color: var(--danger-color);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.8rem;
+        }
+        .btn-sub-delete:hover {
+            background-color: #fee2e2;
+            color: var(--danger-hover);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Left Side Column Wrap (Weather + Countdown) -->
+        <div class="left-column">
+            
+            <!-- Weather Card -->
+            <div class="card weather-card">
+                <h2>Today's Weather</h2>
+                <div class="control-group">
+                    <input type="text" id="weatherLocationInput" placeholder="Enter city name (e.g., Chicago)..." aria-label="City weather location">
+                    <button onclick="fetchWeather()">Get Weather</button>
+                </div>
+                <div id="weatherStatus" style="text-align: center; color: #718096; font-size: 0.9rem; margin-bottom: 0.5rem; display: none;">Fetching data...</div>
+                <div class="weather-grid">
+                    <div class="weather-item">
+                        <span class="weather-val text-high" id="wfHigh">--</span>
+                        <span class="weather-lbl">High Temp</span>
+                    </div>
+                    <div class="weather-item">
+                        <span class="weather-val text-low" id="wfLow">--</span>
+                        <span class="weather-lbl">Low Temp</span>
+                    </div>
+                    <div class="weather-item">
+                        <span class="weather-val" id="wfPrecip">--</span>
+                        <span class="weather-lbl">Precipitation Chance</span>
+                    </div>
+                    <div class="weather-item">
+                        <span class="weather-val" id="wfSunset">--</span>
+                        <span class="weather-lbl">Sundown</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown Card -->
+            <div class="card">
+                <h2>Days Countdown</h2>
+                <div class="control-group">
+                    <input type="date" id="dateInput" aria-label="Target date picker">
+                    <button onclick="calculateCountdown()">Set Target</button>
+                </div>
+                <div class="countdown-display" id="timerDisplay">
+                    Select a date above
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Column (To-Do List Card) -->
+                <div class="card">
+            <h2>To Do List
+</h2>
+            <div class="control-group">
+                <input type="text" id="todoInput" placeholder="Add a main task..." aria-label="Main task description">
+                <button onclick="addTodo()">Add Task</button>
+            </div>
+            <ul class="todo-list" id="todoList">
+                <!-- Dynamic tasks render here -->
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+
+        // Set the minimum allowed date in the calendar picker to today's local date
+        const dateInput = document.getElementById('dateInput');
+        const todayLocal = new Date();
+        const yyyy = todayLocal.getFullYear();
+        const mm = String(todayLocal.getMonth() + 1).padStart(2, '0');
+        const dd = String(todayLocal.getDate()).padStart(2, '0');
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+        // --- CALENDAR COUNTDOWN LOGIC ---
+        function calculateCountdown() {
+            const targetValue = dateInput.value;
+            if (!targetValue) {
+                alert('Please pick a date from the calendar.');
+                return;
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const targetDate = new Date(targetValue + 'T00:00:00'); 
+            const differenceInTime = targetDate.getTime() - today.getTime();
+            const daysLeft = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+            if (daysLeft < 0) {
+                alert('Please pick a date that is today or in the future.');
+                return;
+            }
+
+            updateTimerDisplay(daysLeft);
+        }
+
+        function updateTimerDisplay(days) {
+            const display = document.getElementById('timerDisplay');
+            if (days === 0) {
+                display.innerHTML = '<div>Today! 🎉</div>';
+            } else if (days === 1) {
+                display.innerHTML = `<div>1 <span class="countdown-label">Day Remaining</span></div>`;
+            } else {
+                display.innerHTML = `<div>${days} <span class="countdown-label">Days Remaining</span></div>`;
+            }
+        }
+
+        // --- TO-DO LIST LOGIC ---
+        let todos = JSON.parse(localStorage.getItem('nestedTodos')) || [];
+
+        function renderTodos() {
+            const todoListElement = document.getElementById('todoList');
+            if (!todoListElement) return;
+            todoListElement.innerHTML = '';
+
+            todos.forEach((todo, mainIndex) => {
+                const wrapper = document.createElement('li');
+                wrapper.className = 'todo-wrapper';
+
+                const mainRow = document.createElement('div');
+                mainRow.className = 'todo-main-row';
+
+                const hasSubtasks = todo.subtasks && todo.subtasks.length > 0;
+                const allSubtasksDone = hasSubtasks && todo.subtasks.every(sub => sub.completed);
+                const isComplete = hasSubtasks && allSubtasksDone;
+
+                const statusBadge = document.createElement('span');
+                statusBadge.textContent = isComplete ? '✓ Completed' : '○ In Progress';
+                statusBadge.style.fontSize = '0.75rem';
+                statusBadge.style.padding = '0.2rem 0.5rem';
+                statusBadge.style.borderRadius = '4px';
+                statusBadge.style.marginRight = '0.75rem';
+                statusBadge.style.whiteSpace = 'nowrap';
+                statusBadge.style.fontWeight = 'bold';
+                
+                if (isComplete) {
+                    statusBadge.style.backgroundColor = '#d1fae5';
+                    statusBadge.style.color = '#065f46';
+                } else {
+                    statusBadge.style.backgroundColor = '#fef3c7';
+                    statusBadge.style.color = '#92400e';
+                }
+
+                const textContainer = document.createElement('div');
+                textContainer.style.flex = '1';
+
+                const isEditing = todo.isEditing || false;
+                const actionBtns = document.createElement('div');
+                actionBtns.className = 'action-btns';
+
+                if (isEditing) {
+                    const editInput = document.createElement('input');
+                    editInput.type = 'text';
+                    editInput.value = todo.editText !== undefined ? todo.editText : todo.text;
+                    editInput.style.padding = '0.25rem';
+                    editInput.style.width = '100%';
+                    
+                    editInput.addEventListener('input', (e) => {
+                        todos[mainIndex].editText = e.target.value;
+                    });
+                    
+                    editInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') saveTodo(mainIndex);
+                    });
+                    textContainer.appendChild(editInput);
+
+                    const saveBtn = document.createElement('button');
+                    saveBtn.textContent = 'Save';
+                    saveBtn.style.backgroundColor = '#10b981';
+                    saveBtn.onclick = () => saveTodo(mainIndex);
+                    actionBtns.appendChild(saveBtn);
+                } else {
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'todo-text';
+                    textSpan.textContent = todo.text;
+                    if (isComplete) {
+                        textSpan.style.textDecoration = 'line-through';
+                        textSpan.style.color = '#a0aec0';
+                    }
+                    textContainer.appendChild(textSpan);
+
+                    const editBtn = document.createElement('button');
+                    editBtn.textContent = 'Edit';
+                    editBtn.style.backgroundColor = '#f59e0b';
+                    editBtn.onclick = () => toggleEditMode(mainIndex);
+                    actionBtns.appendChild(editBtn);
+                }
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn-delete';
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.onclick = () => deleteTodo(mainIndex);
+                actionBtns.appendChild(deleteBtn);
+                
+                mainRow.appendChild(statusBadge);
+                mainRow.appendChild(textContainer);
+                mainRow.appendChild(actionBtns);
+                wrapper.appendChild(mainRow);
+
+                const subtaskSection = document.createElement('div');
+                subtaskSection.className = 'subtask-section';
+
+                const inputGroup = document.createElement('div');
+                inputGroup.className = 'subtask-input-group';
+
+                const subtaskInput = document.createElement('input');
+                subtaskInput.type = 'text';
+                subtaskInput.placeholder = 'Add subtask...';
+                subtaskInput.id = `subInput-${mainIndex}`;
+                subtaskInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') addSubtask(mainIndex);
+                });
+
+                const subtaskBtn = document.createElement('button');
+                subtaskBtn.textContent = '+';
+                subtaskBtn.onclick = () => addSubtask(mainIndex);
+
+                inputGroup.appendChild(subtaskInput);
+                inputGroup.appendChild(subtaskBtn);
+                subtaskSection.appendChild(inputGroup);
+
+                const subtaskList = document.createElement('ul');
+                subtaskList.className = 'subtask-list';
+
+                if (todo.subtasks) {
+                    todo.subtasks.forEach((subtask, subIndex) => {
+                        const subLi = document.createElement('li');
+                        subLi.className = `subtask-item ${subtask.completed ? 'completed' : ''}`;
+
+                        const leftDiv = document.createElement('div');
+                        leftDiv.className = 'subtask-left';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.checked = subtask.completed;
+                        checkbox.onclick = () => toggleSubtask(mainIndex, subIndex);
+
+                        const subText = document.createElement('span');
+                        subText.className = 'subtask-text';
+                        subText.textContent = subtask.text;
+
+                        leftDiv.appendChild(checkbox);
+                        leftDiv.appendChild(subText);
+
+                        const subDeleteBtn = document.createElement('button');
+                        subDeleteBtn.className = 'btn-sub-delete';
+                        subDeleteBtn.textContent = '✕';
+                        subDeleteBtn.onclick = () => deleteSubtask(mainIndex, subIndex);
+
+                        subLi.appendChild(leftDiv);
+                        subLi.appendChild(subDeleteBtn);
+                        subtaskList.appendChild(subLi);
+                    });
+                }
+
+                subtaskSection.appendChild(subtaskList);
+                wrapper.appendChild(subtaskSection);
+                todoListElement.appendChild(wrapper);
+            });
+            
+            localStorage.setItem('nestedTodos', JSON.stringify(todos));
+        }
+
+        function addTodo() {
+            const todoInput = document.getElementById('todoInput');
+            const taskText = todoInput.value.trim();
+
+            if (taskText === '') {
+                alert('Task text cannot be empty.');
+                return;
+            }
+
+            todos.push({
+                text: taskText,
+                isEditing: false,
+                subtasks: []
+            });
+
+            todoInput.value = '';
+            renderTodos();
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            renderTodos();
+        }
+
+        function toggleEditMode(index) {
+            todos[index].isEditing = true;
+            todos[index].editText = todos[index].text;
+            renderTodos();
+        }
+
+        function saveTodo(index) {
+            const cleanValue = (todos[index].editText || '').trim();
+                        if (cleanValue === '') {
+                alert('Task text cannot be empty.');
+                return;
+            }
+            todos[index].text = cleanValue;
+            todos[index].isEditing = false;
+            delete todos[index].editText;
+            renderTodos();
+        }
+
+        function addSubtask(mainIndex) {
+            const subtaskInput = document.getElementById(`subInput-${mainIndex}`);
+            const subtaskText = subtaskInput.value.trim();
+
+            if (subtaskText === '') {
+                alert('Subtask text cannot be empty.');
+                return;
+            }
+
+            if (!todos[mainIndex].subtasks) {
+                todos[mainIndex].subtasks = [];
+            }
+
+            todos[mainIndex].subtasks.push({
+                text: subtaskText,
+                completed: false
+            });
+
+            subtaskInput.value = '';
+            renderTodos();
+        }
+
+        function toggleSubtask(mainIndex, subIndex) {
+            todos[mainIndex].subtasks[subIndex].completed = !todos[mainIndex].subtasks[subIndex].completed;
+            renderTodos();
+        }
+
+        function deleteSubtask(mainIndex, subIndex) {
+            todos[mainIndex].subtasks.splice(subIndex, 1);
+            renderTodos();
+        }
+
+        // --- DYNAMIC WEATHER FETCH LOGIC (FIXED ARRAY INDEXING) ---
+        async function fetchWeather() {
+            const cityInput = document.getElementById('weatherLocationInput');
+            const statusLabel = document.getElementById('weatherStatus');
+            const cityName = cityInput.value.trim();
+
+            if (!cityName) {
+                alert('Please enter a city name or ZIP code.');
+                return;
+            }
+
+            statusLabel.style.display = 'block';
+            const isZipCode = /^\d+$/.test(cityName);
+            statusLabel.textContent = isZipCode ? `Searching for ZIP code "${cityName}"...` : `Searching for "${cityName}"...`;
+
+            try {
+                // Step 1: Query Geocoding API to resolve coordinates
+                const geoUrl = `https://open-meteo.com{encodeURIComponent(cityName)}&count=1&language=en&format=json`;
+                const geoResponse = await fetch(geoUrl);
+                
+                if (!geoResponse.ok) {
+                    statusLabel.textContent = 'Weather server geocoding connection failed.';
+                    return;
+                }
+                
+                const geoData = await geoResponse.json();
+
+                if (!geoData.results || geoData.results.length === 0) {
+                    statusLabel.textContent = 'Location not found. Please verify the city or ZIP code.';
+                    return;
+                }
+
+                // Explicitly targeting index 0 of the location results array
+                const location = geoData.results[0]; 
+                const { latitude, longitude, timezone, name, country } = location;
+                statusLabel.textContent = `Loading weather for ${name}, ${country}...`;
+
+                // Step 2: Query Open-Meteo Forecast API
+                const weatherUrl = `https://open-meteo.com{latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunset&temperature_unit=fahrenheit&timezone=${encodeURIComponent(timezone || 'auto')}`;
+                const weatherResponse = await fetch(weatherUrl);
+                
+                if (!weatherResponse.ok) {
+                    statusLabel.textContent = 'Failed to retrieve daily data metrics.';
+                    return;
+                }
+                
+                const weatherData = await weatherResponse.json();
+
+                if (!weatherData || !weatherData.daily) {
+                    statusLabel.textContent = 'Failed to extract daily parameters.';
+                    return;
+                }
+
+                // Explicitly target index 0 to extract values for TODAY only
+                const highTemp = weatherData.daily.temperature_2m_max[0];
+                const lowTemp = weatherData.daily.temperature_2m_min[0];
+                const precipProb = weatherData.daily.precipitation_probability_max[0];
+                const rawSunset = weatherData.daily.sunset[0];
+
+                // Parse the ISO sunset timestamp string cleanly 
+                let formattedSunset = '--';
+                if (rawSunset) {
+                    try {
+                        const sunsetDate = new Date(rawSunset);
+                        if (!isNaN(sunsetDate.getTime())) {
+                            formattedSunset = sunsetDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        } else {
+                            formattedSunset = typeof rawSunset === 'string' ? rawSunset.split('T')[1].substring(0, 5) : '--';
+                        }
+                    } catch (e) {
+                        formattedSunset = typeof rawSunset === 'string' ? rawSunset.split('T')[1].substring(0, 5) : '--';
+                    }
+                }
+
+                // Step 3: Update the display elements in the DOM
+                document.getElementById('wfHigh').textContent = highTemp !== undefined ? `${Math.round(highTemp)}°F` : '--';
+                document.getElementById('wfLow').textContent = lowTemp !== undefined ? `${Math.round(lowTemp)}°F` : '--';
+                document.getElementById('wfPrecip').textContent = precipProb !== undefined ? `${precipProb}%` : '0%';
+                document.getElementById('wfSunset').textContent = formattedSunset;
+
+                statusLabel.textContent = `Showing data for ${name}, ${country}`;
+            } catch (error) {
+                console.error("Weather error context:", error);
+                statusLabel.textContent = 'Error connecting to weather service.';
+            }
+        }
+
+        // Global key binders for input rows
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addTodo();
+        });
+        document.getElementById('weatherLocationInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') fetchWeather();
+        });
+
+        // Application launch sequence
+        renderTodos();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,115 @@
+{
+    "position_metadata": {
+        "title": "Grants Support Officer (GSO)",
+        "institution": "University of New Mexico-Los Alamos (UNM-LA)",
+        "reporting_line": "Dean of Instruction / Academic Affairs Office",
+        "minimum_qualifications": "Bachelor's degree + 5 years directly related experience",
+        "preferred_qualifications": "Experience in university sponsored programs, research development, or grant administration offices; familiarity with federal regulations and platforms (grants.gov, research.gov)."
+    },
+    "key_skills_matrix": {
+        "technical_pre_award": [
+            "Sponsor guideline interpretation & compliance tracking",
+            "Proposal coordination and submission portals (Grants.gov, Research.gov)",
+            "Resource library development & template management"
+        ],
+        "communication_writing": [
+            "Strong technical grant and narrative writing",
+            "Data synthesis and translation of dense academic text into plain-language",
+            "Cross-functional liaison across campus departments and main campus OSP"
+        ],
+        "financial_management": [
+            "Complex budget development & budget justifications (narratives)",
+            "Cost-sharing and in-kind matching tracking rules",
+            "Post-award coordination with Business Operations Director (Uniform Guidance 2 CFR 200)"
+        ],
+        "regulatory_compliance": [
+            "FERPA student data privacy boundaries & masking methods",
+            "IRB human subjects protocol tracking and exemption processing",
+            "Time and effort certification protocols (ECRT system tracking)"
+        ]
+    },
+    "templates_and_artifacts": {
+        "compliance_matrix": {
+            "layout_rules": "Times New Roman/Arial 11-12pt font, 1-inch margins, single-spaced, searchable PDF format.",
+            "narrative_sections": [
+                "Significance",
+                "Project Research & Development Plan",
+                "Personnel & Team Capability",
+                "Resources & Institutional Commitment"
+            ]
+        },
+        "institutional_boilerplate": {
+            "facilities_and_resources": "UNM-LA is a designated Hispanic-Serving Institution (HSI) operating as a branch campus of UNM (R1 flagship). Key assets include the Academic Support Center (ASC), wet labs for chemistry, and fiscal oversight managed via Banner ERP and main campus OSP.",
+            "demographics_data_table": {
+                "Part-Time Students": "71.1%",
+                "Full-Time Students": "28.9%",
+                "Hispanic or Latino": "45.8%",
+                "White (Non-Hispanic)": "41.0%",
+                "American Indian / Alaska Native": "3.7%",
+                "Female Balance": "53.0%",
+                "Male Balance": "47.0%"
+            }
+        },
+        "performance_measures_table": [
+            {
+                "Indicator": "Gateway STEM Success (C or better)",
+                "Baseline": "54%",
+                "Target": "70% by Year 2",
+                "Source": "Banner SIS"
+            },
+            {
+                "Indicator": "STEM Identity & Self-Efficacy",
+                "Baseline": "0%",
+                "Target": "85% cohort scores",
+                "Source": "Validated Survey Scales"
+            },
+            {
+                "Indicator": "Associate Degree Graduation Rate",
+                "Baseline": "22%",
+                "Target": "42% cumulative by Year 3",
+                "Source": "Institutional Research (IR)"
+            },
+            {
+                "Indicator": "Frictionless 4-Year Transfer",
+                "Baseline": "35%",
+                "Target": "55% matriculation by Year 3",
+                "Source": "National Student Clearinghouse"
+            }
+        ],
+        "three_year_budget_model": {
+            "global_parameters": {
+                "escalation_rate": "3.0%",
+                "professional_fringe": "32.0%",
+                "student_fringe": "2.0%",
+                "restricted_fa_cap": "8.0%"
+            },
+            "totals": {
+                "Year_1_Direct_Costs": "$169,422.40",
+                "Year_2_Direct_Costs": "$169,382.40",
+                "Year_3_Direct_Costs": "$169,461.20",
+                "3_Year_Cumulative_Grand_Total": "$546,527.28"
+            }
+        }
+    },
+    "professional_readiness": {
+        "90_day_mastery_plan": {
+            "Days_1_30": "Secure Streamlyne & Banner ERP security clearances; complete CITI program COI/IRB modules; activate OSP liaison checkpoints.",
+            "Days_31_60": "Integrate post-award workflows (ePAR portal, ECRT effort systems); design sample budget adjustments under Uniform Guidance thresholds.",
+            "Days_61_90": "Run independent Streamlyne proposal routing paths; launch the 'Translating Research into Impact' faculty development workshops."
+        },
+        "field_bibliography": [
+            "Research Administration and Management (Elliott C. Kulakowski & Lynne U. Chronister)",
+            "Certified Research Administrator (CRA) Exam Study Guide",
+            "OMB Uniform Guidance (2 CFR 200 - Subpart E Cost Principles)",
+            "UNM OSP Proposal Preparation and Submission Guidelines",
+            "Writing Science (Joshua Schimel)"
+        ],
+        "acronym_cheat_sheet": {
+            "F_A": "Facilities and Administrative Costs (Indirect costs / overhead)",
+            "MTDC": "Modified Total Direct Costs (The billing baseline excluding specific capital outlays)",
+            "Streamlyne": "UNM's centralized proposal development, compliance disclosure, and routing portal",
+            "ePAR": "Electronic Position Action Request (UNM internal personnel hiring action system)",
+            "ECRT": "Effort Certification and Reporting Technology (UNM time-tracking compliance logger)"
+        }
+    }
+}

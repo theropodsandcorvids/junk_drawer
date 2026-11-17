@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Productivity Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --danger-color: #ef4444;
+            --danger-hover: #dc2626;
+            --border-color: #e2e8f0;
+            --subtask-bg: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Two-Column Grid Setup */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 850px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            height: fit-content;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-settings {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        input[type="date"], input[type="text"] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: white;
+            color: var(--text-color);
+        }
+
+        input:focus {
+            border-color: var(--accent-color);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Countdown Display Styles */
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #718096;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        /* To-Do Element Styles */
+        .todo-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 450px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .todo-wrapper {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            padding: 0.75rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .todo-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .todo-text {
+            flex: 1;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .action-btns button {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-delete { background-color: var(--danger-color); }
+        .btn-delete:hover { background-color: var(--danger-hover); }
+
+        /* Subtask System Layout */
+        .subtask-section {
+            margin-top: 0.75rem;
+            padding-left: 1rem;
+            border-left: 2px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .subtask-input-group {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtask-input-group input {
+            padding: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .subtask-input-group button {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .subtask-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .subtask-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--subtask-bg);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .subtask-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .subtask-item.completed .subtask-text {
+            text-decoration: line-through;
+            color: #a0aec0;
+        }
+
+        .btn-sub-delete {
+            background-color: transparent;
+            color: var(--danger-color);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.8rem;
+        }
+        .btn-sub-delete:hover {
+            background-color: #fee2e2;
+            color: var(--danger-hover);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- LEFT COLUMN -->
+        <div class="column">
+            
+                        <!-- Day Countdown Card (Left) -->
+            <div class="card">
+                <!-- Flex container aligning title and its text input side-by-side -->
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; flex-wrap: wrap;">
+                    <h2 id="headerA" style="margin-bottom: 0; white-space: nowrap; text-align: center;">Countdown A</h2>
+                    <input type="text" id="nameInputA" placeholder="Event Name (e.g., Vacation)" oninput="updateEventName('A')" aria-label="Event Name A" style="max-width: 2px; padding: 0.5rem 0.75rem;">
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                    <div class="countdown-display" id="timerDisplayA" style="white-space: nowrap;">
+                        Select a date above
+                    </div>
+                    <div class="countdown-settings">
+                        <div class="control-group" style="margin-bottom: 0;">
+                            <input type="date" id="dateInputA" aria-label="Target date picker A">
+                            <button onclick="calculateCountdown('A')">Set Target</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- To-Do List Card (Left) -->
+            <div class="card">
+            
+                <div class="control-group">
+                    <input type="text" id="todoInputA" placeholder="Add a main task..." aria-label="Main task description A">
+                    <button onclick="addTodo('A')">Add Task</button>
+                </div>
+                <ul class="todo-list" id="todoListA">
+                    <!-- Dynamic tasks render here -->
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="column">
+            
+                        <!-- Day Countdown Card (Right) -->
+            <div class="card">
+                <!-- Flex container aligning title and its text input side-by-side -->
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <h2 id="headerB" style="margin-bottom: 0; white-space: nowrap; text-align: left;">Countdown B</h2>
+                    <input type="text" id="nameInputB" placeholder="Event Name (e.g., Deadline)" oninput="updateEventName('B')" aria-label="Event Name B" style="max-width: 2px; padding: 0.5rem 0.75rem;">
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                    <div class="countdown-display" id="timerDisplayB" style="white-space: nowrap;">
+                        Select a date above
+                    </div>
+                    <div class="countdown-settings">
+                        <div class="control-group" style="margin-bottom: 0;">
+                            <input type="date" id="dateInputB" aria-label="Target date picker B">
+                            <button onclick="calculateCountdown('B')">Set Target</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- To-Do List Card (Right) -->
+            <div class="card">
+               
+                <div class="control-group">
+                    <input type="text" id="todoInputB" placeholder="Add a main task..." aria-label="Main task description B">
+                    <button onclick="addTodo('B')">Add Task</button>
+                </div>
+                <ul class="todo-list" id="todoListB">
+                    <!-- Dynamic tasks render here -->
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Set up local minimum inputs based on today's calendar date boundary
+        const todayLocal = new Date();
+        const yyyy = todayLocal.getFullYear();
+        const mm = String(todayLocal.getMonth() + 1).padStart(2, '0');
+        const dd = String(todayLocal.getDate()).padStart(2, '0');
+        const minDateString = `${yyyy}-${mm}-${dd}`;
+        
+        document.getElementById('dateInputA').min = minDateString;
+        document.getElementById('dateInputB').min = minDateString;
+
+        // --- CALENDAR COUNTDOWN LOGIC ---
+        function updateEventName(id) {
+            const inputVal = document.getElementById(`nameInput${id}`).value.trim();
+            const header = document.getElementById(`header${id}`);
+            const defaultText = `Countdown ${id}`;
+            
+            header.textContent = inputVal || defaultText;
+            localStorage.setItem(`eventName${id}`, inputVal);
+        }
+
+        function calculateCountdown(id) {
+            const dateInput = document.getElementById(`dateInput${id}`);
+            const targetValue = dateInput.value;
+            
+            if (!targetValue) {
+                alert('Please pick a date from the calendar.');
+                return;
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const targetDate = new Date(targetValue + 'T00:00:00'); 
+            const differenceInTime = targetDate.getTime() - today.getTime();
+            const daysLeft = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+            if (daysLeft < 0) {
+                alert('Please pick a date that is today or in the future.');
+                return;
+            }
+
+            localStorage.setItem(`targetDate${id}`, targetValue);
+            updateTimerDisplay(id, daysLeft);
+        }
+
+        function updateTimerDisplay(id, days) {
+            const display = document.getElementById(`timerDisplay${id}`);
+            if (days === 0) {
+                display.innerHTML = '<div>Today! 🎉</div>';
+            } else if (days === 1) {
+                display.innerHTML = `<div>1 <span class="countdown-label">Day Remaining</span></div>`;
+            } else {
+                display.innerHTML = `<div>${days} <span class="countdown-label">Days Remaining</span></div>`;
+            }
+        }
+
+        function loadStoredCountdowns() {
+            ['A', 'B'].forEach(id => {
+                // Restore Custom Event Names
+                const storedName = localStorage.getItem(`eventName${id}`);
+                if (storedName) {
+                    document.getElementById(`nameInput${id}`).value = storedName;
+                    document.getElementById(`header${id}`).textContent = storedName;
+                }
+
+                // Restore Targeted Target Dates
+                const storedDate = localStorage.getItem(`targetDate${id}`);
+                if (storedDate) {
+                    document.getElementById(`dateInput${id}`).value = storedDate;
+                    
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const targetDate = new Date(storedDate + 'T00:00:00');
+                    const differenceInTime = targetDate.getTime() - today.getTime();
+                    const daysLeft = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+                    
+                    if (daysLeft >= 0) {
+                        updateTimerDisplay(id, daysLeft);
+                    }
+                }
+            });
+        }
+
+        // --- TO-DO LIST LOGIC ---
+        let listData = {
+            A: JSON.parse(localStorage.getItem('nestedTodosA')) || [],
+            B: JSON.parse(localStorage.getItem('nestedTodosB')) || []
+        };
+
+        function renderTodos(id) {
+            const todoListElement = document.getElementById(`todoList${id}`);
+            if (!todoListElement) return;
+            todoListElement.innerHTML = '';
+
+            listData[id].forEach((todo, mainIndex) => {
+                const wrapper = document.createElement('li');
+                wrapper.className = 'todo-wrapper';
+
+                const mainRow = document.createElement('div');
+                mainRow.className = 'todo-main-row';
+
+                const hasSubtasks = todo.subtasks && todo.subtasks.length > 0;
+                const allSubtasksDone = hasSubtasks && todo.subtasks.every(sub => sub.completed);
+                const isComplete = hasSubtasks && allSubtasksDone;
+
+                const statusBadge = document.createElement('span');
+                statusBadge.textContent = isComplete ? '✓ Completed' : '○ In Progress';
+                statusBadge.style.fontSize = '0.75rem';
+                statusBadge.style.padding = '0.2rem 0.5rem';
+                statusBadge.style.borderRadius = '4px';
+                statusBadge.style.marginRight = '0.75rem';
+                statusBadge.style.whiteSpace = 'nowrap';
+                statusBadge.style.fontWeight = 'bold';
+                
+                if (isComplete) {
+                    statusBadge.style.backgroundColor = '#d1fae5';
+                    statusBadge.style.color = '#065f46';
+                } else {
+                    statusBadge.style.backgroundColor = '#fef3c7';
+                    statusBadge.style.color = '#92400e';
+                }
+
+                const textContainer = document.createElement('div');
+                textContainer.style.flex = '1';
+
+                const isEditing = todo.isEditing || false;
+                const actionBtns = document.createElement('div');
+                actionBtns.className = 'action-btns';
+
+                if (isEditing) {
+                    const editInput = document.createElement('input');
+                    editInput.type = 'text';
+                    editInput.value = todo.editText !== undefined ? todo.editText : todo.text;
+                    editInput.style.padding = '0.25rem';
+                    editInput.style.width = '100%';
+                    
+                    editInput.addEventListener('input', (e) => {
+                        listData[id][mainIndex].editText = e.target.value;
+                    });
+                    
+                    editInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') saveTodo(id, mainIndex);
+                    });
+                    textContainer.appendChild(editInput);
+
+                    const saveBtn = document.createElement('button');
+                    saveBtn.textContent = 'Save';
+                    saveBtn.style.backgroundColor = '#10b981';
+                    saveBtn.onclick = () => saveTodo(id, mainIndex);
+                    actionBtns.appendChild(saveBtn);
+                } else {
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'todo-text';
+                    textSpan.textContent = todo.text;
+                    if (isComplete) {
+                        textSpan.style.textDecoration = 'line-through';
+                        textSpan.style.color = '#a0aec0';
+                    }
+                    textContainer.appendChild(textSpan);
+
+                    const editBtn = document.createElement('button');
+                    editBtn.textContent = 'Edit';
+                    editBtn.style.backgroundColor = '#f59e0b';
+                    editBtn.onclick = () => toggleEditMode(id, mainIndex);
+                    actionBtns.appendChild(editBtn);
+                }
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn-delete';
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.onclick = () => deleteTodo(id, mainIndex);
+                actionBtns.appendChild(deleteBtn);
+                
+                mainRow.appendChild(statusBadge);
+                mainRow.appendChild(textContainer);
+                mainRow.appendChild(actionBtns);
+                wrapper.appendChild(mainRow);
+
+                const subtaskSection = document.createElement('div');
+                subtaskSection.className = 'subtask-section';
+
+                const inputGroup = document.createElement('div');
+                inputGroup.className = 'subtask-input-group';
+
+                const subtaskInput = document.createElement('input');
+                subtaskInput.type = 'text';
+                subtaskInput.placeholder = 'Add subtask...';
+                subtaskInput.id = `subInput-${id}-${mainIndex}`;
+                subtaskInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') addSubtask(id, mainIndex);
+                });
+
+                const subtaskBtn = document.createElement('button');
+                subtaskBtn.textContent = '+';
+                subtaskBtn.onclick = () => addSubtask(id, mainIndex);
+
+                inputGroup.appendChild(subtaskInput);
+                inputGroup.appendChild(subtaskBtn);
+                subtaskSection.appendChild(inputGroup);
+
+                const subtaskList = document.createElement('ul');
+                subtaskList.className = 'subtask-list';
+
+                if (todo.subtasks) {
+                    todo.subtasks.forEach((subtask, subIndex) => {
+                        const subLi = document.createElement('li');
+                        subLi.className = `subtask-item ${subtask.completed ? 'completed' : ''}`;
+
+                        const leftDiv = document.createElement('div');
+                        leftDiv.className = 'subtask-left';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.checked = subtask.completed;
+                        checkbox.onclick = () => toggleSubtask(id, mainIndex, subIndex);
+
+                        const subText = document.createElement('span');
+                                                subText.className = 'subtask-text';
+                        subText.textContent = subtask.text;
+
+                        leftDiv.appendChild(checkbox);
+                        leftDiv.appendChild(subText);
+
+                        const subDeleteBtn = document.createElement('button');
+                        subDeleteBtn.className = 'btn-sub-delete';
+                        subDeleteBtn.textContent = '✕';
+                        subDeleteBtn.onclick = () => deleteSubtask(id, mainIndex, subIndex);
+
+                        subLi.appendChild(leftDiv);
+                        subLi.appendChild(subDeleteBtn);
+                        subtaskList.appendChild(subLi);
+                    });
+                }
+
+                subtaskSection.appendChild(subtaskList);
+                wrapper.appendChild(subtaskSection);
+                todoListElement.appendChild(wrapper);
+            });
+            
+            localStorage.setItem(`nestedTodos${id}`, JSON.stringify(listData[id]));
+        }
+
+                function addTodo(id) {
+            const todoInput = document.getElementById(`todoInput${id}`);
+            const taskText = todoInput.value.trim();
+
+            if (taskText === '') {
+                alert('Task text cannot be empty.');
+                return;
+            }
+
+            listData[id].push({
+                text: taskText,
+                isEditing: false,
+                subtasks: []
+            });
+
+            todoInput.value = '';
+            renderTodos(id);
+        }
+
+        function deleteTodo(id, index) {
+            listData[id].splice(index, 1);
+            renderTodos(id);
+        }
+
+        function toggleEditMode(id, index) {
+            listData[id][index].isEditing = true;
+            listData[id][index].editText = listData[id][index].text;
+            renderTodos(id);
+        }
+
+        function saveTodo(id, index) {
+            const cleanValue = (listData[id][index].editText || '').trim();
+            if (cleanValue === '') {
+                alert('Task text cannot be empty.');
+                return;
+            }
+            listData[id][index].text = cleanValue;
+            listData[id][index].isEditing = false;
+            delete listData[id][index].editText;
+            renderTodos(id);
+        }
+
+        function addSubtask(id, mainIndex) {
+            const subtaskInput = document.getElementById(`subInput-${id}-${mainIndex}`);
+            const subtaskText = subtaskInput.value.trim();
+
+            if (subtaskText === '') {
+                alert('Subtask text cannot be empty.');
+                return;
+            }
+
+            if (!listData[id][mainIndex].subtasks) {
+                listData[id][mainIndex].subtasks = [];
+            }
+
+            listData[id][mainIndex].subtasks.push({
+                text: subtaskText,
+                completed: false
+            });
+
+            subtaskInput.value = '';
+            renderTodos(id);
+        }
+
+        function toggleSubtask(id, mainIndex, subIndex) {
+            listData[id][mainIndex].subtasks[subIndex].completed = !listData[id][mainIndex].subtasks[subIndex].completed;
+            renderTodos(id);
+        }
+
+        function deleteSubtask(id, mainIndex, subIndex) {
+            listData[id][mainIndex].subtasks.splice(subIndex, 1);
+            renderTodos(id);
+        }
+
+        // Global key binders for parent lists
+        document.getElementById('todoInputA').addEventListener('keypress', (e) => { if (e.key === 'Enter') addTodo('A'); });
+        document.getElementById('todoInputB').addEventListener('keypress', (e) => { if (e.key === 'Enter') addTodo('B'); });
+
+        // Dashboard boot initialization sequences
+        loadStoredCountdowns();
+        renderTodos('A');
+        renderTodos('B');
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset 11: Banner ERP Account Code Crosswalk Chart &amp; Export Portal</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --bg-color: #F9FAFB;
+            --alert-bg: #FCE4D6;
+            --alert-text: #C00000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .instruction-text {
+            font-size: 13px;
+            color: #555555;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-style: italic;
+            border-left: 3px solid var(--navy);
+            padding-left: 10px;
+        }
+
+        /* Crosswalk Grid / Form Styles */
+        .crosswalk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+        }
+
+        .crosswalk-table th, .crosswalk-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            font-size: 13px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .crosswalk-table th {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .crosswalk-table input, .crosswalk-table select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--soft-green);
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .crosswalk-table td.center {
+            text-align: center;
+        }
+
+        .crosswalk-table td.right {
+            text-align: right;
+        }
+
+        .row-total-label {
+            font-weight: bold;
+            text-align: right;
+            background-color: var(--light-gray);
+            color: var(--navy);
+        }
+
+        .row-total-value {
+            font-weight: bold;
+            text-align: right;
+            background-color: var(--light-gray);
+            font-size: 14px;
+            color: var(--dark-green);
+        }
+
+        /* Variance Warning Indicator Styles */
+        .variance-cell {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .status-cell {
+            font-weight: bold;
+            text-align: center;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .status-cell.alert-active {
+            background-color: var(--alert-bg);
+            color: var(--alert-text);
+            border: 1px solid #F5C2C1;
+        }
+
+        .status-cell.compliant-active {
+            background-color: #E2EFDA;
+            color: var(--dark-green);
+        }
+
+        /* Action Controls Layout */
+        .action-container {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #153358;
+        }
+
+        .btn.secondary {
+            background-color: var(--dark-green);
+        }
+
+        .btn.secondary:hover {
+            background-color: #273d1a;
+        }
+    </style>
+    <!-- Include SheetJS (XLSX) CDN Library for Native Client-Side Excel Generation -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Asset 11: Banner ERP Account Code Crosswalk &amp; Variance Engine</h1>
+        <p class="subtitle">Uniform Guidance 2 CFR 200.308 Tracking Terminal &amp; Client-Side Excel Compiler</p>
+    </header>
+
+    <p class="instruction-text">
+        Map federal sponsor allocation pools to internal UNM institutional account strings. Enter the original proposal baselines alongside current reallocations to dynamically track the 25% audit shift variance ceiling.
+    </p>
+
+    <!-- Crosswalk Management Form Interface Matrix -->
+    <table class="crosswalk-table" id="crosswalk-matrix">
+        <thead>
+            <tr>
+                <th style="width: 15%;">Sponsor Category</th>
+                <th style="width: 10%;">Banner Code</th>
+                <th style="width: 25%;">Local Account Line Item Title</th>
+                <th style="width: 15%;">Original Proposal Base ($)</th>
+                <th style="width: 15%;">Current Shift Ledger ($)</th>
+                <th style="width: 10%;">Variance (%)</th>
+                <th style="width: 10%;">2 CFR 200.308 Status</th>
+            </tr>
+        </thead>
+                <tbody>
+            <tr>
+                <td><input type="text" class="cell-sponsor" value="A. Personnel Salaries"></td>
+                <td class="center"><input type="text" class="cell-code" value="201A" style="font-weight:bold; text-align:center; color:var(--navy);"></td>
+                <td><input type="text" class="cell-title" value="Senior Personnel Salaries (PI/Co-PI Effort)"></td>
+                <td><input type="number" class="cell-base" value="125000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td><input type="number" class="cell-shift" value="158000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td class="variance-cell" id="var-row-0">0.00%</td>
+                <td class="status-cell" id="status-row-0">INITIALIZING</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="cell-sponsor" value="A. Personnel Salaries"></td>
+                <td class="center"><input type="text" class="cell-code" value="202A" style="font-weight:bold; text-align:center; color:var(--navy);"></td>
+                <td><input type="text" class="cell-title" value="Student Hourly Payroll (Tutors/GRAs)"></td>
+                <td><input type="number" class="cell-base" value="45000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td><input type="number" class="cell-shift" value="46000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td class="variance-cell" id="var-row-1">0.00%</td>
+                <td class="status-cell" id="status-row-1">INITIALIZING</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="cell-sponsor" value="B. Equipment / Ops"></td>
+                <td class="center"><input type="text" class="cell-code" value="3110" style="font-weight:bold; text-align:center; color:var(--navy);"></td>
+                <td><input type="text" class="cell-title" value="Materials &amp; Laboratory Supplies Base"></td>
+                <td><input type="number" class="cell-base" value="8450.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td><input type="number" class="cell-shift" value="9000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td class="variance-cell" id="var-row-2">0.00%</td>
+                <td class="status-cell" id="status-row-2">INITIALIZING</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="cell-sponsor" value="C. Participant Support"></td>
+                <td class="center"><input type="text" class="cell-code" value="40A0" style="font-weight:bold; text-align:center; color:var(--navy);"></td>
+                <td><input type="text" class="cell-title" value="Student Stipend Payout Sandbox"></td>
+                <td><input type="number" class="cell-base" value="10000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td><input type="number" class="cell-shift" value="10000.00" step="0.01" oninput="executeCrosswalkMath()"></td>
+                <td class="variance-cell" id="var-row-3">0.00%</td>
+                <td class="status-cell" id="status-row-3">INITIALIZING</td>
+            </tr>
+            <!-- Summary Aggregation Footer Row -->
+            <tr>
+                <td colspan="3" class="row-total-label">Grand Ledger Portfolio Totals:</td>
+                <td class="row-total-value" id="tot-base-val">$0.00</td>
+                <td class="row-total-value" id="tot-shift-val">$0.00</td>
+                <td colspan="2" class="row-total-value" id="tot-meta-status" style="text-align:center; font-size:11px;">READY</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="action-container">
+        <button class="btn" onclick="executeCrosswalkMath()">Recalculate Balances</button>
+        <button class="btn secondary" onclick="exportCrosswalkToExcel()">Compile &amp; Export XLSX Workbook</button>
+    </div>
+</div>
+
+<script>
+    // Execute mathematical tracking loops upon initialization loop
+    window.onload = function() {
+        executeCrosswalkMath();
+    };
+
+    function executeCrosswalkMath() {
+        const bases = document.querySelectorAll('.cell-base');
+        const shifts = document.querySelectorAll('.cell-shift');
+        
+        let sumBase = 0;
+        let sumShift = 0;
+
+        bases.forEach((baseInput, idx) => {
+            const valBase = parseFloat(baseInput.value) || 0;
+            const valShift = parseFloat(shifts[idx].value) || 0;
+            
+            sumBase += valBase;
+            sumShift += valShift;
+
+            // Compute row level percentage shift variance indicators
+            let variancePct = 0;
+            if (valBase !== 0) {
+                variancePct = ((valShift - valBase) / valBase) * 100;
+            }
+
+            const varCell = document.getElementById('var-row-' + idx);
+            const statusCell = document.getElementById('status-row-' + idx);
+            
+            varCell.innerText = (variancePct >= 0 ? '+' : '') + variancePct.toFixed(2) + '%';
+
+            // Verify 2 CFR 200.308 Prior Approval Threshold Gate Boundaries (25.00% Limit Rule)
+            if (Math.abs(variancePct) > 25.00) {
+                statusCell.innerText = "⚠️ PRIOR APPROVAL";
+                statusCell.className = "status-cell alert-active";
+                varCell.style.color = "var(--alert-text)";
+            } else {
+                statusCell.innerText = "🟢 COMPLIANT";
+                statusCell.className = "status-cell compliant-active";
+                varCell.style.color = "var(--dark-green)";
+            }
+        });
+
+        // Format summary total strings onto view nodes
+        document.getElementById('tot-base-val').innerText = '$' + sumBase.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('tot-shift-val').innerText = '$' + sumShift.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function exportCrosswalkToExcel() {
+        // Enforce math parameters configuration are synced up before building structures
+        executeCrosswalkMath();
+
+        // 1. Initialize empty SheetJS elements
+        const wb = XLSX.utils.book_new();
+        
+        // 2. Build Tab 1: Account Crosswalk Ledger Data Arrays
+        const sheet1Data = [
+            ["Banner ERP Account Code Crosswalk Engine"],
+            ["Asset 11: Federal Sponsor Categories mapped to Local UNM Institutional Accounts"],
+            [],
+            ["Sponsor Category Group", "Banner Account Code", "Local Allocation Line Item Title", "Approved Proposal Budget ($)"]
+        ];
+
+        // Gather metrics out of active row forms to drop onto Sheet 1 array
+        const sponsors = document.querySelectorAll('.cell-sponsor');
+        const codes = document.querySelectorAll('.cell-code');
+        const titles = document.querySelectorAll('.cell-title');
+        const bases = document.querySelectorAll('.cell-base');
+        const shifts = document.querySelectorAll('.cell-shift');
+
+        sponsors.forEach((sp, idx) => {
+            sheet1Data.push([
+                sp.value,
+                codes[idx].value,
+                titles[idx].value,
+                parseFloat(bases[idx].value) || 0
+            ]);
+        });
+
+        // Add summary math rows referencing row ranges dynamically
+        sheet1Data.push(["", "", "Total Account Portfolio Under Crosswalk:", { t: 'n', f: "SUM(D5:D8)" }]);
+
+        const ws1 = XLSX.utils.aoa_to_sheet(sheet1Data);
+
+        // 3. Build Tab 2: Category Variance Dashboard Data Arrays
+        const sheet2Data = [
+            ["Post-Award Budget Modification Dashboard"],
+            ["Real-time calculation tracking for Uniform Guidance 2 CFR 200.308 Category Shifts"],
+            [],
+            ["Banner Account", "Budget Account Line Item Name", "Sponsor Base Baseline ($)", "Current Operational Shift Ledger ($)", "Programmatic Variance Percentage", "Sponsor Status Clearance Track"]
+        ];
+
+        sponsors.forEach((sp, idx) => {
+            const rNum = idx + 5; // Rows kick off at index 5 in the output excel matrix
+            sheet2Data.push([
+                codes[idx].value,
+                titles[idx].value,
+                { t: 'n', f: `'Account Crosswalk Ledger'!D` + rNum }, // Direct link equation pointing straight to Tab 1 cells
+                parseFloat(shifts[idx].value) || 0,
+                { t: 'n', f: `(D` + rNum + `-C` + rNum + `)/C` + rNum }, // Variance math calculation formula
+                { t: 's', f: `IF(ABS(E` + rNum + `)>0.25, "⚠️ PRIOR APPROVAL REQUIRED", "🟢 Internal Reallocation Valid")` } // Nested IF logic check gate formula
+            ]);
+        });
+
+        sheet2Data.push(["", "Grand Totals:", { t: 'n', f: "SUM(C5:C8)" }, { t: 'n', f: "SUM(D5:D8)" }]);
+
+        const ws2 = XLSX.utils.aoa_to_sheet(sheet2Data);
+
+        // Apply specialized sizing widths array layouts to prevent truncation gaps
+        const colWidthsWS1 = [{ wch: 24 }, { wch: 12 }, { wch: 42 }, { wch: 28 }];
+        const colWidthsWS2 = [{ wch: 12 }, { wch: 42 }, { wch: 24 }, { wch: 24 }, { wch: 22 }, { wch: 32 }];
+        ws1['!cols'] = colWidthsWS1;
+        ws2['!cols'] = colWidthsWS2;
+
+        // 4. Bind structural sheets objects onto the workbook block master package
+        XLSX.utils.book_append_sheet(wb, ws1, "Account Crosswalk Ledger");
+        XLSX.utils.book_append_sheet(wb, ws2, "Category Variance Dashboard");
+
+        // 5. Trigger native binary download sequence out of the browser window viewports
+        XLSX.writeFile(wb, "grant_budget_justification_worksheet.xlsx");
+    }
+</script>
+
+</body>
+</html>

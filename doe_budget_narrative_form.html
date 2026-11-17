@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOE Budget Justification Narrative Generator</title>
+    <style>
+        :root {
+            --primary: #1F497D;
+            --primary-light: #2c64a5;
+            --success: #2e7d32;
+            --bg-input: #E2EFDA;
+            --bg-calc: #F2F2F2;
+            --border: #D3D3D3;
+            --text: #333333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f7f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: var(--primary-light);
+            font-size: 18px;
+            margin-top: 25px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .instructions {
+            background-color: #eef2f7;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 4px 4px 0;
+            font-size: 14px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        input, select, textarea {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        input.user-input, textarea.user-input {
+            background-color: var(--bg-input);
+        }
+
+        input.calc-output {
+            background-color: var(--bg-calc);
+            font-weight: bold;
+            color: #000;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--primary-light);
+        }
+
+        .output-box {
+            margin-top: 30px;
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            padding: 20px;
+            display: none;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .output-header h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .copy-btn {
+            background-color: var(--success);
+            padding: 6px 12px;
+            font-size: 13px;
+            width: auto;
+            margin-top: 0;
+        }
+
+        .copy-btn:hover {
+            background-color: #235e26;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #fafafa;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>DOE Budget Justification Narrative Generator</h1>
+    <div class="instructions">
+        <strong>💡 GSO Compliance Guide:</strong> Input your project's parameters below. Soft-green fields indicate manual input values. This tool dynamically compiles your data into a fully justified, audit-ready text block that aligns exactly with the Office of Science merit criteria.
+    </div>
+
+    <form id="budgetForm" onsubmit="generateNarrative(event)">
+        <h2>1. Project & Institutional Metadata</h2>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="projectTitle">Project Title</label>
+                <input type="text" id="projectTitle" class="user-input" value="Advanced Grid Telemetry Integration & Optimization" required>
+            </div>
+            <div class="form-group">
+                <label for="piName">Principal Investigator Name</label>
+                <input type="text" id="piName" class="user-input" value="Dr. Jane Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="nicraDate">Negotiated Rate Agreement Date (NICRA)</label>
+                <input type="date" id="nicraDate" class="user-input" value="2025-06-15" required>
+            </div>
+            <div class="form-group">
+                <label for="faRate">F&A Indirect Overhead Rate (%)</label>
+                <input type="number" id="faRate" class="user-input" value="52.0" step="0.1" required>
+            </div>
+        </div>
+
+        <h2>2. Personnel Salaries & Fringe Framework (Account Code 201A)</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="piBase">PI Annual Base Salary ($)</label>
+                <input type="number" id="piBase" class="user-input" value="120000" oninput="calculateBudgets()" required>
+            </div>
+            <div class="form-group">
+                <label for="piEffort">PI Calendar Months Effort (Per Year)</label>
+                <input type="number" id="piEffort" class="user-input" value="2.00" step="0.01" oninput="calculateBudgets()" required>
+            </div>
+            <div class="form-group">
+                <label for="piFringeRate">PI Fringe Benefit Rate (%)</label>
+                <input type="number" id="piFringeRate" class="user-input" value="44.23" step="0.01" oninput="calculateBudgets()" required>
+            </div>
+            <div class="form-group">
+                <label for="piTotalYear">Calculated PI Year 1 Total ($)</label>
+                <input type="text" id="piTotalYear" class="calc-output" readonly>
+            </div>
+        </div>
+
+        <h2>3. Equipment Acquisitions > $5,000</h2>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="equipName">Equipment Description / Model Name</label>
+                <input type="text" id="equipName" class="user-input" value="High-Voltage Battery Cycler Channel Array Pack" required>
+            </div>
+            <div class="form-group">
+                <label for="equipCost">Direct Acquisition Outlay ($)</label>
+                <input type="number" id="equipCost" class="user-input" value="25000" oninput="calculateBudgets()" required>
+            </div>
+            <div class="form-group full-width">
+                <label for="equipJust">Technical Justification for Science Scope</label>
+                <textarea id="equipJust" class="user-input" rows="2" required>This instrumentation is required to simulate grid battery charging profiles under rigorous capacity load conditions.</textarea>
+            </div>
+        </div>
+
+        <h2>4. Core Operations (Travel & Supplies)</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="travelBase">Annual Travel Cost Allocation ($)</label>
+                <input type="number" id="travelBase" class="user-input" value="4500" oninput="calculateBudgets()" required>
+            </div>
+            <div class="form-group">
+                <label for="suppliesBase">Annual Materials & Supplies Cost ($)</label>
+                <input type="number" id="suppliesBase" class="user-input" value="15000" oninput="calculateBudgets()" required>
+            </div>
+        </div>
+
+        <button type="submit">⚡ Compile & Generate Narrative Template</button>
+    </form>
+
+    <div id="outputBox" class="output-box">
+        <div class="output-header">
+            <h3>📝 Generated DOE Budget Justification</h3>
+            <button class="copy-btn" onclick="copyText()">Copy Narrative Text</button>
+        </div>
+        <pre id="narrativeOutput"></pre>
+    </div>
+</div>
+
+<script>
+    function calculateBudgets() {
+        const piBase = parseFloat(document.getElementById('piBase').value) || 0;
+        const piEffort = parseFloat(document.getElementById('piEffort').value) || 0;
+        const piFringeRate = parseFloat(document.getElementById('piFringeRate').value) || 0;
+
+        const piSalary = (piBase * (piEffort / 12));
+        const piFringe = piSalary * (piFringeRate / 100);
+        const piTotal = piSalary + piFringe;
+
+        document.getElementById('piTotalYear').value = '$' + piTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        return { piSalary, piFringe, piTotal };
+    }
+
+    function generateNarrative(e) {
+        e.preventDefault();
+        const vals = calculateBudgets();
+        
+        const title = document.getElementById('projectTitle').value;
+        const piName = document.getElementById('piName').value;
+        const nicra = document.getElementById('nicraDate').value;
+        const faRate = parseFloat(document.getElementById('faRate').value) || 0;
+        const equipName = document.getElementById('equipName').value;
+        const equipCost = parseFloat(document.getElementById('equipCost').value) || 0;
+        const equipJust = document.getElementById('equipJust').value;
+        const travel = parseFloat(document.getElementById('travelBase').value) || 0;
+        const supplies = parseFloat(document.getElementById('suppliesBase').value) || 0;
+
+        // MTDC Base excludes equipment
+        const mtdcBase = vals.piTotal + travel + supplies;
+        const indirects = mtdcBase * (faRate / 100);
+        const grandTotal = mtdcBase + indirects + equipCost;
+
+        const template = `DEPARTMENT OF ENERGY (DOE) BUDGET JUSTIFICATION NARRATIVE
+PROJECT TITLE: ${title}
+PRINCIPAL INVESTIGATOR: ${piName}
+
+1. PERSONNEL SALARIES & EFFORT CEILINGS (ACCOUNT CODE 201A)
+* Principal Investigator — ${piName} (Effort: ${document.getElementById('piEffort').value} Calendar Months Per Year):
+The PI will provide absolute operational oversight for the project scope, organize system testbeds, and direct annual reporting sequences. The requested salary is derived from an institutional full-time annualized base salary of $${parseInt(document.getElementById('piBase').value).toLocaleString()}.
+  - Year 1 Direct Requested Salary: $${vals.piSalary.toLocaleString(undefined, {maximumFractionDigits:2})}
+  - Out-Year Metrics: Years 2 and 3 retain a linear calculation trajectory.
+
+2. FRINGE BENEFITS
+Fringe benefits are applied according to institutional parameters approved by our cognizant federal agency on ${nicra}. Faculty/Professional lines utilize a fixed rate of ${document.getElementById('piFringeRate').value}%.
+  - Year 1 Requested Fringe: $${vals.piFringe.toLocaleString(undefined, {maximumFractionDigits:2})}
+
+3. EQUIPMENT (ACQUISITIONS > $5,000 PER UNIT)
+* ${equipName}:
+${equipJust} Cost is based on vendor pricing and includes delivery and validation setups.
+  - Year 1 Direct Acquisition Cost: $${equipCost.toLocaleString(undefined, {maximumFractionDigits:2})} (Exempt from F&A sweeps).
+
+4. TRAVEL TASKS
+* Mandated Sponsor Meetings & Dissemination Events:
+Funds are allocated for project personnel to travel to required DOE review meetings and engineering conferences.
+  - Year 1 Requested Travel: $${travel.toLocaleString(undefined, {maximumFractionDigits:2})}
+
+5. MATERIALS AND SUPPLIES
+* Experimental Laboratory Consumables:
+Requested funds cover the acquisition of diagnostic consumables, substrate layers, and system wiring matrices directly tied to lab testing runs.
+  - Year 1 Requested Materials: $${supplies.toLocaleString(undefined, {maximumFractionDigits:2})}
+
+6. INDIRECT COSTS (F&A OVERHEAD)
+F&A Indirect overhead is calculated using the institution's negotiated rate of ${faRate}% applied to the Modified Total Direct Cost (MTDC) baseline. The MTDC base strictly excludes equipment purchases.
+  - Year 1 MTDC Calculation Base: $${mtdcBase.toLocaleString(undefined, {maximumFractionDigits:2})}
+  - Year 1 Indirect Overhead Requested: $${indirects.toLocaleString(undefined, {maximumFractionDigits:2})}
+
+================================================================================
+TOTAL COMBINED DIRECT AND INDIRECT PROJECT VALUE (YEAR 1): $${grandTotal.toLocaleString(undefined, {maximumFractionDigits:2})}
+================================================================================`;
+
+        document.getElementById('narrativeOutput').textContent = template;
+        document.getElementById('outputBox').style.display = 'block';
+        document.getElementById('outputBox').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyText() {
+        const text = document.getElementById('narrativeOutput').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Narrative copied to clipboard successfully!');
+        });
+    }
+
+    // Initialize fields
+    calculateBudgets();
+</script>
+
+</body>
+</html>

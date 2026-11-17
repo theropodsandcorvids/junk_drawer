@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 1 Monthly Timeline & KPI Targets Dashboard</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --alert-bg: #FCE4D6;
+            --alert-text: #C00000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: #F9FAFB;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-title h1 {
+            color: var(--navy);
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* KPI Quick Stats Overview */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .kpi-card h3 {
+            margin: 0 0 5px 0;
+            font-size: 11px;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-card .value {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        .kpi-card .target {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 2px;
+        }
+
+        /* Timeline Roadmap Grid */
+        .timeline-container {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 10px;
+        }
+
+        .timeline-section-title {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .month-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .month-header {
+            background-color: var(--light-gray);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .month-header h4 {
+            margin: 0;
+            color: var(--navy);
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .quarter-tag {
+            font-size: 11px;
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .month-body {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .task-list {
+            margin: 0 0 15px 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+
+        .task-list li {
+            margin-bottom: 6px;
+        }
+
+        .target-box {
+            background-color: var(--soft-green);
+            border: 1px solid #C3D69B;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .target-box strong {
+            color: var(--dark-green);
+            text-transform: uppercase;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .month-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .kpi-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .month-grid, .kpi-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-title">
+            <h1>Year 1 Monthly Timeline &amp; KPI Dashboard</h1>
+            <p>Asset 24: Gateway STEM Success &amp; Institutional Capacity Building</p>
+        </div>
+    </header>
+
+    <!-- High-Level KPI Summary Dashboard Row -->
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <h3>Gateway Progress Track</h3>
+            <div class="value">54% &rarr; 62%</div>
+            <div class="target">Year 1 Success Target Benchmark</div>
+        </div>
+        <div class="kpi-card">
+            <h3>Part-Time Student Footprint</h3>
+            <div class="value">71.1%</div>
+            <div class="target">Primary Demographic Density</div>
+        </div>
+        <div class="kpi-card">
+            <h3>Year 1 Supplies Burn Rate</h3>
+            <div class="value">$8,450.00</div>
+            <div class="target">Procurement Matrix Cap Limit</div>
+        </div>
+        <div class="kpi-card">
+            <h3>Stipend Sandbox Line</h3>
+            <div class="value">$10,000.00</div>
+            <div class="target">Code 40A0 Total Allocation</div>
+        </div>
+    </div>
+
+    <!-- Timeline Roadmap Block -->
+    <div class="timeline-container">
+        <div class="timeline-section-title">Chronological Project Roadmap &amp; Operational Gates</div>
+        
+        <div class="month-grid">
+            <!-- Month 1 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h4>Month 01: Setup &amp; Routing</h4>
+                    <span class="quarter-tag">Q1 Baseline</span>
+                </div>
+                <div class="month-body">
+                    <ul class="task-list">
+                        <li>Initialize dedicated Banner restricted index parameters</li>
+                        <li>Route ePAR lines for project staff appointments</li>
+                        <li>Sync ledger access parameters inside Streamlyne systems</li>
+                    </ul>
+                    <div class="target-box">
+                        <strong>Target KPI Checkpoint:</strong>
+                        100% of internal accounting controls verified by the Business Operations Director.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month 2 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h4>Month 02: Launch &amp; Intake</h4>
+                    <span class="quarter-tag">Q1 Baseline</span>
+                </div>
+                <div class="month-body">
+                    <ul class="task-list">
+                        <li>Deploy student cohort orientation emails</li>
+                        <li>Launch Academic Support Center tutor shift calendars</li>
+                        <li>Execute Quarter 1 lab supplies procurement log</li>
+                    </ul>
+                    <div class="target-box">
+                        <strong>Target KPI Checkpoint:</strong>
+                        Minimum of 20 low-income or part-time student intakes signed and indexed.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month 3 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h4>Month 03: Deployment</h4>
+                    <span class="quarter-tag">Q1 Baseline</span>
+                </div>
+                <div class="month-body">
+                    <ul class="task-list">
+                        <li>Verify Code 40A0 stipend tranche allocations</li>
+                        <li>Deploy software tracking SaaS platform parameters</li>
+                        <li>Conduct initial faculty compliance checklist reviews</li>
+                    </ul>
+                    <div class="target-box">
+                        <strong>Target KPI Checkpoint:</strong>
+                        100% of cohort participants matched to tracking platform profiles.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month 4 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h4>Month 04: Midterm Alert Gate</h4>
+                    <span class="quarter-tag">Q2 Active</span>
+                </div>
+                <div class="month-body">
+                    <ul class="task-list">
+                        <li>Extract Week 4 and Week 8 midterm tracking metrics</li>
+                        <li>Trigger risk alerts for course benchmarks dropping below 60%</li>
+                        <li>Deploy intrusive advising modules for off-track lines</li>
+                    </ul>
+                    <div class="target-box">
+                        <strong>Target KPI Checkpoint:</strong>
+                        Execute immediate intrusive tutoring hours within 48 hours of any triggered alert.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month 5 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h4>Month 05: Evaluation Track</h4>
+                    <span class="quarter-tag">Q2 Active</span>
+                </div>
+                <div class="month-body">
+                    <ul class="task-list">
+                        <li>Launch intensive weekend Chemistry Wet Lab practical bootcamps</li>
+                        <li>Compile monthly GSO accomplishments memo reports</li>
+                        <li>Run internal voucher audits to verify 2 CFR 200 criteria</li>
+                    </ul>
+                    <div class="target-box">
+                        <strong>Target KPI Checkpoint:</strong>
+                        Maintain a project direct expenditure burn rate variance within +/- 5.0%.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month 6 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h4>Month 06: Data Suppression</h4>
+                    <span class="quarter-tag">Q2 Active</span>
+                </div>
+                <div class="month-body">
+                    <ul class="task-list">
+                        <li>Extract end-of-semester grade data from institutional SIS</li>
+                        <li>Apply primary and secondary FERPA cell-suppression filters</li>
+                        <li>Draft the Year 1 executive briefing summary files</li>
+                    </ul>
+                    <div class="target-box">
+                        <strong>Target KPI Checkpoint:</strong>
+                        Verify student data privacy via double-blind matrix reviews (Zero identifiers leaked).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

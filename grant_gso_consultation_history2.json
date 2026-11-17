@@ -1,0 +1,113 @@
+{
+    "project_metadata": {
+        "title": "Gateway STEM Success and Institutional Capacity Building",
+        "institution": "University of New Mexico-Los Alamos (UNM-LA)",
+        "governance_status": "Designated Hispanic-Serving Institution (HSI)",
+        "compliance_frameworks": ["2 CFR 200", "FERPA", "UNM Policy 3210"],
+        "combined_project_grand_total": 301696.65,
+        "multi_year_direct_costs_base": 281126.52,
+        "facilities_and_administrative_indirect_costs": 20570.13,
+        "fringe_benefits_rates": {
+            "full_time_faculty_pi": "44.23%",
+            "part_time_staff_coordinator": "25.97%",
+            "student_employee_hourly": "1.00%"
+        },
+        "target_demographics": {
+            "part_time_student_density": "71.1%",
+            "hispanic_latino_baseline": "45.8%"
+        }
+    },
+    "comprehensive_40_asset_lifecycle_taxonomy": {
+        "Phase 1: Pre-Award & Proposal Development": {
+            "Static Guidelines": [
+                "Asset 01: UNM-LA Standard Formatting Baseline Matrix",
+                "Asset 02: NSF (PAPPG) Grant Proposal Compliance Checklist",
+                "Asset 08: Streamlyne Document Status Cheat Sheet",
+                "Asset 09: Grant Writing Tips Reference Sheet"
+            ],
+            "High-Value Blank Fillable Templates": [
+                "Asset 03: NIH (PHS 398) Budget Justification Template",
+                "Asset 04: NSF-Compliant Biographical Sketch Template Outline",
+                "Asset 05: Federal Grant Data Management Plan",
+                "Asset 07: Institutional Letter of Commitment Framework",
+                "Asset 36: Conflict of Interest (COI) & Financial Disclosure Matrix",
+                "Asset 37: Human Subjects Protection / IRB Narrative Framework",
+                "Asset 38: Subaward Budget & Scope of Work (SOW) Package Template",
+                "Asset 40: Current and Pending Support Profile Template"
+            ],
+            "Project-Specific Logs": [
+                "Asset 06: Facilities, Equipment, and Other Resources Narrative"
+            ]
+        },
+        "Phase 2: Post-Award Setup & Launch": {
+            "Static Guidelines": [
+                "Asset 10: Post-Award Handover Guide",
+                "Asset 13: Faculty Onboarding Slideshow Script"
+            ],
+            "High-Value Blank Fillable Templates": [
+                "Asset 11: Banner ERP Account Code Crosswalk Chart",
+                "Asset 14: Student Cohort Orientation Email Template",
+                "Asset 16: Search Committee Interview Matrix & Questions"
+            ],
+            "Project-Specific Logs": [
+                "Asset 12: Year 1 Procurement Schedule Matrix",
+                "Asset 15: GSO First-Semester Monthly Task Calendar"
+            ]
+        },
+        "Phase 3: Active Monitoring & Iterative Reporting": {
+            "High-Value Blank Fillable Templates": [
+                "Asset 18: Student Stipend Disbursement Tracking Matrix",
+                "Asset 20: FERPA Data-Masking Protocol Worksheet",
+                "Asset 21: Monthly Reporting Reminder Faculty Email",
+                "Asset 22: Monthly GSO Accomplishments Memo Template",
+                "Asset 23: Sponsor Budget Modification Request Form"
+            ],
+            "Project-Specific Logs": [
+                "Asset 17: 3-Year Cumulative Direct Cost Trajectory Graph & Matrix",
+                "Asset 19: Risk Mitigation Guide",
+                "Asset 24: Year 1 Monthly Timeline & KPI Targets Dashboard",
+                "Asset 39: Multi-Year Risk Register & Key Personnel Contingency Plan"
+            ]
+        },
+        "Phase 4: Post-Award Audits & Executive Reporting": {
+            "High-Value Blank Fillable Templates": [
+                "Asset 25: Monthly Voucher Audit Workflow Sheet",
+                "Asset 26: Internal Audit Notification Memo Template",
+                "Asset 28: Executive Briefing Memorandum Template"
+            ],
+            "Project-Specific Logs": [
+                "Asset 27: 3-Year Post-Award Audit Risk Matrix",
+                "Asset 29: Board of Regents Executive Presentation Script"
+            ]
+        },
+        "Phase 5: Grant Closeout & Archiving": {
+            "High-Value Blank Fillable Templates": [
+                "Asset 31: End-of-Grant Closeout Checklist Matrix",
+                "Asset 32: Pre-Audit Documentation Binder Index"
+            ],
+            "Project-Specific Logs": [
+                "Asset 30: Federal Grant Performance Progress Report (PPR) Template",
+                "Asset 33: GSO Onboarding Transition Memo"
+            ]
+        },
+        "Cross-Phase Aggregation Portals": {
+            "Project-Specific Logs": [
+                "Asset 34: Grant Toolkit Webpage Portal [index.html]",
+                "Asset 35: Printable Master Proposal Guide Booklet"
+            ]
+        }
+    },
+    "generated_digital_artifacts_registry": {
+        "excel_files": {
+            "grant_budget_justification_worksheet.xlsx": "Multi-Year Budget Summary, 2 CFR 200.308 Category Variance Dashboard with 25% automated trigger red styling warnings, and FERPA masking arrays.",
+            "grant_voucher_audit_workflow.xlsx": "Phase 4 Post-Award Audit Workbook simulating a Banner FGROBND extraction ledger. Automatically flags unallowable charges with red status warnings and removes Code 40A0 Participant Support Costs from F&A loops."
+        },
+        "html_web_applications": {
+            "index.html": "Asset 34 Master control landing hub mapping all 40 chronological assets with functional category crosswalk styling and interactive relative hyperlinks.",
+            "grant_proposal_compliance_matrix.html": "Pre-Award checklist engine loaded with agency parameters, file size estimator limits, routing deadline calculations, and IRB/IACUC tracking inputs.",
+            "post_award_handover_guide.html": "Asset 10 Handover onboarding application featuring real-time execution slider scoring and a mandatory, locked institutional routing verification block.",
+            "gso_monthly_accomplishments_memo.html": "Asset 22 Universal fillable form environment tracking outlays, milestone hours, and compliance certifications with a built-in plain-text clipboard exporter.",
+            "year1_kpi_dashboard.html": "Asset 24 High-level infographic rendering vertical chronological lanes for months 1-6 alongside target baseline indicator boxes."
+        }
+    }
+}

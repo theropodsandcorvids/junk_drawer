@@ -1,0 +1,82 @@
+{
+  "context_meta_data": {
+    "target_institution": "University of New Mexico-Los Alamos (UNM-LA)",
+    "position_classification": "Grants Support Officer (GSO) - Grade 14 Professional, Exempt",
+    "primary_systems": "Streamlyne (Internal Approval/eRA Hub), Banner ERP (General Financial Ledger)",
+    "regulatory_framework": "2 CFR 200 (Uniform Guidance - Subpart E Cost Principles & Subpart F Audit)",
+    "compilation_date": "2026-11-05"
+  },
+  "onboarding_schedule": {
+    "week_1": {
+      "focus": "Systems Access, Flagship Sync, & Core Baseline Tracking",
+      "days": {
+        "day_1": "Local Setup & Network Initialization (HR onboarding, UNM NetID, local email).",
+        "day_2": "Flagship OSP Credentialing & Streamlyne Access (Submit portal requests, establish liaison protocols).",
+        "day_3": "Federal Funder Portal Onboarding (DOE PAMS, Research.gov/NSF, eRA Commons/NIH sync with master UEI).",
+        "day_4": "HSI Library Integration & Boilerplate Review (Organize IPEDS datasets, download Modules 1-7 boilerplates).",
+        "day_5": "Pre-Award 'Shredding' Calibration (Practice extraction of 1-inch margins, 15-page ceilings, time zone traps)."
+      }
+    },
+    "week_2": {
+      "focus": "Active Portfolio Review, Policy Enforcement, & Faculty Liaison Launch",
+      "days": {
+        "day_6": "Post-Award Ledger Reconciliation & Index Tracking (Review active indexes like LA-545021 for expenditure variances).",
+        "day_7": "Human Subjects (IRB) & Animal Care (IACUC) Audit (Establish tracking logs linking project indexes to FWA and PHS numbers).",
+        "day_8": "National Laboratory Joint-Venture Risk Mapping (Audit personnel hours to enforce 51.5% Onsite vs 26.0% Offsite F&A rates).",
+        "day_9": "Faculty Introduction & Auxiliary Toolkit Rollout (Host briefings, distribute DOE PIER and DMP placeholder frameworks).",
+        "day_10": "The Reverse Timeline System Test (Execute a mock end-to-end proposal routing simulation backwards from deadline)."
+      }
+    }
+  },
+  "institutional_identity_and_boilerplates": {
+    "ue_identifier": "V8Y6K3N2M4P1",
+    "cage_code": "07455",
+    "ein_tin": "1-856000642-A1",
+    "unm_irb_fwa": "FWA00003257",
+    "unm_phs_assurance": "D16-00396",
+    "module_1_profile": "UNM-LA is a comprehensive, open-admission branch campus of the University of New Mexico. UNM is one of only 21 R1 universities nationwide that also holds a federal designation as a Hispanic-Serving Institution (HSI). Serves as a tight-knit community college environment with Carnegie R1 research backing.",
+    "module_2_enrollment": "73.5% part-time undergraduate learners, balancing education with familial/employment duties. 38% of student base is over the age of 25 (non-traditional learners). Student-to-faculty ratio is 23:1.",
+    "module_3_dei": "Majority-minority student body with 72% identifying as ethnic minorities or BIPOC. Hispanic learners comprise 46% to 54% of enrollment; American Indian and Alaska Native students represent up to 7%.",
+    "module_4_geographic": "Located in Northern New Mexico, drawing 96% of students from in-state. Anchors regional workforce training pipelines directly adjacent to federal defense and energy sector plants.",
+    "module_5_stem": "Specialized Associate of Science (A.S.) programs in Computer Science, Pre-Engineering, and General Science. Pre-Engineering includes a tracking mechanism for a Bachelor of Science in Mechanical Engineering (BSME) completed on-site. Tied to regional national laboratories.",
+    "module_6_experiential": "Hands-on learning incorporating molecular biology (DNA purification/gel electrophoresis), quantitative chemical titrations, and industry-standard computing tools.",
+    "module_7_facilities": "Multi-building branch campus aligned with flagship risk-management frameworks. Upgraded chemical fume hoods, computational clusters, and ITV synchronous/hybrid instructional setups."
+  },
+  "compliance_and_spending_rules": {
+    "the_50_percent_location_rule": "Apply 51.5% On-Campus F&A rate if >=50% of total personnel hours occur on campus. Apply 26.0% Off-Campus F&A rate if >50% of total personnel hours occur offsite (e.g., inside LANL facilities). Rate applies to whole university base per project year.",
+    "fringe_benefit_rates": {
+      "faculty_salaried": 0.300,
+      "undergraduate_student": 0.010
+    },
+    "mtdc_exclusions": [
+      "Capital equipment packages equal to or exceeding $5,000 unit cost",
+      "Participant Support Costs (Line F: direct student stipends, travel, subsistence)",
+      "The portion of any individual subaward exceeding the first $25,000 over its full lifecycle"
+    ],
+    "the_90_day_cost_transfer_wall": "All retroactive billing corrections must be completed within 90 calendar days of the initial ledger transaction. Past 90 days, costs are permanently locked on that index and cannot be moved to federal lines.",
+    "the_120_day_liquidation_clock": "Federal drawdowns lock exactly 120 days post project end date. Remaining direct cash is forfeited to the U.S. Treasury, and deficits become the liability of the branch campus operating budget.",
+    "student_hour_caps": "Undergraduate labor is limited to a maximum of 20 hours/week during academic semesters, and 40 hours/week during official summer/break periods."
+  },
+  "governing_pre_award_timelines": {
+    "t_minus_30_days": "PI delivers 'Intent to Apply' and RFP to GSO; budget grid built offline.",
+    "t_minus_15_days": "Proposal budget and local resource layouts must clear branch executives for underwriting.",
+    "t_minus_5_days": "The absolute Streamlyne routing cutoff. Proposals must hit the queue or flagship OSP will reject.",
+    "t_minus_3_days": "Technical text and narrative freeze. PI stops editing; GSO flattens PDFs and checks formatting.",
+    "t_minus_48_hours": "GSO portal safety lock. Finalize upload entries to clear automated portal scanners.",
+    "t_minus_0_hours": "Sponsor close. Albuquerque AOR applies legal signature. GSO must explicitly convert Eastern deadlines to Mountain Time (e.g., 11:59 PM ET is 9:59 PM MT)."
+  },
+  "financial_and_administrative_traps": {
+    "trap_1_parking_lot": "Charging unallowable equipment or bulk purchases at the very end of a grant to avoid losing leftover cash. Fix: Reject or route an NCE.",
+    "trap_2_rainy_day_switcheroo": "Paying student workers from local accounts while waiting for a grant index to clear, then attempting a mass retroactive payroll shift past the 90-day wall. Fix: Split at the 90-day wall or use Index 76 local pools.",
+    "trap_3_cross_contamination": "Guessing the billing split of shared lab hard drives or reagents across multiple grants based on budget availability instead of logs. Fix: Implement a Pro-Rata Cost Allocation Memo before the buy.",
+    "trap_4_travel_bailout": "Falsifying a travel budget deficit as 'materials' to bypass computer tracking. Fix: Deny; execute a formal Budget Reallocation Request.",
+    "trap_5_ghost_personnel": "PI volunteering uncompensated effort in proposal text without creating a matching cost-share tracking account. Fix: Block unless approved by Dean.",
+    "trap_6_equipment_vendor_lock": "PI ordering capital equipment directly from a vendor without clearing flagship competitive bidding. Fix: Mandate a 30-to-45-day bidding buffer."
+  },
+  "system_and_software_splits": {
+    "streamlyne_native_capabilities": "Automated internal executive routing loops, electronic signature tracking, basic compliance lookup fields for IRB/IACUC numbers, and Conflict of Interest (COI) submission checks.",
+    "streamlyne_gaps": "Lacks narrative content, text boilerplates, advanced Excel alert logic (like the 3/9ths summer cap check), proactive timeline alerts (90-day closeout emails), or physical receipt storage.",
+    "banner_erp_capabilities": "Tracks raw transactional data, financial numbers, PO balances, historical cost transfer timelines, actual payroll payroll entries, and automated overhead calculations.",
+    "banner_erp_gaps": "Lacks the compliance context, itemized retail purchase details, signed effort cert sheets, or sole-use justifications required for audits."
+  }
+}

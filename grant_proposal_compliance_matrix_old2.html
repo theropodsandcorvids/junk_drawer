@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Grant Proposal Compliance Check Matrix</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --bg-color: #F9FAFB;
+            --alert-bg: #FCE4D6;
+            --alert-text: #C00000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Interactive Dashboard Group */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .meta-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--navy);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .input-group input, .input-group select {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            background-color: var(--soft-green);
+        }
+
+        .status-panel {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .status-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--navy);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .status-badge {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        .status-badge.alert-state {
+            color: var(--alert-text);
+        }
+
+        /* Matrix Table Framework */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .matrix-table th, .matrix-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .matrix-table th {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .matrix-table select, .matrix-table input {
+            width: 95%;
+            padding: 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--soft-green);
+        }
+
+        .section-header-row {
+            background-color: var(--light-gray);
+            font-weight: bold;
+            color: var(--navy);
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        /* Generated View Drawer */
+        .preview-drawer {
+            display: none;
+            margin-top: 30px;
+            border: 2px solid var(--navy);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .drawer-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .drawer-body {
+            padding: 20px;
+            background-color: #FAFAFA;
+        }
+
+        .report-textarea {
+            width: 100%;
+            height: 280px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #222222;
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #153358;
+        }
+
+        .btn.secondary {
+            background-color: var(--dark-green);
+        }
+
+        .btn.secondary:hover {
+            background-color: #273d1a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Grant Proposal Compliance Check Matrix</h1>
+        <p class="subtitle">Institutional Desk Audit Controls, Routing Timelines, and Size Validation Matrix</p>
+    </header>
+
+    <!-- Dashboard Interlocks -->
+    <div class="dashboard-grid">
+        <div class="meta-inputs">
+            <div class="input-group">
+                <label>Target Submission Portal</label>
+                <select id="portal-select" onchange="runComplianceChecks()">
+                    <option value="grants">Grants.gov (General Baseline)</option>
+                    <option value="research">Research.gov (NSF 10MB Capped Limit)</option>
+                    <option value="era">eRA Commons (NIH Framework)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Component Document File Size (MB)</label>
+                <input type="number" id="file-size-input" placeholder="e.g., 4.2" step="0.1" oninput="runComplianceChecks()">
+            </div>
+            <div class="input-group">
+                <label>Target Sponsor Deadline Date</label>
+                <input type="date" id="deadline-date" onchange="runComplianceChecks()">
+            </div>
+            <div class="input-group">
+                <label>Current Internal Processing Date</label>
+                <input type="date" id="current-date" onchange="runComplianceChecks()">
+            </div>
+        </div>
+        <div class="status-panel">
+            <div class="status-title">System Routing Clock Validation</div>
+            <div class="status-badge" id="clock-status-badge">STANDBY / INITIALIZING</div>
+            <div style="font-size: 11px; color: #666; margin-top: 5px;" id="clock-details-text">Awaiting input thresholds</div>
+        </div>
+    </div>
+
+    <!-- Compliance Tables Grid -->
+    <table class="matrix-table">
+        <thead>
+            <tr>
+                <th style="width: 25%;">Compliance Gate Sector ID</th>
+                <th style="width: 45%;">Regulatory Requirement Check Parameter</th>
+                <th style="width: 30%;">Current Desk Review Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- SECTION A -->
+            <tr class="section-header-row"><td colspan="3">Section A: General Federal Guideline Matrices</td></tr>
+            <tr>
+                <td><strong>A.1 Budget Justification</strong></td>
+                <td>Ensure narrative lists precise formulas for all elements and matches spreadsheet cell totals exactly.</td>
+                <td>
+                    <select class="row-status-select"><option>Fully Compliant</option><option>Action Required</option><option>Pending Institutional Audit</option></select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>A.2 F&amp;A Overhead Limit</strong></td>
+                <td>Verify indirect calculations run on Modified Total Direct Costs (MTDC) excluding restricted codes.</td>
+                <td>
+                    <select class="row-status-select"><option>Fully Compliant</option><option>Action Required</option><option>Pending Institutional Audit</option></select>
+                </td>
+            </tr>
+
+                       <!-- SECTION B -->
+            <tr class="section-header-row"><td colspan="3">Section B: Core Personnel Safeguards</td></tr>
+            <tr>
+                <td><strong>B.1 NSF 2-Month Cap Rule</strong></td>
+                <td>Ensure Senior Personnel commitments across all concurrent options stay within the 2.0 calendar-month threshold.</td>
+                <td>
+                    <select class="row-status-select"><option>Fully Compliant</option><option>Action Required</option><option>Pending Institutional Audit</option></select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>B.2 NIH Salary Ceiling Capping</strong></td>
+                <td>Adjust baseline numbers where annualized investigator compensation limits clip the active federal salary ceiling.</td>
+                <td>
+                    <select class="row-status-select"><option>Fully Compliant</option><option>Action Required</option><option>Pending Institutional Audit</option></select>
+                </td>
+            </tr>
+
+            <!-- SECTION C -->
+            <tr class="section-header-row"><td colspan="3">Section C: Specialized Bioethics &amp; Clearance Codes</td></tr>
+            <tr>
+                <td><strong>C.1 IRB Human Subjects Vetting</strong></td>
+                <td>Log valid certification numbers or verify Exemption 4 status for tracking metrics.</td>
+                <td>
+                    <select class="row-status-select"><option>Fully Compliant</option><option>Action Required</option><option>Pending Institutional Audit</option></select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>C.2 IACUC Vertebrate Care Protocols</strong></td>
+                <td>Verify active clearing logs if the project narrative targets cellular assay extractions or living test-beds.</td>
+                <td>
+                    <select class="row-status-select"><option>Fully Compliant</option><option>Action Required</option><option>Pending Institutional Audit</option></select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="action-container">
+        <button class="btn" onclick="compileComplianceMatrixReport()">Compile &amp; Preview Audit Summary</button>
+    </div>
+
+    <!-- Generated View Drawer Viewport -->
+    <div class="preview-drawer" id="report-drawer">
+        <div class="drawer-header">
+            <span>Generated Proposal Desk Audit Frame View</span>
+        </div>
+        <div class="drawer-body">
+            <textarea class="report-textarea" id="report-view-zone" readonly></textarea>
+            <div class="action-container" style="margin-top: 15px;">
+                <button class="btn secondary" onclick="executeClipboardCopy()">Copy Audit Summary Text to Clipboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function runComplianceChecks() {
+        const portal = document.getElementById('portal-select').value;
+        const fileSize = parseFloat(document.getElementById('file-size-input').value) || 0;
+        const badge = document.getElementById('clock-status-badge');
+        const details = document.getElementById('clock-details-text');
+
+        let isSizeAlert = false;
+        if (portal === 'research' && fileSize > 10.0) {
+            isSizeAlert = true;
+        }
+
+        const deadlineVal = document.getElementById('deadline-date').value;
+        const currentVal = document.getElementById('current-date').value;
+        let isTimelineAlert = false;
+
+        if (deadlineVal && currentVal) {
+            const dDate = new Date(deadlineVal);
+            const cDate = new Date(currentVal);
+            const diffTime = dDate - cDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays < 5) {
+                isTimelineAlert = true;
+                badge.innerText = "⚠️ GSO OVERDUE";
+                badge.className = "status-badge alert-state";
+                details.innerText = "Crucial -5 Day GSO Audit window breached. Routing locked.";
+            } else {
+                badge.innerText = "🟢 TIMELINE COMPLIANT";
+                badge.className = "status-badge";
+                details.innerText = diffDays + " days remaining until external sponsor submission portal deadline.";
+            }
+        }
+
+        if (isSizeAlert) {
+            badge.innerText = "🚨 PORTAL OVERSIZE";
+            badge.className = "status-badge alert-state";
+            details.innerHTML = '<strong>CRITICAL: File size format (' + fileSize + 'MB) breaches the 10MB Research.gov portal upload capacity ceiling!</strong>';
+        }
+    }
+
+    function compileComplianceMatrixReport() {
+        const portal = document.getElementById('portal-select').options[document.getElementById('portal-select').selectedIndex].text;
+        const size = document.getElementById('file-size-input').value || '0.0';
+        const clockStatus = document.getElementById('clock-status-badge').innerText;
+
+        let output = "================================================================================\\n";
+        output += "OFFICIAL INSTITUTIONAL GRANT PROPOSAL DESK COMPLIANCE MATRIX REPORT\\n";
+        output += "================================================================================\\n\\n";
+        output += `TARGET PORTAL SECTOR     : ${portal}\\n`;
+        output += `COMPONENT FILE SIZE LOAD : ${size} MB\\n`;
+        output += `ROUTING TIMELINE CLOCK   : ${clockStatus}\\n`;
+        output += "--------------------------------------------------------------------------------\\n\\n";
+
+        output += "ITEMIZED GRID VALIDATION MATRIX ROSTER:\\n";
+        const rows = document.querySelectorAll('tbody tr:not(.section-header-row)');
+        rows.forEach(row => {
+            const sectorId = row.cells[0].innerText;
+            const statusVal = row.cells[2].querySelector('select').value;
+            output += `  [Sector ID: ${sectorId}] Vetting Status Indicator: ${statusVal}\\n`;
+        });
+
+        output += "\\n================================================================================\\n";
+        output += "Desk audit validation compilation complete. Ready for routing integration files.";
+
+        document.getElementById('report-view-zone').value = output;
+        document.getElementById('report-drawer').style.display = 'block';
+        document.getElementById('report-drawer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function executeClipboardCopy() {
+        const textData = document.getElementById('report-view-zone').value;
+        navigator.clipboard.writeText(textData).then(() => {
+            alert('Success! The compiled desk compliance matrix audit report has been copied to your clipboard.');
+        }).catch(err => {
+            alert('Clipboard action failed. Verify local browser permissions layout.');
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset 2: Multi-Agency Grant Proposal Compliance Checklist Matrix</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --bg-color: #F9FAFB;
+            --alert-bg: #FCE4D6;
+            --alert-text: #C00000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Unified Tracker Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .meta-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--navy);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            background-color: var(--soft-green);
+        }
+
+        .progress-panel {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .progress-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--navy);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .progress-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        /* Tabbed Sub-navigation Interface Matrix */
+        .tab-nav-bar {
+            display: flex;
+            border-bottom: 2px solid var(--navy);
+            margin-bottom: 20px;
+            gap: 5px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+            font-size: 13px;
+            font-weight: bold;
+            color: #555555;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            border-color: var(--navy);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background-color: #E0E0E0;
+            color: #222222;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Compliance Checklist Roster Styles */
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .checklist-table th, .checklist-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            font-size: 13px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .checklist-table th {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .checklist-table td.center {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .checklist-table input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checklist-table tr.checked-row {
+            background-color: rgba(226, 239, 218, 0.25);
+        }
+
+        .checklist-table tr.checked-row td strong {
+            color: var(--dark-green);
+        }
+
+        .guideline-tag {
+            font-size: 10px;
+            font-weight: bold;
+            background-color: var(--light-gray);
+            color: #666666;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Preview Output Drawer Elements */
+        .preview-drawer {
+            display: none;
+            margin-top: 35px;
+            border: 2px solid var(--navy);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .drawer-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .drawer-body {
+            padding: 20px;
+            background-color: #FAFAFA;
+        }
+
+        .report-textarea {
+            width: 100%;
+            height: 280px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #222222;
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #153358;
+        }
+
+        .btn.secondary {
+            background-color: var(--dark-green);
+        }
+
+        .btn.secondary:hover {
+            background-color: #273d1a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Asset 2: Multi-Agency Proposal Compliance Checklist Matrix</h1>
+        <p class="subtitle">Unified Pre-Award Screening Terminal — Institutional Gate Framework</p>
+    </header>
+
+    <!-- Project Metadata Workspace Board -->
+    <div class="dashboard-grid">
+        <div class="meta-inputs">
+            <div class="input-group">
+                <label>Target Core Proposal Title</label>
+                <input type="text" id="meta-title" value="Gateway STEM Success Capacity Building Grant">
+            </div>
+            <div class="input-group">
+                <label>Lead Principal Investigator</label>
+                <input type="text" id="meta-pi" placeholder="e.g., Dr. Jane Smith">
+            </div>
+        </div>
+        <div class="progress-panel">
+            <div class="progress-title">Aggregate Screening Verification Score</div>
+            <div class="progress-text" id="progress-text">0 / 20 Gates Cleared (0%)</div>
+        </div>
+    </div>
+
+    <!-- Tabbed Navigation Engine Elements -->
+    <div class="tab-nav-bar">
+        <button class="tab-btn active" onclick="switchActiveTab('generic')">1. Generic Baseline</button>
+        <button class="tab-btn" onclick="switchActiveTab('nsf')">2. NSF PAPPG</button>
+        <button class="tab-btn" onclick="switchActiveTab('nih')">3. NIH PHS 398</button>
+        <button class="tab-btn" onclick="switchActiveTab('doe')">4. DOE Science</button>
+    </div>
+
+        <!-- TAB 1: GENERIC BASELINE FRAMEWORK -->
+    <div class="tab-pane active" id="pane-generic">
+        <table class="checklist-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%; text-align: center;">Verify</th>
+                    <th style="width: 22%;">System Control Gate</th>
+                    <th style="width: 70%;">Standard Regulatory Screening Metric Check Parameter</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Format</span><br><strong>Standard Typography</strong></td>
+                    <td>Verify page components apply exactly 1-inch outer margins, standard black fonts, and are rendered as fully searchable PDFs.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Fiscal</span><br><strong>Justification Alignment</strong></td>
+                    <td>Confirm narrative budget text lines detail structural equations matching arithmetic cell totals inside the general ledger worksheet.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Policy</span><br><strong>Cost Sharing Ban</strong></td>
+                    <td>Verify no voluntary cost-sharing or unapproved institutional cash match lines leak into budget narratives (Strict 2 CFR 200 rule violation).</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Legal</span><br><strong>Commitment Signature</strong></td>
+                    <td>Ensure the formal Letter of Commitment features active, valid signatory blocks from the Chief Academic Officer or Authorized Rep.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Data</span><br><strong>Management Plan</strong></td>
+                    <td>Confirm data sharing profiles incorporate Dublin Core catalog metadata schemas and define a 3-year post-grant archive plan.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: NSF PAPPG FRAMEWORK -->
+    <div class="tab-pane" id="pane-nsf">
+        <table class="checklist-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%; text-align: center;">Verify</th>
+                    <th style="width: 22%;">NSF PAPPG Gate</th>
+                    <th style="width: 70%;">Sponsor-Specific Screening Rule Threshold Parameter</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Narrative</span><br><strong>Project Description</strong></td>
+                    <td>Confirm narrative tracks strictly within the 15-page ceiling and embeds an explicit, separate section header titled 'Broader Impacts'.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Personnel</span><br><strong>Biographical Sketch</strong></td>
+                    <td>Verify profiles align directly to current SciENcv structural schema templates. Synergize professional appointments and product trees.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Effort</span><br><strong>2-Month Senior Cap</strong></td>
+                    <td>Verify no investigator effort parameters exceed the maximum 2.0 calendar-month limit across all concurrent active options combined.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Support</span><br><strong>Current &amp; Pending</strong></td>
+                    <td>Map active project footprints alongside unreviewed items. Enforce capacity checking limits to ensure total commitment runs below 12.0 months.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Facilities</span><br><strong>Equipment Log</strong></td>
+                    <td>Detail the localized physical wet lab configuration blocks of UNM-LA without introducing speculative financial narrative projections.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 3: NIH PHS 398 FRAMEWORK -->
+    <div class="tab-pane" id="pane-nih">
+        <table class="checklist-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%; text-align: center;">Verify</th>
+                    <th style="width: 22%;">NIH PHS 398 Gate</th>
+                    <th style="width: 70%;">Sponsor-Specific Screening Rule Threshold Parameter</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Aims</span><br><strong>Specific Aims Block</strong></td>
+                    <td>Verify the structural abstract and research aims layout fills exactly one isolated page limit without spilling over trailing rows.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Strategy</span><br><strong>Research Strategy</strong></td>
+                    <td>Enforce strict page controls matching mechanizations: 6 pages for standard R21 formats / 12 pages for complex R01 project scopes.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Bioethics</span><br><strong>Human Subjects Protection</strong></td>
+                    <td>Incorporate robust data protection narratives, secure encryption codes, and valid IRB institutional exemption determination codes.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Cap</span><br><strong>Executive Salary Limit</strong></td>
+                    <td>Verify no annualized investigator direct compensation lines exceed the active DHHS Executive Level II salary cap threshold.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Profile</span><br><strong>Modular Budget Cap</strong></td>
+                    <td>Confirm direct request increments are bundled into clean $25,000 baseline chunks if tracking under the standard $250,000 modular cap.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 4: DOE SCIENCE FRAMEWORK -->
+    <div class="tab-pane" id="pane-doe">
+        <table class="checklist-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%; text-align: center;">Verify</th>
+                    <th style="width: 22%;">DOE Science Gate</th>
+                    <th style="width: 70%;">Sponsor-Specific Screening Rule Threshold Parameter</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Impact</span><br><strong>PIER Plan Blueprint</strong></td>
+                    <td>Incorporate a dedicated, mandatory Promoting Inclusive and Equitable Research (PIER) Plan outlining direct diversity action timelines.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Abstract</span><br><strong>Public Abstract Text</strong></td>
+                    <td>Verify an unclassified public abstract is written using accessible wording tailored specifically for programmatic web index searches.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Open Data</span><br><strong>Software Sharing DMP</strong></td>
+                    <td>Ensure the open data schema defines clear distribution frameworks for open-source code scripts generated during lab modernizations.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Subaward</span><br><strong>Collaborative Limits</strong></td>
+                    <td>Verify distinct budget packages, institutional profiles, and statement of work templates exist for all connected multi-unit sub-indices.</td>
+                </tr>
+                <tr>
+                    <td class="center"><input type="checkbox" class="compliance-chk" onchange="evaluateRowState(this)"></td>
+                    <td><span class="guideline-tag">Vetting</span><br><strong>Conflict of Interest</strong></td>
+                    <td>Map comprehensive reviewer disclosure matrix files isolating external advisory affiliations and corporate co-author ties.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="action-container">
+        <button class="btn" onclick="compileComplianceDeskAuditReport()">Compile &amp; Preview Audit Summary</button>
+    </div>
+
+    <!-- Generated View Drawer Viewport Module -->
+    <div class="preview-drawer" id="report-drawer">
+        <div class="drawer-header">
+            <span>Generated Proposal Desk Audit Frame View</span>
+        </div>
+        <div class="drawer-body">
+            <textarea class="report-textarea" id="report-view-zone" readonly></textarea>
+            <div class="action-container" style="margin-top: 15px;">
+                <button class="btn secondary" onclick="executeClipboardCopy()">Copy Audit Summary Text to Clipboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchActiveTab(tabId) {
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        const targetBtn = Array.from(buttons).find(btn => btn.innerText.toLowerCase().includes(tabId));
+        if (targetBtn) targetBtn.classList.add('active');
+
+        const panes = document.querySelectorAll('.tab-pane');
+        panes.forEach(pane => pane.classList.remove('active'));
+        
+        document.getElementById('pane-' + tabId).classList.add('active');
+    }
+
+    function evaluateRowState(checkbox) {
+        const targetRow = checkbox.closest('tr');
+        if (checkbox.checked) {
+            targetRow.classList.add('checked-row');
+        } else {
+            targetRow.classList.remove('checked-row');
+        }
+
+        const totalGates = document.querySelectorAll('.compliance-chk').length;
+        const clearedGates = document.querySelectorAll('.compliance-chk:checked').length;
+        const percentageScore = Math.round((clearedGates / totalGates) * 100);
+
+        document.getElementById('progress-text').innerText = `${clearedGates} / ${totalGates} Gates Cleared (${percentageScore}%)`;
+    }
+
+    function compileComplianceDeskAuditReport() {
+        const title = document.getElementById('meta-title').value || '[UNSPECIFIED PROJECT TITLE]';
+        const pi = document.getElementById('meta-pi').value || '[UNSPECIFIED LEAD INVESTIGATOR]';
+        const aggregateScore = document.getElementById('progress-text').innerText;
+
+        let output = "================================================================================\\n";
+        output += "OFFICIAL INSTITUTIONAL PROPOSAL COMPLIANCE MATRIX DESK AUDIT RECORD\\n";
+        output += "================================================================================\\n\\n";
+        output += `MASTER PROJECT TITLE : ${title}\\n`;
+        output += `PRINCIPAL INVESTIGATOR: ${pi}\\n`;
+        output += `COMPLIANCE SCORE TRACK: ${aggregateScore}\\n`;
+        output += "--------------------------------------------------------------------------------\\n\\n";
+
+        output += "CHECKLIST COMPONENT TRACKER BREAKDOWN:\\n";
+        
+        const tabs = ['generic', 'nsf', 'nih', 'doe'];
+        const tabLabels = ['1. Generic Framework Baseline', '2. NSF PAPPG Requirements', '3. NIH PHS 398 Standards', '4. DOE Science Specifications'];
+
+        tabs.forEach((tabId, index) => {
+            output += `\\n[Tab Group: ${tabLabels[index]}]\\n`;
+            const paneRows = document.querySelectorAll('#pane-' + tabId + ' tbody tr');
+            paneRows.forEach(row => {
+                const criterionName = row.cells[1].innerText.replace(/\\n/g, ' ');
+                const isCleared = row.querySelector('.compliance-chk').checked ? "🟢 CLEARED / VERIFIED" : "❌ PENDING INQUIRY";
+                output += `  - ${criterionName} -> ${isCleared}\\n`;
+            });
+        });
+
+        output += "\\n================================================================================\\n";
+        output += "Desk audit validation run complete. Ready for routing authorization profile insertion.";
+
+        document.getElementById('report-view-zone').value = output;
+        document.getElementById('report-drawer').style.display = 'block';
+        document.getElementById('report-drawer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function executeClipboardCopy() {
+        const rawText = document.getElementById('report-view-zone').value;
+        navigator.clipboard.writeText(rawText).then(() => {
+            alert('Success! The complete multi-tab compliance matrix audit summary text has been copied to your clipboard.');
+        }).catch(err => {
+            alert('Clipboard copy execution rejected. Check browser context security constraints.');
+        });
+    }
+</script>
+
+</body>
+</html>

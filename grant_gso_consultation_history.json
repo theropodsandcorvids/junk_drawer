@@ -1,0 +1,121 @@
+{
+    "project_context": {
+        "title": "Gateway STEM Success and Institutional Capacity Building",
+        "institution": "University of New Mexico-Los Alamos (UNM-LA)",
+        "framework": "Federal Uniform Guidance (2 CFR 200) Compliance Framework"
+    },
+    "conversation_history": [
+        {
+            "role": "user",
+            "content": "Initial prompt uploading project parameters and requesting GSO persona activation."
+        },
+        {
+            "role": "assistant",
+            "content": "Persona activated. Confirmed core project parameters: fiscal scope ($590,098.56), demographic baselines, Banner ERP codes, and FERPA cell suppression rules."
+        },
+        {
+            "role": "user",
+            "content": "Request for Search Committee Matrix."
+        },
+        {
+            "role": "assistant",
+            "content": "Provided Asset 16: Search Committee Interview Matrix & Questions tailored for a 0.5 FTE STEM Program Coordinator, including 1-5 scoring rubric, core domains, and evaluation scorecard."
+        },
+        {
+            "role": "user",
+            "content": "Request for a layman's explanation of the Grant process."
+        },
+        {
+            "role": "assistant",
+            "content": "Provided an analogical overview of the 5 key grant lifecycle phases (Blueprint, Building the Sandbox, Steering the Ship, Checking Receipts, Packing Up) comparing the grant to a community center built with seed funds."
+        },
+        {
+            "role": "user",
+            "content": "Request to map all 35 project assets to the 5 lifecycle phases in the same layman tone."
+        },
+        {
+            "role": "assistant",
+            "content": "Mapped and explained all 35 project assets chronologically from Asset 1 (Pre-Award baseline matrix) through Asset 33 (Closeout handover transition memo) and the aggregators (Assets 34 & 35)."
+        },
+        {
+            "role": "user",
+            "content": "Request for Printable Master Proposal Guide template."
+        },
+        {
+            "role": "assistant",
+            "content": "Generated copy-pasteable Markdown template for Asset 35 (Master Proposal Guide & Institutional Compliance Blueprint) with placeholder slots for future proposals."
+        },
+        {
+            "role": "user",
+            "content": "Request for a blank Budget Justification Worksheet table calculated using local fringe benefits rates."
+        },
+        {
+            "role": "assistant",
+            "content": "Provided Appendix A: Budget Justification Worksheet containing pre-loaded UNM Main Campus projected fringe rates (44.23% full-time, 25.97% part-time staff, 1.00% student employee) and narrative templates."
+        },
+        {
+            "role": "user",
+            "content": "Request for an automated multi-year Excel budget workbook with variance warnings and a summary tab."
+        },
+        {
+            "role": "assistant",
+            "content": "Executed an openpyxl script compiling 'grant_budget_justification_worksheet.xlsx' with individual year tabs, a cross-sheet Budget Summary, a 2 CFR 200.308 Variance Dashboard (25% alert logic), and a FERPA Privacy Sandbox Tracker (cell suppression masks)."
+        },
+        {
+            "role": "user",
+            "content": "Request for complete written text narrative justification template matching the Excel sums."
+        },
+        {
+            "role": "assistant",
+            "content": "Drafted the full copy-pasteable Budget Justification Narrative with line-by-line calculations matching the numerical sums and fringe rates used in the spreadsheet workbook."
+        },
+        {
+            "role": "user",
+            "content": "Request for explanation of why a Budget Justification Narrative is standard."
+        },
+        {
+            "role": "assistant",
+            "content": "Explained the standard role of the narrative as an itemized 'explanation receipt' providing the math and logic behind expenditures to satisfy accountability and audit trails."
+        },
+        {
+            "role": "user",
+            "content": "Request for Facilities, Equipment, and Other Resources Narrative isolated from cost-sharing risk."
+        },
+        {
+            "role": "assistant",
+            "content": "Drafted a qualitative-only Facilities Narrative detailing Chemistry Wet Labs, the Academic Support Center, and GSO infrastructure completely omitting quantitative dollar figures to shield against voluntary committed cost-sharing risks."
+        },
+        {
+            "role": "user",
+            "content": "Request for universal budget justification narrative template for future funding agency models (NSF, NIH, DOE)."
+        },
+        {
+            "role": "assistant",
+            "content": "Generated specialized modular and detailed pre-award justification text blocks for the National Science Foundation (NSF PAPPG), National Institutes of Health (NIH PHS 398), and Department of Energy (DOE Office of Science)."
+        },
+        {
+            "role": "user",
+            "content": "Request for interactive web forms for the DOE Budget Narrative, Institutional Compliance Check Matrix, and Post-Award Handover Guide (Asset 10)."
+        },
+        {
+            "role": "assistant",
+            "content": "Compiled standalone HTML5 webpage workspaces ('doe_budget_narrative_form.html', 'grant_proposal_compliance_matrix.html', and 'post_award_handover_guide.html') loaded with dynamic validation scripts, file size estimators, and timeline calculators."
+        },
+        {
+            "role": "user",
+            "content": "Request for automated Monthly Voucher Audit spreadsheet (Asset 25)."
+        },
+        {
+            "role": "assistant",
+            "content": "Generated 'grant_voucher_audit_workflow.xlsx' via Python script, establishing allowability check triggers under 2 CFR 200 and a zero-indirect isolation sandbox for Participant Support Costs (Code 40A0)."
+        },
+        {
+            "role": "user",
+            "content": "Request for fillable Monthly GSO Accomplishments Memo template webpage (Asset 22)."
+        },
+        {
+            "role": "assistant",
+            "content": "Built and displayed code for 'gso_monthly_accomplishments_memo.html', an interactive blank web layout designed to track monthly fiscal data, project metrics, regulatory updates, and export compiled text via the clipboard."
+        }
+    ]
+}

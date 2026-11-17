@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset 05: Federal Grant Data Management Plan (DMP)</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --bg-color: #F9FAFB;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .section-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .section-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-body {
+            padding: 20px;
+        }
+
+        .section-body h3 {
+            color: var(--navy);
+            font-size: 15px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 5px;
+        }
+
+        .section-body ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .section-body li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* Preview Drawer and Markdown Copy Area */
+        .preview-drawer {
+            margin-top: 35px;
+            border: 2px solid var(--navy);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .drawer-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-body {
+            padding: 20px;
+            background-color: #FAFAFA;
+        }
+
+        .report-textarea {
+            width: 100%;
+            height: 300px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #222222;
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: var(--dark-green);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #273d1a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Asset 05: Federal Grant Data Management Plan (DMP)</h1>
+        <p class="subtitle">Uniform Guidance 2 CFR 200.315 / OSTP Open-Access Compliance Blueprint</p>
+    </header>
+
+    <!-- Visual Page Sections -->
+    <div class="section-card">
+        <div class="section-header">1. Expected Data Formats &amp; Deliverables</div>
+        <div class="section-body">
+            <h3>Digital Research Data Matrices</h3>
+            <ul>
+                <li><strong>Quantitative Student Performance Data:</strong> Course enrollment matrices, withdrawal velocities, and final letter grades stored as flat-file comma-separated values (<code>.csv</code>).</li>
+                <li><strong>Qualitative Intervention Logs:</strong> Intrusive advising hours and tutoring tracking summaries compiled as machine-readable data sets (<code>.json</code>).</li>
+                <li><strong>Instructional Training Modules:</strong> Laboratory safety curricula and project dissemination documents archived as searchable document formats (<code>.pdf</code>).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-header">2. Metadata Vocabularies &amp; Schema Standards</div>
+        <div class="section-body">
+            <h3>Machine-Readable Documentation Standards</h3>
+            <ul>
+                <li><strong>Dublin Core Mapping:</strong> All master directories will match the ANSI/NISO Z39.85 vocabulary layout (incorporating static title, creator, issued date, and format data fields).</li>
+                <li><strong>Dossier Self-Containment:</strong> Every database export requires an accompanying plain-text <code>README.txt</code> file cataloging missing cell variables and tracking definitions.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-header">3. Privacy Controls &amp; Intellectual Property Rights</div>
+        <div class="section-body">
+            <h3>FERPA Protection &amp; Re-use Licensure</h3>
+            <ul>
+                <li><strong>Anonymization Interlocks:</strong> Direct identification parameters, social security strings, and internal student Banner codes are programmatically scrubbed.</li>
+                <li><strong>Cell Suppression Rules:</strong> Core datasets automatically suppress calculation groups containing small sizes (<strong>n &lt; 5</strong>) or extreme boundary conditions to prevent deductive disclosure.</li>
+                <li><strong>Open Access Mandate:</strong> Disseminated software models and curricular guides will be released internationally under a <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong> license.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-header">4. Long-Term Archiving &amp; Preservation Lifecycles</div>
+        <div class="section-body">
+            <h3>LoboVault Storage Configuration</h3>
+            <ul>
+                <li><strong>Primary Repository Placement:</strong> Anonymized annual performance files will be logged in the UNM Digital Repository (LoboVault) with static, permanent Digital Object Identifiers (DOIs).</li>
+                <li><strong>Statutory Preservation Constraints:</strong> In direct alignment with <strong>2 CFR § 200.334</strong>, all raw datasets, progress report records, and audit files are locked for a minimum retention window of <strong>three (3) years</strong> following final financial report sign-off.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Integrated Preview Drawer & Markdown Copy Action -->
+    <div class="preview-drawer">
+        <div class="drawer-header">
+            <span>Raw Markdown Source View (.md format)</span>
+            <span style="font-size: 11px; opacity: 0.85;">Federal Portal Copy Frame</span>
+        </div>
+        <div class="drawer-body">
+            <textarea class="report-textarea" id="markdown-source-zone" readonly># 📑 FEDERAL GRANT DATA MANAGEMENT PLAN (ASSET 05)
+**Document Classification:** Standard Technical Proposal Component
+**Compliance Track:** Uniform Guidance 2 CFR 200.315 / White House OSTP Open-Access Directive
+**Target Proposal Integration Section:** Supplementary Documents
+
+## 1. TYPES OF DATA, SAMPLES, PHYSICAL COLLECTIONS, AND SOFTWARE
+The project will generate and manage distinct data streams categorized under institutional types to ensure long-term usability, reproducibility, and security.
+
+* **Quantitative Student Performance Metrics (Digital Datasets):** Course gateway enrollment rates, withdrawal velocities, and final letter grade arrays stored as flat-file comma-separated values (`.csv`).
+* **Qualitative Academic Intervention Trackers (Interaction Logs):** Intrusive advising hours and tutor tracking contact summaries compiled as machine-readable datasets (`.json`).
+* **Laboratory Training Materials & Instructional Media (Dissemination Content):** Chemistry Wet Lab bootcamp modules, digital safety curricula, and student orientation assets preserved as Portable Document Format (`.pdf`).
+
+## 2. METADATA STANDARDS, SCHEMAS, AND MACHINE-READABLE PACKAGING
+To maintain structural clarity and discovery across federal web portals, all data collections will be cataloged using open-source, machine-readable packaging configurations.
+
+* **Primary Metadata Dictionary Schema:** Every dataset will be bound to a standardized **Dublin Core Metadata Element Set (ANSI/NISO Z39.85)** containing title, creator, date issued, format, and rights declarations.
+* **ReadMe File Scaffolding:** Every raw data file package will include a plain text **`README.txt`** file detailing variable dictionaries, codebook schemas, missing cell codes, and computational processing pipelines.
+
+## 3. DATA PRIVACY, SHARING POLICIES, AND FERPA SAFEGUARDS
+Data sharing protocols will strictly protect human subjects and balance public data access with student privacy.
+
+* **Ironclad FERPA Anonymization Protocols:** No raw student identification metrics, Social Security Numbers, or internal university Banner IDs will ever be shared or stored in public facing data dumps.
+* **Double-Blind Cell Suppression Thresholds:** Cells containing values derived from groups sizing **less than five individuals (n < 5)** will be programmatically masked. Extreme boundaries (such as a 100% pass rate or 0% failure rate) will also be suppressed to prevent deductive disclosure.
+* **Access Tier Isolation:** Raw, non-masked data will remain locked inside an encrypted local server accessible only via Multi-Factor Authentication (MFA) to personnel holding active IRB clearances.
+
+## 4. POLICIES FOR RE-USE, RE-DISTRIBUTION, AND DERIVATIVE WORKS
+* **Open-Access Intellectual Property Parameters:** All public-facing data streams, instructional training files, and software tools built through this grant will be released internationally under a **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
+* **Derivative Work Rights:** External research teams, government analysts, and institutional peers hold full rights to re-use, build upon, redistribute, and generate derivative works from the published data packages.
+
+## 5. PLANS FOR ARCHIVING, LONG-TERM PRESERVATION, AND STORAGE HOUSING
+* **Primary Institutional Repository Placement:** Compiled anonymized data rows will be uploaded into the **UNM Digital Repository (LoboVault)**, maintained permanently by University Libraries, which assigns a permanent **Digital Object Identifier (DOI)** to each package.
+* **Mandatory Preservation Lifecycles:** In alignment with Uniform Guidance **2 CFR § 200.334**, all datasets, programmatic reporting logs, and administrative files will be preserved and accessible for an absolute minimum of **three (3) years** following the formal submission of the final Federal Financial Report (FFR).</textarea>
+            <div class="action-container">
+                <button class="btn" onclick="executeMarkdownCopy()">Copy Raw Markdown Text to Clipboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function executeMarkdownCopy() {
+        const markdownArea = document.getElementById('markdown-source-zone');
+        markdownArea.select();
+        markdownArea.setSelectionRange(0, 99999); // Mobile optimization safeguard
+
+        navigator.clipboard.writeText(markdownArea.value).then(() => {
+            alert('Success! The complete Federal Grant Data Management Plan (Asset 05) raw Markdown text has been copied to your clipboard.');
+        }).catch(err => {
+            alert('Clipboard action failed. Please check local browser viewport configuration settings.');
+        });
+    }
+</script>
+
+</body>
+</html>

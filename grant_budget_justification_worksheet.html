@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset 03: Interactive Budget Justification Template &amp; Calculator</title>
+    <style>
+        :root {
+            --navy: #1F497D;
+            --soft-green: #E2EFDA;
+            --dark-green: #375623;
+            --border-color: #D3D3D3;
+            --light-gray: #F2F2F2;
+            --text-color: #333333;
+            --bg-color: #F9FAFB;
+            --alert-bg: #FCE4D6;
+            --alert-text: #C00000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Live Warning Banner */
+        .variance-banner {
+            display: none;
+            background-color: var(--alert-bg);
+            border: 1px solid #F5C2C1;
+            color: var(--alert-text);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Tab Layout */
+        .tab-bar {
+            display: flex;
+            border-bottom: 2px solid var(--navy);
+            margin-bottom: 25px;
+            gap: 5px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 10px 18px;
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+            font-size: 13px;
+            font-weight: bold;
+            color: #555555;
+            cursor: pointer;
+            white-space: nowrap;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            border-color: var(--navy);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background-color: #E0E0E0;
+            color: #222222;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Forms and Tables Elements */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--navy);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .input-group input, .input-group textarea {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            background-color: var(--soft-green);
+        }
+
+        .input-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .section-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .section-body {
+            padding: 20px;
+        }
+
+        .calc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .calc-table th, .calc-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .calc-table th {
+            background-color: var(--light-gray);
+            color: var(--navy);
+            font-weight: bold;
+        }
+
+        .calc-table td.right {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .calc-table input {
+            width: 90%;
+            padding: 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--soft-green);
+        }
+
+        /* Live Preview Document Area */
+        .preview-drawer {
+            margin-top: 35px;
+            border: 2px solid var(--navy);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .drawer-header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-body {
+            padding: 20px;
+            background-color: #FAFAFA;
+        }
+
+        .report-textarea {
+            width: 100%;
+            height: 280px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #222222;
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #153358;
+        }
+
+        .btn.secondary {
+            background-color: var(--dark-green);
+        }
+
+        .btn.secondary:hover {
+            background-color: #273d1a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Asset 03: Budget Justification Interactive Compiler</h1>
+        <p class="subtitle">Multi-Tab Mapping Module Synchronized with 'grant_budget_justification_worksheet.xlsx'</p>
+    </header>
+
+    <!-- Prior Approval Alert Flag Banner -->
+    <div class="variance-banner" id="global-variance-alert">
+        ⚠️ UNIFORM GUIDANCE ALERT: A category change on your Modification Dashboard has approached or exceeded the 25% budget threshold limit. Prior sponsor written authorization rules are triggered.
+    </div>
+
+    <!-- Tabbed Navigation Bar -->
+    <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchBudgetTab('y1')">Year 1 Budget</button>
+        <button class="tab-btn" onclick="switchBudgetTab('y2')">Year 2 Budget</button>
+        <button class="tab-btn" onclick="switchBudgetTab('y3')">Year 3 Budget</button>
+        <button class="tab-btn" onclick="switchBudgetTab('summary')">3-Year Summary</button>
+        <button class="tab-btn" onclick="switchBudgetTab('variance')">Variance Dashboard</button>
+        <button class="tab-btn" onclick="switchBudgetTab('ferpa')">FERPA Masking Sandbox</button>
+    </div>
+
+    <!-- TAB: YEAR 1 BUDGET -->
+    <div class="tab-pane active" id="pane-y1">
+        <div class="section-card">
+            <div class="section-header">Year 1 Direct &amp; Indirect Cost Line Allocations</div>
+            <div class="section-body">
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Senior Personnel Salaries (201A)</label>
+                        <input type="number" id="y1-senior" value="125000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>Student Hourly Payroll (202A)</label>
+                        <input type="number" id="y1-student" value="45000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>Materials &amp; Supplies Base (3110)</label>
+                        <input type="number" id="y1-supplies" value="8450.00" oninput="calculateSummaryTotals()">
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Participant Support Costs (40A0)</label>
+                        <input type="number" id="y1-participant" value="10000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                                       <div class="input-group">
+                        <label>MTDC Base Calculations</label>
+                        <input type="text" id="y1-mtdc" readonly style="font-weight:bold; color:var(--dark-green);">
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>8% F&amp;A Indirect Recovery</label>
+                        <input type="text" id="y1-indirect" readonly style="font-weight:bold; color:var(--dark-green);">
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top:15px;">
+                    <label>Personnel Narrative Justification Text</label>
+                    <textarea id="y1-narrative">Senior Personnel salary supports 2.0 calendar months of effort for the Principal Investigator to oversee general wet lab modernization tracks and coordinate tutor schedules. Student Hourly Payroll funds undergraduate peer support shifts at a pro-rated fringe base surcharge of 1.00%.</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: YEAR 2 BUDGET -->
+    <div class="tab-pane" id="pane-y2">
+        <div class="section-card">
+            <div class="section-header">Year 2 Direct &amp; Indirect Cost Line Allocations</div>
+            <div class="section-body">
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Senior Personnel Salaries (201A)</label>
+                        <input type="number" id="y2-senior" value="125000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>Student Hourly Payroll (202A)</label>
+                        <input type="number" id="y2-student" value="45000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>Materials &amp; Supplies Base (3110)</label>
+                        <input type="number" id="y2-supplies" value="8450.00" oninput="calculateSummaryTotals()">
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Participant Support Costs (40A0)</label>
+                        <input type="number" id="y2-participant" value="10000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>MTDC Base Calculations</label>
+                        <input type="text" id="y2-mtdc" readonly style="font-weight:bold; color:var(--dark-green);">
+                    </div>
+                    <div class="input-group">
+                        <label>8% F&amp;A Indirect Recovery</label>
+                        <input type="text" id="y2-indirect" readonly style="font-weight:bold; color:var(--dark-green);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: YEAR 3 BUDGET -->
+    <div class="tab-pane" id="pane-y3">
+        <div class="section-card">
+            <div class="section-header">Year 3 Direct &amp; Indirect Cost Line Allocations</div>
+            <div class="section-body">
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Senior Personnel Salaries (201A)</label>
+                        <input type="number" id="y3-senior" value="125000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>Student Hourly Payroll (202A)</label>
+                        <input type="number" id="y3-student" value="45000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>Materials &amp; Supplies Base (3110)</label>
+                        <input type="number" id="y3-supplies" value="8450.00" oninput="calculateSummaryTotals()">
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Participant Support Costs (40A0)</label>
+                        <input type="number" id="y3-participant" value="10000.00" oninput="calculateSummaryTotals()">
+                    </div>
+                    <div class="input-group">
+                        <label>MTDC Base Calculations</label>
+                        <input type="text" id="y3-mtdc" readonly style="font-weight:bold; color:var(--dark-green);">
+                    </div>
+                                        <div class="input-group">
+                        <label>8% F&amp;A Indirect Recovery</label>
+                        <input type="text" id="y3-indirect" readonly style="font-weight:bold; color:var(--dark-green);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: 3-YEAR SUMMARY -->
+    <div class="tab-pane" id="pane-summary">
+        <div class="section-card">
+            <div class="section-header">Federal Form Roll-up Master Summary Table</div>
+            <div class="section-body">
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Budget Category Component</th>
+                            <th>Year 1 Allocation</th>
+                            <th>Year 2 Allocation</th>
+                            <th>Year 3 Allocation</th>
+                            <th>3-Year Portfolio Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Senior Personnel (201A)</td>
+                            <td id="s-y1-senior">$0.00</td>
+                            <td id="s-y2-senior">$0.00</td>
+                            <td id="s-y3-senior">$0.00</td>
+                            <td id="total-senior" class="right">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Student Payroll (202A)</td>
+                            <td id="s-y1-student">$0.00</td>
+                            <td id="s-y2-student">$0.00</td>
+                            <td id="s-y3-student">$0.00</td>
+                            <td id="total-student" class="right">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Materials &amp; Supplies (3110)</td>
+                            <td id="s-y1-supplies">$0.00</td>
+                            <td id="s-y2-supplies">$0.00</td>
+                            <td id="s-y3-supplies">$0.00</td>
+                            <td id="total-supplies" class="right">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Participant Support (40A0)</td>
+                            <td id="s-y1-participant">$0.00</td>
+                            <td id="s-y2-participant">$0.00</td>
+                            <td id="s-y3-participant">$0.00</td>
+                            <td id="total-participant" class="right">$0.00</td>
+                        </tr>
+                        <tr style="background-color: var(--light-gray); font-weight: bold;">
+                            <td>Total Direct Costs Base</td>
+                            <td id="tot-direct-y1">$0.00</td>
+                            <td id="tot-direct-y2">$0.00</td>
+                            <td id="tot-direct-y3">$0.00</td>
+                            <td id="grand-direct" class="right">$0.00</td>
+                        </tr>
+                        <tr style="background-color: #EBF1F5; font-weight: bold;">
+                            <td>F&amp;A Indirect Recovery (8%)</td>
+                            <td id="tot-ind-y1">$0.00</td>
+                            <td id="tot-ind-y2">$0.00</td>
+                            <td id="tot-ind-y3">$0.00</td>
+                            <td id="grand-indirect" class="right">$0.00</td>
+                        </tr>
+                        <tr style="background-color: var(--soft-green); font-weight: bold; font-size: 14px;">
+                            <td>TOTAL PROJECT COMBINED VALUE</td>
+                            <td id="tot-final-y1">$0.00</td>
+                            <td id="tot-final-y2">$0.00</td>
+                            <td id="tot-final-y3">$0.00</td>
+                            <td id="grand-total-portfolio" class="right">$0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: VARIANCE DASHBOARD -->
+    <div class="tab-pane" id="pane-variance">
+        <div class="section-card">
+            <div class="section-header">2 CFR 200.308 Category Modification Simulator</div>
+            <div class="section-body">
+                <p class="instruction-text">Simulate a post-award reallocation away from Year 1 baselines to evaluate compliance limits.</p>
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Account Code</th>
+                            <th>Original Year 1 Baseline ($)</th>
+                            <th>Proposed Shift Ledger ($)</th>
+                            <th>Computed Variance Percentage</th>
+                            <th>Sponsor Clearing Threshold Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>201A (Personnel)</strong></td>
+                            <td>$125,000.00</td>
+                            <td><input type="number" id="v-shift-senior" value="125000.00" oninput="calculateVariances()"></td>
+                            <td id="v-pct-senior">0.00%</td>
+                            <td id="v-status-senior" style="font-weight:bold;">READY</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: FERPA SANDBOX -->
+    <div class="tab-pane" id="pane-ferpa">
+        <div class="section-card">
+            <div class="section-header">Double-Blind Cell Suppression Testing Suite</div>
+            <div class="section-body">
+                <p class="instruction-text">Test raw cohort counts to verify programmatic data masking rules before reporting external data.</p>
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label>Raw Sub-Cohort Size Input (n)</label>
+                        <input type="number" id="ferpa-n-input" value="6" oninput="verifyFERPAMask()">
+                    </div>
+                    <div class="input-group">
+                        <label>Reportable Population Output</label>
+                        <input type="text" id="ferpa-display" readonly style="font-weight:bold;">
+                    </div>
+                    <div class="input-group">
+                        <label>Security Mask Flag Applied</label>
+                        <input type="text" id="ferpa-flag" readonly style="font-weight:bold;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-container">
+        <button class="btn" onclick="compileBudgetNarrativeReport()">Compile &amp; Preview Narrative Report</button>
+    </div>
+
+    <!-- Document Output Drawer -->
+    <div class="preview-drawer" id="report-drawer">
+        <div class="drawer-header">
+            <span>Generated Budget Narrative Frame Summary View</span>
+            <span style="font-size: 11px; background-color: var(--dark-green); padding: 2px 6px; border-radius: 3px;">Audit-Ready Data</span>
+        </div>
+        <div class="drawer-body">
+            <textarea class="report-textarea" id="report-view-zone" readonly></textarea>
+            <div class="action-container" style="margin-top: 15px;">
+                <button class="btn secondary" onclick="executeClipboardCopy()">Copy Narrative Summary to Clipboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        calculateSummaryTotals();
+        calculateVariances();
+        verifyFERPAMask();
+    };
+
+    function switchBudgetTab(tabId) {
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Find matching navigation control anchor node
+        const targetBtn = Array.from(buttons).find(btn => btn.innerText.toLowerCase().includes(tabId == 'summary' ? '3-year' : tabId == 'variance' ? 'variance' : tabId == 'ferpa' ? 'ferpa' : tabId));
+        if (targetBtn) targetBtn.classList.add('active');
+
+        const panes = document.querySelectorAll('.tab-pane');
+        panes.forEach(pane => pane.classList.remove('active'));
+        
+        document.getElementById('pane-' + tabId).classList.add('active');
+    }
+
+    function calculateSummaryTotals() {
+        // Collect operational parameters inputs
+        const y1Senior = parseFloat(document.getElementById('y1-senior').value) || 0;
+        const y1Student = parseFloat(document.getElementById('y1-student').value) || 0;
+        const y1Supplies = parseFloat(document.getElementById('y1-supplies').value) || 0;
+        const y1Participant = parseFloat(document.getElementById('y1-participant').value) || 0;
+
+        const y2Senior = parseFloat(document.getElementById('y2-senior').value) || 0;
+        const y2Student = parseFloat(document.getElementById('y2-student').value) || 0;
+        const y2Supplies = parseFloat(document.getElementById('y2-supplies').value) || 0;
+        const y2Participant = parseFloat(document.getElementById('y2-participant').value) || 0;
+
+        const y3Senior = parseFloat(document.getElementById('y3-senior').value) || 0;
+        const y3Student = parseFloat(document.getElementById('y3-student').value) || 0;
+        const y3Supplies = parseFloat(document.getElementById('y3-supplies').value) || 0;
+        const y3Participant = parseFloat(document.getElementById('y3-participant').value) || 0;
+
+        // Perform F&A 8% Excluded Participant Support Base Logic Checks
+        const mtdcY1 = y1Senior + y1Student + y1Supplies;
+        const indY1 = mtdcY1 * 0.08;
+        document.getElementById('y1-mtdc').value = '$' + mtdcY1.toFixed(2);
+        document.getElementById('y1-indirect').value = '$' + indY1.toFixed(2);
+
+        const mtdcY2 = y2Senior + y2Student + y2Supplies;
+        const indY2 = mtdcY2 * 0.08;
+        document.getElementById('y2-mtdc').value = '$' + mtdcY2.toFixed(2);
+        document.getElementById('y2-indirect').value = '$' + indY2.toFixed(2);
+
+        const mtdcY3 = y3Senior + y3Student + y3Supplies;
+        const indY3 = mtdcY3 * 0.08;
+        document.getElementById('y3-mtdc').value = '$' + mtdcY3.toFixed(2);
+        document.getElementById('y3-indirect').value = '$' + indY3.toFixed(2);
+
+        // Sync table strings across nodes
+        document.getElementById('s-y1-senior').innerText = '$' + y1Senior.toFixed(2);
+        document.getElementById('s-y2-senior').innerText = '$' + y2Senior.toFixed(2);
+        document.getElementById('s-y3-senior').innerText = '$' + y3Senior.toFixed(2);
+        document.getElementById('total-senior').innerText = '$' + (y1Senior + y2Senior + y3Senior).toFixed(2);
+
+        document.getElementById('s-y1-student').innerText = '$' + y1Student.toFixed(2);
+        document.getElementById('s-y2-student').innerText = '$' + y2Student.toFixed(2);
+        document.getElementById('s-y3-student').innerText = '$' + y3Student.toFixed(2);
+        document.getElementById('total-student').innerText = '$' + (y1Student + y2Student + y3Student).toFixed(2);
+
+        document.getElementById('s-y1-supplies').innerText = '$' + y1Supplies.toFixed(2);
+        document.getElementById('s-y2-supplies').innerText = '$' + y2Supplies.toFixed(2);
+        document.getElementById('s-y3-supplies').innerText = '$' + y3Supplies.toFixed(2);
+        document.getElementById('total-supplies').innerText = '$' + (y1Supplies + y2Supplies + y3Supplies).toFixed(2);
+
+        document.getElementById('s-y1-participant').innerText = '$' + y1Participant.toFixed(2);
+        document.getElementById('s-y2-participant').innerText = '$' + y2Participant.toFixed(2);
+        document.getElementById('s-y3-participant').innerText = '$' + y3Participant.toFixed(2);
+        document.getElementById('total-participant').innerText = '$' + (y1Participant + y2Participant + y3Participant).toFixed(2);
+
+        // Calculate direct totals aggregates columns
+        const dirY1 = mtdcY1 + y1Participant;
+        const dirY2 = mtdcY2 + y2Participant;
+        const dirY3 = mtdcY3 + y3Participant;
+        document.getElementById('tot-direct-y1').innerText = '$' + dirY1.toFixed(2);
+        document.getElementById('tot-direct-y2').innerText = '$' + dirY2.toFixed(2);
+        document.getElementById('tot-direct-y3').innerText = '$' + dirY3.toFixed(2);
+        document.getElementById('grand-direct').innerText = '$' + (dirY1 + dirY2 + dirY3).toFixed(2);
+
+        document.getElementById('tot-ind-y1').innerText = '$' + indY1.toFixed(2);
+        document.getElementById('tot-ind-y2').innerText = '$' + indY2.toFixed(2);
+        document.getElementById('tot-ind-y3').innerText = '$' + indY3.toFixed(2);
+        document.getElementById('grand-indirect').innerText = '$' + (indY1 + indY2 + indY3).toFixed(2);
+
+        const finY1 = dirY1 + indY1;
+        const finY2 = dirY2 + indY2;
+        const finY3 = dirY3 + indY3;
+        document.getElementById('tot-final-y1').innerText = '$' + finY1.toFixed(2);
+        document.getElementById('tot-final-y2').innerText = '$' + finY2.toFixed(2);
+        document.getElementById('tot-final-y3').innerText = '$' + finY3.toFixed(2);
+        document.getElementById('grand-total-portfolio').innerText = '$' + (finY1 + finY2 + finY3).toFixed(2);
+    }
+
+    function calculateVariances() {
+        const vShiftS = parseFloat(document.getElementById('v-shift-senior').value) || 0;
+        const vPctS = ((vShiftS - 125000.00) / 125000.00) * 100;
+        
+        const pctNode = document.getElementById('v-pct-senior');
+        const statusNode = document.getElementById('v-status-senior');
+        
+        pctNode.innerText = (vPctS >= 0 ? '+' : '') + vPctS.toFixed(2) + '%';
+        
+        let triggerAlertBanner = false;
+
+        if (Math.abs(vPctS) > 25.0) {
+            statusNode.innerText = "⚠️ PRIOR APPROVAL REQUIRED";
+            statusNode.style.color = "var(--alert-text)";
+            pctNode.style.color = "var(--alert-text)";
+            triggerAlertBanner = true;
+        } else {
+            statusNode.innerText = "🟢 COMPLIANT";
+            statusNode.style.color = "var(--dark-green)";
+            pctNode.style.color = "var(--dark-green)";
+        }
+
+        const banner = document.getElementById('global-variance-alert');
+        banner.style.display = triggerAlertBanner ? 'block' : 'none';
+    }
+
+    function verifyFERPAMask() {
+        const n = parseInt(document.getElementById('ferpa-n-input').value) || 0;
+        const display = document.getElementById('ferpa-display');
+        const flag = document.getElementById('ferpa-flag');
+
+        if (n < 5) {
+            display.value = "[SUPPRESSED / MASKED]";
+            display.style.color = "var(--alert-text)";
+            flag.value = "TRUE (Low Cell Count)";
+            flag.style.color = "var(--alert-text)";
+        } else {
+            display.value = n.toString();
+            display.style.color = "var(--dark-green)";
+            flag.value = "FALSE (Clean Share)";
+            flag.style.color = "var(--dark-green)";
+        }
+    }
+
+    function compileBudgetNarrativeReport() {
+        const title = "Gateway STEM Success Capacity Building Grant";
+        const y1Tot = document.getElementById('tot-final-y1').innerText;
+        const grandTot = document.getElementById('grand-total-portfolio').innerText;
+        const txtText = document.getElementById('y1-narrative').value;
+
+        let outputText = "================================================================================\\n";
+        outputText += "OFFICIAL MASTER PROPOSAL BUDGET JUSTIFICATION REPORT (ASSET 03)\\n";
+        outputText += "================================================================================\\n\\n";
+        outputText += `PROJECT IDENTIFIER: ${title}\\n`;
+        outputText += `YEAR 1 GRAND TOTAL: ${y1Tot}\\n`;
+        outputText += `3-YEAR PORTFOLIO VALUE: ${grandTot}\\n`;
+        outputText += "--------------------------------------------------------------------------------\\n\\n";
+        outputText += "SECTION A: PROGRAMMATIC WORKFORCE NARRATIVE PROFILE\\n";
+        outputText += `${txtText}\\n\\n`;
+        outputText += "================================================================================\\n";
+        outputText += "Compilation record finalized. Ready for copy-paste portal integration.";
+
+        document.getElementById('report-view-zone').value = outputText;
+        document.getElementById('report-drawer').style.display = 'block';
+        document.getElementById('report-drawer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function executeClipboardCopy() {
+        const textData = document.getElementById('report-view-zone').value;
+        navigator.clipboard.writeText(textData).then(() => {
+            alert('Success! Budget Narrative Summary copy executed.');
+        }).catch(err => {
+            alert('Clipboard permissions failed.');
+        });
+    }
+</script>
+</body>
+</html>
